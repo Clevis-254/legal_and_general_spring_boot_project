@@ -4,6 +4,8 @@ The project uses Spring Boot using a build tool Gradle-Groovy
 ## To setup the project 
 Before running any of the steps below please ensure you have **`Node`** installed
 Firstly install tailwindcss by running `npm install` at the root of the project
+## Thymeleaf and Tailwind
+To inherit tailwind css to different html files, include this code in the head part of your file `<link th:replace="~{base :: css_file}"/>`
 ## To run the project
 - First start the tailwindcss compiler by running `npm run tailwind` at the root of the project
 ## Helpful resources
