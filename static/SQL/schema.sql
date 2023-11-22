@@ -24,3 +24,11 @@ CREATE TABLE adminUsers(
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
+
+CREATE TABLE requests(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    approved BOOLEAN NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
+);
