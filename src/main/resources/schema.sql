@@ -1,4 +1,7 @@
-
+drop table if exists adminUsers;
+drop table if exists requests;
+drop table if exists questions;
+drop table if exists users;
 
 -- -----------------------------------------------------
 
@@ -6,9 +9,11 @@
 
 -- -----------------------------------------------------
 
-CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
+-- CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
 
-USE `group_5_client_project` ;
+-- USE `group_5_client_project`;
+
+
 
 CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
