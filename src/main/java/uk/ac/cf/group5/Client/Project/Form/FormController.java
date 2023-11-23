@@ -10,7 +10,6 @@ public class FormController {
     @GetMapping("/form/employee")
     public ModelAndView getEmployeeForm() {
         ModelAndView modelAndView = new ModelAndView("form/employeeForm");
-        modelAndView.addObject("employee", new EmployeeForm());
         return modelAndView;
     }
 }
