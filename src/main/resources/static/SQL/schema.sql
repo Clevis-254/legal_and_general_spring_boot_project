@@ -32,3 +32,12 @@ CREATE TABLE requests(
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
+
+CREATE TABLE questions(
+    id INT NOT NULL AUTO_INCREMENT,
+    employeeText VARCHAR(255) NOT NULL,
+    externalText VARCHAR(255) NOT NULL,
+    date_added DATE NOT NULL,
+    category VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
+)
