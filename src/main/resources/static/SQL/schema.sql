@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS `group_5_client_project` ;
+
 
 -- -----------------------------------------------------
 
@@ -28,7 +28,7 @@ CREATE TABLE adminUsers(
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approved BOOLEAN NOT NULL,
+    approval BOOLEAN NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
