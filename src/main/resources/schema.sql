@@ -1,4 +1,7 @@
-DROP SCHEMA IF EXISTS `group_5_client_project` ;
+drop table if exists adminUsers;
+drop table if exists requests;
+drop table if exists questions;
+drop table if exists users;
 
 -- -----------------------------------------------------
 
@@ -6,9 +9,11 @@ DROP SCHEMA IF EXISTS `group_5_client_project` ;
 
 -- -----------------------------------------------------
 
-CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
+-- CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
 
-USE `group_5_client_project` ;
+-- USE `group_5_client_project`;
+
+
 
 CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
@@ -28,7 +33,7 @@ CREATE TABLE adminUsers(
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approved BOOLEAN NOT NULL,
+    approval BOOLEAN NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
