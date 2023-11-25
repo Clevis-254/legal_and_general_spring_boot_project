@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Login Page</title>
+    <link th:fragment="css_file"
+          th:href="@{/css/build.css}" rel="stylesheet"
+    >
+</head>
+<body>
+<form action="/login" method="post">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
