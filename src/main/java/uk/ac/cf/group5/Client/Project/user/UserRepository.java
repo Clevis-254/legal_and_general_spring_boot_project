@@ -6,7 +6,7 @@ public interface UserRepository {
 
     List<UserItem> getUserItems();
 
-    UserItem getUserItem(Long id);
+    UserItem getUserItem(String username);
 
     void add(UserItem Item);
 }

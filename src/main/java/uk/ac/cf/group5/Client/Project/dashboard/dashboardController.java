@@ -11,5 +11,4 @@ public class dashboardController {
         ModelAndView dashboard = new ModelAndView("dashboard/user");
         return dashboard;
     }
-
 }
