@@ -1,9 +1,8 @@
 USE group_5_client_project;
 
-insert into users (username, password, email)
+insert into users (username, password, email, isadmin)
 values
-    ('adminJerry', 'adminPassword', 'group5superuser@gmail.com'),
+    ('adminJerry', 'adminPassword', 'group5superuser@gmail.com', true),
 
-    ('userHoward', 'userPassword', 'group5employeetest@gmail.com');
+    ('userHoward', 'userPassword', 'group5employeetest@gmail.com', false);
 
-insert into adminusers (userID) values (1);
