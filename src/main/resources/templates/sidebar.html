@@ -12,14 +12,14 @@ lg:left-0 h-screen bg-gray-200 flex flex-col justify-between w-1/6 py-16 rounded
 rounded" id="side-bar" th:fragment="sidebarFragment">
   <div class="flex flex-col space-y-16">
     <div class="flex items-center justify-between w-full max-w-[12rem] mx-auto">
-      <a th:href="@{/}" class="flex justify-evenly hover:opacity-75 focus-ring">
-               <span><img alt="Lot of Spam" src="/images/legal%20logo.png"/>
+      <a th:href="@{/dashboard}" class="flex justify-evenly hover:opacity-75 focus-ring">
+               <span><img alt="logo" src="/images/legal%20logo.png"/>
             </span>
       </a>
     </div>
     <!--TODO add user profile picture and username.-->
     <div class="flex flex-col w-48 mx-auto space-y-3 transition-colors">
-      <a th:href="@{/}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+      <a th:href="@{/dashboard}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 width="12"
                 height="12"

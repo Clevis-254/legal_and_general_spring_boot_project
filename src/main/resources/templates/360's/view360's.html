@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+xmlns:sec = "https://www/thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>view 360's</title>
   <link th:replace="~{base :: css_file}"/>
   <link th:replace="~{base :: favicon}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex w-full max-h-full">
 <div th:replace="sidebar :: sidebarFragment"></div>
@@ -14,10 +16,9 @@
     <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
         <span class="text-3xl font-bold text-left ">My reviews</span>
         <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
-              <span th:each="UserItem, iStat : ${UserItems}">
             <a
                     class="flex items-center h-10 px-4 space-x-4 border rounded sm:h-12 focus-ring border-dark"
-                    th:href="@{/request360/{id} (id=${UserItem.id})}">
+                    th:href="@{/request360}">
                 <span class="text-sm text-base">Request a 360</span>
                 <svg
                         width="22"
@@ -35,7 +36,6 @@
                     />
                 </svg>
             </a>
-              </span>
 
         </div>
     </div>
