@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AdminMenuController {
-    @GetMapping ("Admin/AdminMenu")
-    ModelAndView Admin(){ModelAndView adminMenu = new ModelAndView("Admin/AdminMenu"); return adminMenu;}
+public class AdminDashboard {
+    @GetMapping("/Admin/AdminDashboard")
+    ModelAndView Admin(){ModelAndView adminPage = new ModelAndView("/Admin/AdminDashboard"); return adminPage;}
 }
+
