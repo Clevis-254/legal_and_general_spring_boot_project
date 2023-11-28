@@ -7,6 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminDashboard {
     @GetMapping("/Admin/AdminDashboard")
-    ModelAndView Admin(){ModelAndView adminPage = new ModelAndView("/Admin/AdminDashboard"); return adminPage;}
+    public ModelAndView GetAdminDashboard(){
+            ModelAndView adminDashboard = new ModelAndView("/Admin/AdminDashboard");
+            return adminDashboard;
+        }
+
 }
 

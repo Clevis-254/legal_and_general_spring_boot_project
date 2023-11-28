@@ -7,5 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminMenuController {
     @GetMapping ("Admin/AdminMenu")
-    ModelAndView Admin(){ModelAndView adminMenu = new ModelAndView("Admin/AdminMenu"); return adminMenu;}
+    public ModelAndView Admin(){
+        ModelAndView adminMenu = new ModelAndView("Admin/AdminMenu");
+        return adminMenu;
+    }
 }
