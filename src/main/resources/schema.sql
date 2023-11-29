@@ -1,4 +1,4 @@
-drop table if exists adminUsers;
+
 drop table if exists requests;
 drop table if exists questions;
 drop table if exists users;
@@ -15,21 +15,23 @@ drop table if exists users;
 
 
 
-CREATE TABLE if not exists users(
+CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    isadmin BOOLEAN NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    enabled boolean default true,
+    role VARCHAR(50) default 'ROLE_USER',
     PRIMARY KEY (id)
 );
 
 
 
-CREATE TABLE if not exists requests(
+CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approval BOOLEAN NOT NULL,
+    approval BOOLEAN default false,
+    username VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );

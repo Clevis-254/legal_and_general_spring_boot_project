@@ -19,10 +19,11 @@ private UserRepository userRepository;
         userRepository.add(user);
     }
 
-    public UserItem getUserItem(Long id){
-       return userRepository.getUserItem(id);
-    }
 
+
+    public UserItem getUserItem(String username) {
+         return userRepository.getUserItem(username);
+    }
     public List<UserItem> getUserItems() {
         return userRepository.getUserItems();
     }

@@ -6,10 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class dashboardController {
-    @GetMapping("/")
+    @GetMapping("/dashboard")
     public ModelAndView getDashboard(){
         ModelAndView dashboard = new ModelAndView("dashboard/user");
         return dashboard;
     }
-
 }

@@ -7,9 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserItem {
     private Long id;
-    private String username;
+    private String name;
 
-    private  String email;
+    private  String username;
 
     private String password;
 
