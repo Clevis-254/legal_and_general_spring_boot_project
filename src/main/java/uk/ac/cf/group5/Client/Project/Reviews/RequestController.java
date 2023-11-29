@@ -2,12 +2,8 @@ package uk.ac.cf.group5.Client.Project.Reviews;
 
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
@@ -25,9 +21,26 @@ public class RequestController {
         this.user = userService;
     }
     @GetMapping("/reviews")
-    public ModelAndView getReviews(){
+    public ModelAndView getReviews(Authentication authentication){
+        //String employee = authentication.getName();
+        //UserItem userItem = user.getUserItem(employee);
+        //Long id =  userItem.getId();
         ModelAndView reviews = new ModelAndView("360's/view360's");
+        //List<RequestItem> requestItems = request.getRequestItems(id);
+        //reviews.addObject("RequestItems", requestItems);
         return reviews;
+    }
+
+    @GetMapping("/requests")
+    public ModelAndView getRequest(Authentication authentication){
+        String employee = authentication.getName();
+       UserItem userItem = user.getUserItem(employee);
+        Long id =  userItem.getId();
+        ModelAndView requests = new ModelAndView("360's/requests");
+        List<RequestItem> requestItems = request.getRequestItems(id);
+       requests.addObject("requestItems", requestItems);
+        return requests;
+
     }
 
 
@@ -46,6 +59,6 @@ public class RequestController {
 
         request.add(requestItem);
 
-        return new ModelAndView("redirect:reviews");
+        return new ModelAndView("redirect:requests");
     }
 }
