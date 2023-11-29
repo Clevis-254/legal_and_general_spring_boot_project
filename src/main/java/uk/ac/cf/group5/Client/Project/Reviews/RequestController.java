@@ -1,8 +1,7 @@
 package uk.ac.cf.group5.Client.Project.Reviews;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
@@ -20,25 +19,44 @@ public class RequestController {
         this.user = userService;
     }
     @GetMapping("/reviews")
-    public ModelAndView getReviews(){
+    public ModelAndView getReviews(Authentication authentication){
+        //String employee = authentication.getName();
+        //UserItem userItem = user.getUserItem(employee);
+        //Long id =  userItem.getId();
         ModelAndView reviews = new ModelAndView("360's/view360's");
-        List<UserItem> UserItems = user.getUserItems();
-        reviews.addObject("UserItems", UserItems);
+        //List<RequestItem> requestItems = request.getRequestItems(id);
+        //reviews.addObject("RequestItems", requestItems);
         return reviews;
     }
-    // change the user item to request.
-    private RequestItem mapUserToRequest(UserItem user) {
-        RequestItem requestItem = new RequestItem();
-        requestItem.setUserId(user.getId());
-        requestItem.setUsername(user.getUsername());
-        requestItem.setApproved(false);
-        return requestItem;
+
+    @GetMapping("/requests")
+    public ModelAndView getRequest(Authentication authentication){
+        String employee = authentication.getName();
+       UserItem userItem = user.getUserItem(employee);
+        Long id =  userItem.getId();
+        ModelAndView requests = new ModelAndView("360's/requests");
+        List<RequestItem> requestItems = request.getRequestItems(id);
+       requests.addObject("requestItems", requestItems);
+        return requests;
+
     }
-    @GetMapping ("/request360/{id}")
-    public ModelAndView MakeRequest(@PathVariable(value = "id" ,required = true) long id){
-        UserItem employee = user.getUserItem(id);
-        RequestItem requestItem = mapUserToRequest(employee);
+
+
+    @GetMapping("/request360")
+    public ModelAndView makeRequest(/*@AuthenticationPrincipal UserDetails userDetails*/
+    Authentication authentication) {
+
+/*        String employee = userDetails.getUsername();*/
+
+        String employee = authentication.getName();
+        UserItem userItem = user.getUserItem(employee);
+
+        RequestItem requestItem = new RequestItem();
+        requestItem.setUsername(userItem.getUsername());
+        requestItem.setUserId(userItem.getId());
+
         request.add(requestItem);
-        return new ModelAndView("redirect:/reviews");
+
+        return new ModelAndView("redirect:requests");
     }
 }

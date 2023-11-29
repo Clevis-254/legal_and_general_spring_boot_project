@@ -2,6 +2,8 @@ package uk.ac.cf.group5.Client.Project.Reviews;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RequestServiceImpl implements RequestService{
 
@@ -14,5 +16,8 @@ public class RequestServiceImpl implements RequestService{
 
     public void add(RequestItem request) {
         requestRepository.add(request);
+    }
+    public List<RequestItem> getRequestItems(Long userId){
+        return requestRepository.getRequestItems(userId);
     }
 }

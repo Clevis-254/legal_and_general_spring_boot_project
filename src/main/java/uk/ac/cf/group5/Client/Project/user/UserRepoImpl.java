@@ -22,15 +22,15 @@ public class UserRepoImpl implements UserRepository{
 
         UserItemMapper = (rs, i) -> new UserItem(
                 rs.getLong("id"),
+                rs.getString("name"),
                 rs.getString("username"),
-                rs.getString("email"),
                 rs.getString("password")
         );
     }
 
-    public UserItem getUserItem(Long id) {
-        String sql = "select id,username from users where id = ?";
-        return jdbctemplate.queryForObject(sql,UserItemMapper, id);
+    public UserItem getUserItem(String username) {
+        String sql = "select * from users where username = ?";
+        return jdbctemplate.queryForObject(sql,UserItemMapper, username);
     }
     public List<UserItem> getUserItems() {
         String sql = "select * from users";
@@ -40,17 +40,17 @@ public class UserRepoImpl implements UserRepository{
     public void add(UserItem user) {
         String UserInsertSql =
                 "insert into users " +
-                        "(username, email, password)" +
+                        "(name, username, password)" +
                         " values (?,?,?)";
         jdbctemplate.update(UserInsertSql,
                 user.getUsername(),
-                user.getEmail(),
+                user.getName(),
                 user.getPassword()
         );
     }
 
-    public UserItem findByEmail(String email){
-        String sql = "select * from users where email = ?";
-        return jdbctemplate.queryForObject(sql,UserItemMapper, email);
+    public UserItem findByEmail(String username){
+        String sql = "select * from users where username = ?";
+        return jdbctemplate.queryForObject(sql,UserItemMapper, username);
     }
 }

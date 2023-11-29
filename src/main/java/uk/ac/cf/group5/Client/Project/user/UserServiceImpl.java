@@ -15,15 +15,16 @@ private UserRepository userRepository;
         userRepository.add(user);
     }
 
-    public UserItem getUserItem(Long id){
-       return userRepository.getUserItem(id);
-    }
 
+
+    public UserItem getUserItem(String username) {
+         return userRepository.getUserItem(username);
+    }
     public List<UserItem> getUserItems() {
         return userRepository.getUserItems();
     }
 
-   public  UserItem findByEmail(String email){
-       return userRepository.findByEmail(email);
+   public  UserItem findByEmail(String username){
+       return userRepository.findByEmail(username);
    };
 }

@@ -4,6 +4,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
 
@@ -21,9 +23,10 @@ public class RequestRepositoryImpl implements RequestRepository {
 
         RequestItemMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
+                rs.getBoolean("approved"),
+                rs.getLong("userid"),
                 rs.getString("username"),
-                rs.getBoolean("isapproved"),
-                rs.getLong("userid")
+                rs.getDate("requested")
         );
     }
 
@@ -31,12 +34,21 @@ public class RequestRepositoryImpl implements RequestRepository {
     public void add(RequestItem request) {
         String RequestInsertSql =
                 "insert into requests " +
-                        "(username, approved, userId)" +
-                        " values (?,?,?)";
+                        "(userid,username)" +
+                        " values (?,?)";
         jdbctemplate.update(RequestInsertSql,
-                request.getUsername(),
-                request.getApproved(),
-                request.getUserId()
+                request.getUserId(),
+                //request.getApproved(),
+                request.getUsername()
         );
+    }
+
+    @Override
+    public Object findAll() {
+        return null;
+    }
+    public List<RequestItem> getRequestItems(Long userId){
+        String sql = "select * from requests where userid = ?";
+        return jdbctemplate.query(sql, RequestItemMapper, userId);
     }
 }
