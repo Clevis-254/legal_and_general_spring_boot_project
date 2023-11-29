@@ -25,7 +25,8 @@ public class RequestRepositoryImpl implements RequestRepository {
                 rs.getLong("id"),
                 rs.getBoolean("approved"),
                 rs.getLong("userid"),
-                rs.getString("username")
+                rs.getString("username"),
+                rs.getDate("requested")
         );
     }
 

@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project;
+package uk.ac.cf.group5.Client.Project.basics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

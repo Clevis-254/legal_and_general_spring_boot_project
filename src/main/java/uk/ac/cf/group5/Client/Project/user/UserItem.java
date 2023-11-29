@@ -13,6 +13,7 @@ public class UserItem {
 
     private String password;
 
+
     public UserItem(){
         this(0L,"","","");
     }

@@ -9,7 +9,7 @@
 <body class="flex w-full max-h-full">
 <div th:replace="sidebar :: sidebarFragment"></div>
 <main
-class="flex flex-col items-center w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
+class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
 >
   <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
     <span class="text-3xl font-bold text-left ">My requests</span>
@@ -36,31 +36,32 @@ class="flex flex-col items-center w-full max-h-screen px-6 py-8 space-y-8 overfl
       </a>
     </div>
   </div>
-  <div
-          class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4
-          sm:items-center md:space-y-0 md:flex-row border-black-100"
-  >
     <table>
       <tbody>
       <tr th:each="requestItem, iStat : ${requestItems}">
         <td>
-          <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
-            <div class="flex flex-col w-full gap-4 sm:flex-row">
-              <div class="flex flex-col space-y-4">
-                <div>
-                  <span class="font-bold text-2xl">Request :</span>
-                  <span th:text="${requestItem.id}" class="font-light text-base"></span>
+          <div
+                  class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow
+                   sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100"
+          >
+            <div class="flex flex-col space-y-4">
+                <span class="font-bold text-2xl">Request :
+                    <span th:text="${requestItem.id}" class="font-light text-base"></span>
+                </span>
+                <div class="flex space-x-3">
+                    <span class="font-semibold text-base">Status:
+                                    <span th:text="${requestItem.approved ? 'Approved' : 'Pending'}"
+                                          th:class="${requestItem.approved ? 'bg-green-300' : 'bg-red-300'}"></span>
+                                </span>
+               <!-- <span class="font-semibold text-base">Status:
+                    <span th:text="${requestItem.approved ? 'Approved'  : 'Pending'}"
+                          class="font-light text-base"></span>
+                </span>-->
+                    <span class="font-semibold text-base">Date requested:
+                        <span th:text="${#dates.format(requestItem.requested, 'yyyy-MM-dd')}"
+                      class="font-light text-base"></span>
+                </span>
                 </div>
-                <div>
-                  <span class="font-bold text-2xl">Status :</span>
-                  <span th:text="${requestItem.approved}" class="font-light text-base"></span>
-                </div>
-                <div>
-                  <span class="font-bold text-2xl">Date requested :</span>
-                  <!-- Assuming requestItem.requested is of type Date -->
-                  <span th:text="${#dates.format(requestItem.approved)}" class="font-light text-base"></span>
-                </div>
-              </div>
             </div>
           </div>
         </td>
