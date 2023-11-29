@@ -24,6 +24,6 @@ private UserRepository userRepository;
     }
 
    public  UserItem findByEmail(String email){
-       return userRepository.findByEmail(email.);
+       return userRepository.findByEmail(email);
    };
 }
