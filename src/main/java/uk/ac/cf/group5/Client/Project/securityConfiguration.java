@@ -43,7 +43,8 @@ public class securityConfiguration {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
-                        .requestMatchers("/request360").hasRole( "USER"))
+                        .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/form/employee").hasRole( "USER"))
                 .formLogin(form -> form
                         //.loginPage("/login")
                         .permitAll()
