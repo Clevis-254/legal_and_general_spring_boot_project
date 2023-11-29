@@ -7,11 +7,17 @@
 </head>
 <body>
 <form class= "items-center flex justify-evenly" method="get" th:action="@{/AdminMenu}">
-  <div class="flex items-center space-x-2">
-      <a th:href="@{/Admin/AdminDashboard}" type="button"  class="bg-blue-900 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Admin Page</a>
-        <br>
-      <a th:href="@{/dashboard/user} "type="button"  class="bg-red-900 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">User Page</a>
-  </div>
+    <div class="flex flex-col w-full items-center">
+  <span class="text-center text-3xl font-bold">Welcome to admin page
+  </span>
+        <div class="skeleton w-100 h-800 space-x-10 items-center">
+            <a th:href="@{/Admin/AdminDashboard}" type="button"  class=" text-white bg-blue-700 hover:bg-blue-900 font-bold items-center py-10 px-15 space-x-5 rounded">Admin Page</a>
+
+            <a th:href="@{/} "type="button"  class="text-white bg-red-700 hover:bg-red-900 font-bold items-center py-10 px-15 space-x-5 rounded">User Page</a>
+
+        </div>
+        </div>
 </form>
+
 </body>
 </html>
