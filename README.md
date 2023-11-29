@@ -8,6 +8,11 @@ Firstly install tailwindcss by running `npm install` at the root of the project
 To inherit tailwind css to different html files, include this code in the head part of your file `<link th:replace="~{base :: css_file}"/>`
 ## To run the project
 - First start the tailwindcss compiler by running `npm run tailwind` at the root of the project
+## Contributing to the project
+- include the following links on your header of the project in order to access the favicon
+`<link th:replace="~{base :: favicon}">`
+- To include the user navbar on your page , paste the following on top of your body html element
+`<div th:replace="sidebar :: sidebarFragment"></div>`
 ## Helpful resources
 - want to learn more about tailwind check this [TailwindCSS Tutorial](https://www.codeinwp.com/blog/tailwind-css-tutorial/) out.
 - [TailwindCSS Docs](https://tailwindcss.com/docs/utility-first)

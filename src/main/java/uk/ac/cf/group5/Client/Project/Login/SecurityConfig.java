@@ -3,41 +3,79 @@ package uk.ac.cf.group5.Client.Project.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@Service
 public class SecurityConfig {
+    public  static final String [] ENDPOINTS_WHITELIST = {
+            "/",
+            "/403",
+            "/css/**",
+            "/images/**"
+    };
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private DataSource dataSource;
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
+            Exception {
+        http
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/dashboard/**").hasRole( "USER")
+                        .requestMatchers("/reviews/**").hasRole( "USER")
+                        .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/requests").hasRole( "USER"))
+                .formLogin(form -> form
+                        //.loginPage("/login")
+                        //.permitAll()
+                        .defaultSuccessUrl("/dashboard",false)
+                        //.defaultSuccessUrl("/admin", true)
+                        //currently the admin url is not working
+                        .failureUrl("/login?error=true"))
+                // .formLogin(form -> form
+                //.loginPage("/login")
+                // .permitAll())
+                .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedPage("/403"));
+
+        return http.build();
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService());
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
-
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorize -> authorize
-                        .requestMatchers("/login", "/register").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .permitAll()
-                );
+    @Bean
+    UserDetailsService userDetailsService() {
+        //we can replace this with another implementation of UserDetailsService.
+        //that could use JPA to access the DB, or use LDAP instead.
+        //quite often, Spring will provide default implementations. Read before writing!
+        //The user details service interface provides a method to get a user by username.
+        //That user will contain the authorities. With that object graph, Spring Security can do the rest.
+        JdbcDaoImpl jdbcUserDetails = new JdbcDaoImpl();
+        jdbcUserDetails.setDataSource(dataSource);
+        jdbcUserDetails.setUsersByUsernameQuery("select username, password, enabled from users where username=?");
+        jdbcUserDetails.setAuthoritiesByUsernameQuery("select username, role from users where username=?");
+        return jdbcUserDetails;
     }
 }
