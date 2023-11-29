@@ -11,6 +11,7 @@ public class RequestItem {
     private Long userId;
     private String username;
 
+
     public RequestItem() {
         this(0L,  false, 0L,"");
     }

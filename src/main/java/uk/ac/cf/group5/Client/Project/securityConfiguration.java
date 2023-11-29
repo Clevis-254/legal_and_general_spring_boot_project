@@ -43,10 +43,11 @@ public class securityConfiguration {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
-                        .requestMatchers("/request360").hasRole( "USER"))
+                        .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/requests").hasRole( "USER"))
                 .formLogin(form -> form
                         //.loginPage("/login")
-                        .permitAll()
+                        //.permitAll()
                         .defaultSuccessUrl("/dashboard",false)
                         //.defaultSuccessUrl("/admin", true)
                         //currently the admin url is not working
