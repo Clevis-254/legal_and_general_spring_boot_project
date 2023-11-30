@@ -45,9 +45,6 @@ public class securityConfiguration {
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
-                        .requestMatchers("LoginSuccess").hasRole( "USER")
-                        .requestMatchers("/LoginSuccess").hasRole( "ADMIN")
-                        .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER"))
 
