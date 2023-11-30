@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>base</title>
+    <title>Employee 360</title>
+
     <link th:fragment="css_file"
           th:href="@{/css/build.css}" rel="stylesheet"
     >
+    <link th:fragment="favicon"
+          th:href="@{/images/favicon .ico}"
+          rel="shortcut icon"
+          type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-image: url("../../static/images/legal and general logo.jpg");
-            background-size: cover;
-        }
-    </style>
 </head>
-<body>
-        <div class="text-center text-6xl">Welcome to your 360 Self evaluation!</div>
-        <div class="bg-gray-100 border-8 border-black align-middle w-auto mx-48">
+<body style="font-family: 'Roboto', sans-serif;">
+<div class="flex text-center text-6xl justify-between items-center">
+    <img alt="logo" src="/images/legal%20logo.png"/>
+            Welcome to your 360 Self evaluation!</div>
+        <div class=" border-8 border-black align-middle w-auto m-8">
             <div class="mx-auto max-w-7xl p-8">
-                <form th:action="@{/submitResponses}" th:object="${response}" method="post">
-                    <input type="hidden" th:field="*{userID}" th:value="1" />
+                <form th:action="@{/form/employee}" method="post">
+<!--                    <input type="hidden" th:field="*{userID}" th:value="1" />-->
                     <h2 class="text-4xl">Collaboration</h2>
 
                     <h3 class="text-2xl">Q1: While working, to what extent do you experience yourself... </h3>
@@ -32,13 +32,13 @@
                         <label class="text-center text-lg italic">Often</label>
                         <label class="text-center text-lg italic">Always</label>
                     </div>
-                    <div class="grid grid-cols-6 border-t-2 border-gray-500 p-4" th:each="question : ${questions}">
-                        <label class="text-xl" th:text="${question.questionText}"></label>
-                        <input type="radio" th:name="${question.id}" class="h-16 my-2.5" th:value="1" />
-                        <input type="radio" th:name="${question.id}" class="h-16 my-2.5"  th:value="2" />
-                        <input type="radio" th:name="${question.id}" class="h-16 my-2.5"  th:value="3" />
-                        <input type="radio" th:name="${question.id}" class="h-16 my-2.5"  th:value="4" />
-                        <input type="radio" th:name="${question.id}" class="h-16 my-2.5" th:value="5" />
+                    <div class="grid grid-cols-6 border-t-2 border-gray-500 p-4 flex items-center" th:each="question : ${questions}">
+                        <label class="text-lg" th:text="${question.questionText}"></label>
+                        <input type="radio" th:name="${question.id}" class="h-8 my-2.5" th:value="1" />
+                        <input type="radio" th:name="${question.id}" class="h-8 my-2.5"  th:value="2" />
+                        <input type="radio" th:name="${question.id}" class="h-8 my-2.5"  th:value="3" />
+                        <input type="radio" th:name="${question.id}" class="h-8 my-2.5"  th:value="4" />
+                        <input type="radio" th:name="${question.id}" class="h-8 my-2.5" th:value="5" />
                     </div>
 
                      <!--QUESTION 2-->
