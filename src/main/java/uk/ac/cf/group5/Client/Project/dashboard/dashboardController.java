@@ -24,8 +24,11 @@ public class dashboardController {
     @GetMapping("/dashboard")
     public ModelAndView getDashboard(Authentication authentication) {
         String username = authentication.getName();
+        System.out.println(username);
         UserItem userItem = user.getUserItem(username);
+        System.out.println(userItem);
         Long id = userItem.getId();
+        System.out.println(id);
         ModelAndView dashboard = new ModelAndView("dashboard/user");
         List<RequestItem> requestItems = request.getRequestItems(id);
         dashboard.addObject("requestItems", requestItems);

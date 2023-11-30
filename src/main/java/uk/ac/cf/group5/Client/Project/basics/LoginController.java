@@ -22,25 +22,25 @@ public class LoginController {
     }
     @GetMapping("/")
     public String home() {
-        return "redirect:LoginSuccess";
+        return "redirect:dashboard";
     }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-    @GetMapping("/LoginSuccess")
-    public ModelAndView LoginSuccess(Authentication authResult) throws Exception {
-        String name = authResult.getName();
-        UserItem userItem = user.getUserItem(name);
-        String role = userItem.getRole();
-
-        if (role.contains("ROLE_ADMIN")) {
-            return new ModelAndView("redirect:/Admin/AdminMenu");
-        } else if (role.contains("ROLE_USER")) {
-            return new ModelAndView("redirect:/dashboard");
-        }
-        // Default redirect in case the role is neither ROLE_ADMIN nor ROLE_USER
-        return new ModelAndView("redirect:/dashboard");
-    }
+//    @GetMapping("/LoginSuccess")
+//    public ModelAndView LoginSuccess(Authentication authResult) throws Exception {
+//        String name = authResult.getName();
+//        UserItem userItem = user.getUserItem(name);
+//        String role = userItem.getRole();
+//
+//        if (role.contains("ROLE_ADMIN")) {
+//            return new ModelAndView("redirect:/Admin/AdminMenu");
+//        } else if (role.contains("ROLE_USER")) {
+//            return new ModelAndView("redirect:/dashboard");
+//        }
+//        // Default redirect in case the role is neither ROLE_ADMIN nor ROLE_USER
+//        return new ModelAndView("redirect:/dashboard");
+//    }
 }
