@@ -1,6 +1,7 @@
 drop table if exists adminUsers;
 drop table if exists requests;
 drop table if exists questions;
+drop table if exists responses;
 drop table if exists users;
 
 -- -----------------------------------------------------
@@ -25,12 +26,6 @@ CREATE TABLE users(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE adminUsers(
-    id INT NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (userID) REFERENCES users(id)
-);
 
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
@@ -44,9 +39,19 @@ CREATE TABLE requests(
 
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
-    employeeText VARCHAR(255) NOT NULL,
-    externalText VARCHAR(255) NOT NULL,
+    question_text VARCHAR(255) NOT NULL,
     date_added DATE NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
+);
+
+CREATE TABLE responses(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    answer1 INT NOT NULL,
+    answer2 INT NOT NULL,
+    answer3 INT NOT NULL,
+    answer4 INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
 )
