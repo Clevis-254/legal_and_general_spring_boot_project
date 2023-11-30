@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Your custom CSS file -->
+    <link th:fragment="css_file" th:href="@{/css/build.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+        /* Additional custom styles */
+        body, html {
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 items-center">
+<div class="flex flex-col justify-center items-center">
+    <img alt="logo" src="/images/legal%20logo.png"/>
+    <h1 class="text-3xl mt-4">Thank you!</h1>
+    <p class="text-lg text-gray-700">Please check your email for a PDF copy of your results</p>
+    <button onclick="window.location.href='/dashboard';" class="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Back to home</button>
+</div>
+</body>
+</html>
