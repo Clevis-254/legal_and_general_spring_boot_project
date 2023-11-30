@@ -26,7 +26,8 @@ public class securityConfiguration {
             "/",
             "/403",
             "/css/**",
-            "/images/**"
+            "/images/**",
+            "/login"
     };
 
     @Autowired
@@ -46,8 +47,8 @@ public class securityConfiguration {
                         .requestMatchers("/request360").hasRole( "USER")
                         .requestMatchers("/requests").hasRole( "USER"))
                 .formLogin(form -> form
-                        //.loginPage("/login")
-                        //.permitAll()
+                        .loginPage("/login")
+                        .permitAll()
                         .defaultSuccessUrl("/dashboard",false)
                         //.defaultSuccessUrl("/admin", true)
                         //currently the admin url is not working

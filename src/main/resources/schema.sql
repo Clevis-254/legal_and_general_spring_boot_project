@@ -1,3 +1,5 @@
+
+drop table if exists responses;
 drop table if exists adminUsers;
 drop table if exists requests;
 drop table if exists questions;
