@@ -1,6 +1,7 @@
 
 drop table if exists requests;
 drop table if exists questions;
+drop table if exists responses;
 drop table if exists users;
 
 -- -----------------------------------------------------
@@ -26,21 +27,31 @@ CREATE TABLE users(
 );
 
 
-
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approval BOOLEAN default false,
+    approved BOOLEAN default false,
     username VARCHAR(50) NOT NULL,
+    requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
 
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
-    employeeText VARCHAR(255) NOT NULL,
-    externalText VARCHAR(255) NOT NULL,
+    question_text VARCHAR(255) NOT NULL,
     date_added DATE NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
+);
+
+CREATE TABLE responses(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    answer1 INT NOT NULL,
+    answer2 INT NOT NULL,
+    answer3 INT NOT NULL,
+    answer4 INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
 )

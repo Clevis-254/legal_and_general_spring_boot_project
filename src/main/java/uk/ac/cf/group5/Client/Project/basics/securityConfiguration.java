@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project;
+package uk.ac.cf.group5.Client.Project.basics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,27 +42,29 @@ public class securityConfiguration {
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
+                        .requestMatchers("/dashboard").hasRole("ADMIN")
+                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
+                        .requestMatchers("/LoginSuccess").hasRole("USER")
+                        .requestMatchers("/dashboard").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
-                        .requestMatchers("/request360").hasRole( "USER"))
-
-
+                        .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/requests").hasRole( "USER")
+                        .requestMatchers("/form/employee").hasRole( "USER")
+                        .requestMatchers("/thankYou").hasRole( "USER"))
 
 
                 .formLogin(form -> form
                         //.loginPage("/login")
-                        .permitAll()
-
-                        //.defaultSuccessUrl("/dashboard",true)
+                        //.permitAll()
+                        .defaultSuccessUrl("/dashboard",false)
                         .defaultSuccessUrl("/LoginSuccess", true)
 
                         .failureUrl("/login?error=true"))
 
-                       // .formLogin(form -> form
-                        //.loginPage("/login")
-                       // .permitAll())
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
                 .exceptionHandling(exceptions -> exceptions
-                .accessDeniedPage("/403"));
+                        .accessDeniedPage("/403"));
 
 
         return http.build();

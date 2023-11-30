@@ -13,8 +13,10 @@ public class UserItem {
 
     private String password;
 
+    private String role;
+
     public UserItem(){
-        this(0L,"","","");
+        this(0L,"","","","");
     }
 
 }

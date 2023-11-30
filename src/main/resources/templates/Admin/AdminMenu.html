@@ -2,22 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Menu</title>
-  <link th:fragment="css_file" th:href="@{/css/build.css}" rel="stylesheet">
+    <title>Admin page</title>
+    <link th:replace="~{base :: css_file}"/>
+    <link th:replace="~{base :: favicon}">
 </head>
 <body>
-<form class= "items-center flex justify-evenly" method="get" th:action="@{/AdminMenu}">
-    <div class="flex flex-col w-full items-center">
-  <span class="text-center text-3xl font-bold">Welcome to admin page
-  </span>
-        <div class="skeleton w-100 h-800 space-x-10 items-center">
-            <a th:href="@{/Admin/AdminDashboard}" type="button"  class=" text-white bg-blue-700 hover:bg-blue-900 font-bold items-center py-10 px-15 space-x-5 rounded">Admin Page</a>
-
-            <a th:href="@{/dashboard}" type="button"  class="text-white bg-red-700 hover:bg-red-900 font-bold items-center py-10 px-15 space-x-5 rounded">User Page</a>
-
-        </div>
-        </div>
-</form>
-
+<main class="min-h-screen w-full flex flex-col items-center space-y-10 py-4">
+    <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-6 md:px-4 lg:px">
+        <a href="/">
+            <img alt="logo" src="/images/logo_3.png"class="w-2/3 h-auto items-center"/>
+        </a>
+    </div>
+    <div class="flex flex-col items-center  space-y-6 text-center mb-4">
+        <h1 class="text-4xl font-bold mb-2">Welcome</h1>
+        <span class="text-lg font-light">Which page would you like to Access Today ??</span>
+    </div>
+    <div class="flex space-x-10 items-center text-center mb-4">
+        <button class="border border-black  bg-blue-500 rounded-full hover:bg-blue-400 text-white text-sm px-4 py-4">
+            <a th:href="@{/dashboard}" class="w-full h-full flex items-center justify-center">
+                User Dashboard
+            </a>
+        </button>
+        <button class="border border-black  bg-blue-500 rounded-full hover:bg-blue-400 text-white text-sm px-4 py-4">
+            <a th:href="@{/Admin/AdminDashboard}" class="w-full h-full flex items-center justify-center">
+                Admin Dashboard
+            </a>
+        </button>
+    </div>
+</main>
 </body>
 </html>

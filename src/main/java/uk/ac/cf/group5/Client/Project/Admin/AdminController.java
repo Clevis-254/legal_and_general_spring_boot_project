@@ -16,14 +16,15 @@ public class AdminController {
         return adminMenu;
     }
     @GetMapping("/Admin/LoginSuccess")
-    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws Exception, ServletException {
+    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
+            throws Exception, ServletException {
         String role = authResult.getAuthorities().toString();
 
         if(role.contains("ROLE_ADMIN")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "Admin/AdminMenu"));
         }
         else if(role.contains("ROLE_USER")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/dashboard"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"dashboard"));
 
         }
 

@@ -25,7 +25,8 @@ public class UserRepoImpl implements UserRepository{
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("username"),
-                rs.getString("password")
+                rs.getString("password"),
+                rs.getString("role")
         );
     }
 
