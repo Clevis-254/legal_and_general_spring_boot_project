@@ -26,7 +26,13 @@ public class FormController {
 
     @PostMapping("/form/employee")
     public String submitResponses() {
-        return "redirect:/thankYou";
+        return "redirect:/form/employee/contacts";
+    }
+
+    @GetMapping("/form/employee/contacts")
+    public ModelAndView getEmployeeContacts() {
+        ModelAndView modelAndView = new ModelAndView("form/contacts");
+        return modelAndView;
     }
 
     @GetMapping("/thankYou")
