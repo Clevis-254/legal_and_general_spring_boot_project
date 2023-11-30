@@ -15,19 +15,19 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/LoginSuccess")
-    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws Exception, ServletException{
-        String role = authResult.getAuthorities().toString();
-
-        if(role.contains("ROLE_ADMIN")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
-        }
-        else if(role.contains("ROLE_USER")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/dashboard"));
-
-        }
-
-    }
+//    @GetMapping("/LoginSuccess")
+//    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws Exception, ServletException{
+//        String role = authResult.getAuthorities().toString();
+//
+//        if(role.contains("ROLE_ADMIN")){
+//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
+//        }
+//        else if(role.contains("ROLE_USER")){
+//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/dashboard"));
+//
+//        }
+//
+//    }
 
 
 }

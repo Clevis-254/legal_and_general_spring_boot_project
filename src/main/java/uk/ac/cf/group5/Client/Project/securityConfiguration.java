@@ -26,10 +26,7 @@ public class securityConfiguration {
             "/",
             "/403",
             "/css/**",
-            "/images/**",
-            "/LoginSuccess",
-            "/dashboard",
-            "/dashboard/**"
+            "/images/**"
     };
 
     @Autowired

@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminDashboard {
-    @GetMapping("/Admin/AdminDashboard")
-    public ModelAndView GetAdminDashboard(){
-            ModelAndView adminDashboard = new ModelAndView("/Admin/AdminDashboard");
-            return adminDashboard;
-        }
+//    @GetMapping("/Admin/AdminDashboard")
+//    public ModelAndView GetAdminDashboard(){
+//            ModelAndView adminDashboard = new ModelAndView("/Admin/AdminDashboard");
+//            return adminDashboard;
+//        }
 
 }
 
