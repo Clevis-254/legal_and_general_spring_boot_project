@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project;
+package uk.ac.cf.group5.Client.Project.basics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,23 +44,23 @@ public class securityConfiguration {
                         .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
+                        .requestMatchers("/requests").hasRole( "USER")
                         .requestMatchers("/form/employee").hasRole( "USER")
-                        .requestMatchers("/thankYou").hasRole( "USER")
-                )
+                        .requestMatchers("/thankYou").hasRole( "USER"))
                 .formLogin(form -> form
                         //.loginPage("/login")
-                        .permitAll()
+                        //.permitAll()
                         .defaultSuccessUrl("/dashboard",false)
                         //.defaultSuccessUrl("/admin", true)
                         //currently the admin url is not working
                         .failureUrl("/login?error=true"))
 
-                       // .formLogin(form -> form
-                        //.loginPage("/login")
-                       // .permitAll())
+                // .formLogin(form -> form
+                //.loginPage("/login")
+                // .permitAll())
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
                 .exceptionHandling(exceptions -> exceptions
-                .accessDeniedPage("/403"));
+                        .accessDeniedPage("/403"));
 
 
         return http.build();
