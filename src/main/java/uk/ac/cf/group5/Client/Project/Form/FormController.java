@@ -10,20 +10,17 @@ import java.util.List;
 @Controller
 public class FormController {
 
-    private final QuestionServiceImpl questionService;
+    private final QuestionService questionService;
 
-    public FormController(QuestionServiceImpl questionService) {
+    public FormController(QuestionService questionService) {
         this.questionService = questionService;
     }
-
-
 
     @GetMapping("/form/employee")
     public ModelAndView getEmployeeForm() {
         ModelAndView modelAndView = new ModelAndView("form/employeeForm");
         List<Question> questions = questionService.getAllQuestions();
         modelAndView.addObject("questions", questions);
-//        modelAndView.addObject("response", new Response());
         return modelAndView;
     }
 
