@@ -8,6 +8,9 @@ values
 
     ('userHoward', '$2a$12$9smU000YcKQckNGLnkc9Cunkmc7uYEFqEY.TUYOLQ5Fic1LgPlGhy', 'group5employeetest@gmail.com', true);
 
-delete from adminusers;
-
-insert into adminusers (userID) values (1);
+insert into questions (question_text, date_added, category)
+values
+    ('Building meaningful relationships across teams and projects.', curdate(), 'collaborative'),
+    ('Sharing your experiences openly so that people can learn. ', curdate(), 'collaborative'),
+    ('Actively seeking out opportunities to support others in their work.', curdate(), 'collaborative'),
+    ('As being open and approachable', curdate(), 'collaborative');

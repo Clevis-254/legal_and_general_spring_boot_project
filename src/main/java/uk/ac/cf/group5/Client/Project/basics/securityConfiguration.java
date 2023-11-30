@@ -45,7 +45,9 @@ public class securityConfiguration {
                         .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
-                        .requestMatchers("/requests").hasRole( "USER"))
+                        .requestMatchers("/requests").hasRole( "USER")
+                        .requestMatchers("/form/employee").hasRole( "USER")
+                        .requestMatchers("/thankYou").hasRole( "USER"))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
@@ -54,12 +56,12 @@ public class securityConfiguration {
                         //currently the admin url is not working
                         .failureUrl("/login?error=true"))
 
-                       // .formLogin(form -> form
-                        //.loginPage("/login")
-                       // .permitAll())
+                // .formLogin(form -> form
+                //.loginPage("/login")
+                // .permitAll())
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
                 .exceptionHandling(exceptions -> exceptions
-                .accessDeniedPage("/403"));
+                        .accessDeniedPage("/403"));
 
 
         return http.build();

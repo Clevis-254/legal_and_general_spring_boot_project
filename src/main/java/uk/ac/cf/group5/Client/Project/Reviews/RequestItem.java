@@ -18,4 +18,8 @@ public class RequestItem {
     public RequestItem() {
         this(0L,  false, 0L,"",new Date());
     }
+
+    public RequestItem(Long id, Boolean approved, Long userId, String username) {
+        this(id, approved, userId, username, new Date());
+    }
 }
