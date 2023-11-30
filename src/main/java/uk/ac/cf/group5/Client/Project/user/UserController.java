@@ -22,9 +22,9 @@ public class UserController {
         return "redirect:dashboard";
     }
 
-    @GetMapping("/logout")
-    public String logout(){
-        return "redirect:login";
-    }
+//    @GetMapping("/logout")
+//    public String logout(){
+//        return "redirect:login";
+//    }
 
 }
