@@ -41,12 +41,14 @@ public class securityConfiguration {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                        .requestMatchers("/**").hasRole("ADMIN")
+                        //.requestMatchers("/**").hasRole("ADMIN")
+                        .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
-                        .requestMatchers("/dashboard").hasRole("ADMIN")
-                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
+                       // .requestMatchers("/dashboard/**").hasRole("ADMIN")
+//                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
                         //.requestMatchers("/LoginSuccess").hasRole("USER")
-                        .requestMatchers("/dashboard/**").hasRole( "USER")
+                       // .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
                         .requestMatchers("/requests").hasRole( "USER")
