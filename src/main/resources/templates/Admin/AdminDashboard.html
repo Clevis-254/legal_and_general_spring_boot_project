@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin dashboard</title>
+  <link th:replace="~{base :: css_file}"/>
+  <link th:replace="~{base :: favicon}">
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+<div class="flex flex-col w-full">
+<span class="text-center text-3xl font-bold">Welcome to admin page
+  </span>
+</div>
+
+<div class="flex flex-col w-full">
+
+  <div class="skeleton w-30 h-60">
+    <a th:href="@{/Admin/AdminMenu}" class="text-white bg-blue-800 hover:bg-blue-900  focus:ring-blue-200 font-medium rounded-lg text-xs px-1 py-10   me-2 text-center inline-flex items-center">
+      <span class="font-light">Back to Admin Menu</span>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>
