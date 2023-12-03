@@ -3,7 +3,7 @@ package uk.ac.cf.group5.Client.Project.basics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 
 import javax.sql.DataSource;
@@ -41,6 +41,8 @@ public class securityConfiguration {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/**").hasRole("ADMIN")
+                        .requestMatchers("LoginSuccess").hasRole( "USER")
                         .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
@@ -50,7 +52,7 @@ public class securityConfiguration {
                 .formLogin(form -> form
                         //.loginPage("/login")
                         //.permitAll()
-                        .defaultSuccessUrl("/dashboard",false)
+                        .defaultSuccessUrl("/LoginSuccess", true)
                         //.defaultSuccessUrl("/admin", true)
                         //currently the admin url is not working
                         .failureUrl("/login?error=true"))
