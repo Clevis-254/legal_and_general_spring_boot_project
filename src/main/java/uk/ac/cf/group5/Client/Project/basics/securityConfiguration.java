@@ -26,7 +26,10 @@ public class securityConfiguration {
             "/",
             "/403",
             "/css/**",
-            "/images/**"
+            "/images/**",
+            "/LoginSuccess",
+            "/dashboard",
+            "/login"
     };
 
     @Autowired
@@ -40,11 +43,9 @@ public class securityConfiguration {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/LoginSuccess").hasAnyRole( "USER")
-                        .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/dashboard").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")

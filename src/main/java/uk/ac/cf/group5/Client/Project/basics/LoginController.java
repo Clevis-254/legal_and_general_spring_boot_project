@@ -28,6 +28,9 @@ public class LoginController {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
 
         }
+        else {response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/login"));
 
     }
+    }
+
 }
