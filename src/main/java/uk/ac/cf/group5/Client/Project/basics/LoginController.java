@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
     @GetMapping("/")
     public String home() {
-        return "redirect:dashboard";
+        return "redirect:/login";
     }
     @GetMapping("/login")
     public String login() {
@@ -25,7 +25,7 @@ public class LoginController {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
         }
         else if(role.contains("ROLE_USER")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+"/dashboard"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
 
         }
 

@@ -42,8 +42,10 @@ public class securityConfiguration {
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/**").hasRole("ADMIN")
-                        .requestMatchers("LoginSuccess").hasRole( "USER")
-                        .requestMatchers("/dashboard/**").hasRole( "USER")
+                        .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/LoginSuccess").hasAnyRole( "USER")
+                        .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/dashboard").hasRole( "USER")
                         .requestMatchers("/reviews/**").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
                         .requestMatchers("/requests").hasRole( "USER")
@@ -90,7 +92,7 @@ public class securityConfiguration {
 
         JdbcDaoImpl jdbcUserDetails = new JdbcDaoImpl();
         jdbcUserDetails.setDataSource(dataSource);
-        jdbcUserDetails.setUsersByUsernameQuery("select username, password, enabled from users where username=?");
+        jdbcUserDetails.setUsersByUsernameQuery("select username, password, enabled, role from users where username=?");
         jdbcUserDetails.setAuthoritiesByUsernameQuery("select username, role from users where username=?");
         return jdbcUserDetails;
     }
