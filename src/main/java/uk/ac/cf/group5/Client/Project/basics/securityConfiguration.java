@@ -3,21 +3,22 @@ package uk.ac.cf.group5.Client.Project.basics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+
 
 
 import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class securityConfiguration {
@@ -41,24 +42,43 @@ public class securityConfiguration {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/dashboard/**").hasRole( "USER")
-                        .requestMatchers("/reviews/**").hasRole( "USER")
+                        //.requestMatchers("/**").hasRole("ADMIN")
+                        .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/Admin/**").hasRole("ADMIN")
+                        // .requestMatchers("/dashboard/**").hasRole("ADMIN")
+//                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
+                        //.requestMatchers("/LoginSuccess").hasRole("USER")
+                        // .requestMatchers("/dashboard/**").hasRole( "USER")
+                        .requestMatchers("/reviews").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
                         .requestMatchers("/requests").hasRole( "USER")
                         .requestMatchers("/form/employee").hasRole( "USER")
                         .requestMatchers("/thankYou").hasRole( "USER"))
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                        .defaultSuccessUrl("/dashboard",false)
-                        //.defaultSuccessUrl("/admin", true)
-                        //currently the admin url is not working
-                        .failureUrl("/login?error=true"))
 
-                // .formLogin(form -> form
-                //.loginPage("/login")
-                // .permitAll())
+                .formLogin(form -> form
+                        //.loginPage("/login")
+                        //.permitAll()
+                        .successHandler((request, response, authentication) -> {
+                            for (GrantedAuthority auth : authentication.getAuthorities()) {
+                                if (auth.getAuthority().equals("ROLE_ADMIN")) {
+                                    response.sendRedirect("/Admin/AdminMenu");
+                                } else if (auth.getAuthority().equals("ROLE_USER")) {
+                                    response.sendRedirect("/dashboard");
+                                }
+                            }
+                        })
+                        .failureUrl("/login?error=true")
+                )
+
+//                .formLogin(form -> form
+//                        //.loginPage("/login")
+//                        //.permitAll()
+//                      //  .defaultSuccessUrl("/dashboard",false)
+//                        .defaultSuccessUrl("/LoginSuccess", true)
+//
+//                        .failureUrl("/login?error=true"))
+
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
                 .exceptionHandling(exceptions -> exceptions
                         .accessDeniedPage("/403"));
