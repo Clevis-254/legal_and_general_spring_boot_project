@@ -1,4 +1,4 @@
- package uk.ac.cf.group5.Client.Project.requests;
+package uk.ac.cf.group5.Client.Project.requests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,11 @@ import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestRepository;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static org.apache.el.util.MessageFactory.get;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

@@ -3,19 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>User Login Page</title>
-    <link th:fragment="css_file"
-          th:href="@{/css/build.css}" rel="stylesheet"
-    >
+    <link th:replace="~{base :: css_file}"/>
+    <link th:replace="~{base :: favicon}">
 </head>
-<body>
-<form th:action="@{/login}" method="post">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" required>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <button type="submit">Login</button>
-</form>
-</body>
+<main class="min-h-screen min-w-full flex flex-col items-center space-y-10 py-8 sm:items-center sm:justify-evenly">
+    <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-6 md:px-4 lg:px">
+        <a href="/">
+            <img src="/images/logo%203.png" alt="Logo">
+        </a>
+    </div>
+    <div class="flex flex-col items-center text-center mb-4 space-y-3 sm:space-y-10">
+        <h1 class="text-3xl font-bold mb-2">Welcome Back!!</h1>
+        <span class="text-lg font-light">Enter your credentials below</span>
+    </div>
+        <form th:action="@{/login}" method="post">
+            <div class="flex flex-col space-y-10 sm:space-y-10">
+                <div
+                        class=" flex flex-col items-center relative w-full max-w-md space-y-3
+                 flex-flow-row sm:space-y-10">
+                    <div class="flex items-center space-x-4">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required placeholder="username@email.com"
+                               class="focus:border-green-400 p-2 border rounded-full w-full"/>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required placeholder="Password"
+                               class="focus:border-green-400 p-2 border rounded-full w-full"/>
+                    </div>
+                </div>
+                <div class="flex items-center ">
+                    <button type="submit"
+                            class="bg-blue-500 flex items-center justify-center w-full h-12 font-light rounded  text-white p-2
+                          hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue rounded-full">Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3 flex flex-col justify-between mt-4">
+        <span class="font-light text-base">&copy; 2023 Legal & General. All rights reserved.</span>
+    </div>
+</main>
 </html>

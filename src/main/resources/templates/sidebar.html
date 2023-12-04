@@ -5,7 +5,6 @@
     <title>sidebar</title>
   <link th:replace="~{base :: css_file}"/>
   <link th:replace="~{base :: favicon}">
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex w-full max-h-full">
 <aside class="absolute lg:relative z-50 transition-transform ease-in -left-[16rem]
@@ -112,30 +111,36 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
         </svg>
         <span class="font-light">settings</span>
       </a>
-      <a th:href="@{/logout}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
-        <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clip-path="url(#clip0_8_539)">
-            <path
-                    d="M4.45 3.77999C4.605 1.98 5.53 1.245 7.555 1.245H7.62C9.855 1.245 10.75 2.14 10.75 4.375V7.635C10.75 9.87 9.855 10.765 7.62 10.765H7.555C5.545 10.765 4.62 10.04 4.455 8.27M7.5 6H1.81M2.925 4.325L1.25 6L2.925 7.675"
-                    stroke="#2C2C2C"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_8_539">
-              <rect width="12" height="12" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-        <span class="font-light">Logout</span>
-      </a>
+<!--      <a th:href="@{/logout}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">-->
+<!--        <svg-->
+<!--                width="12"-->
+<!--                height="12"-->
+<!--                viewBox="0 0 12 12"-->
+<!--                fill="none"-->
+<!--                xmlns="http://www.w3.org/2000/svg"-->
+<!--        >-->
+<!--          <g clip-path="url(#clip0_8_539)">-->
+<!--            <path-->
+<!--                    d="M4.45 3.77999C4.605 1.98 5.53 1.245 7.555 1.245H7.62C9.855 1.245 10.75 2.14 10.75 4.375V7.635C10.75 9.87 9.855 10.765 7.62 10.765H7.555C5.545 10.765 4.62 10.04 4.455 8.27M7.5 6H1.81M2.925 4.325L1.25 6L2.925 7.675"-->
+<!--                    stroke="#2C2C2C"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--            />-->
+<!--          </g>-->
+<!--          <defs>-->
+<!--            <clipPath id="clip0_8_539">-->
+<!--              <rect width="12" height="12" fill="white" />-->
+<!--            </clipPath>-->
+<!--          </defs>-->
+<!--        </svg>-->
+<!--        <span class="font-light">Logout</span>-->
+<!--      </a>-->
+      <form th:action="@{/logout}" th:method="post">
+        <input type="submit" value="logout"/>
+        <input th:name="${_csrf.parameterName}"
+               th:type="hidden"
+               th:value="${_csrf.token}"/>
+      </form>
     </div>
   </div>
 </aside>
