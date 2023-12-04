@@ -1,4 +1,4 @@
-package UserLogin;
+package uk.ac.cf.group5.Client.Project.Login;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,3 +36,4 @@ public class UserLoginTest {
         assertEquals(expectedModelAndView.getViewName(), actualModelAndView.getViewName());
     }
 }
+

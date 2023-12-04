@@ -6,25 +6,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
-//    private UserService user;
-//
-//    public  UserController( UserService userService){
-//        this.user = userService;
-//    }
-//
-//    @GetMapping("/login")
-//    public ModelAndView Login(){
-//        ModelAndView login = new ModelAndView("/LoginPage");
-//        return login;
-//    }
-//    @GetMapping("/")
-//    public String home() {
-//        return "redirect:dashboard";
-//    }
+   private UserService user;
 
-//    @GetMapping("/logout")
-//    public String logout(){
-//        return "redirect:login";
-//    }
+    public  UserController( UserService userService){
+        this.user = userService;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView Login(){
+        ModelAndView login = new ModelAndView("/LoginPage");
+        return login;
+    }
+    @GetMapping("/")
+    public String home() {
+        return "redirect:dashboard";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:login";
+    }
 
 }
