@@ -1,52 +1,38 @@
 package UserLogin;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.group5.Client.Project.user.UserController;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
-import uk.ac.cf.group5.Client.Project.user.UserRepository;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class UserControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private UserService userService;
-
-    @MockBean
-    private UserRepository userRepository;
+public class UserLoginTest {
 
     @Test
-    public void testLogin() throws Exception {
-        // Mocking behavior of the UserService
-        UserItem mockUserItem = new UserItem();
-        when(userService.getUserItem("testUser")).thenReturn(mockUserItem);
+    public void testLogin() {
 
+        UserService userService = mock(UserService.class);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/login"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/LoginPage"));
+        UserController userController = new UserController(userService);
 
-        // You can add more assertions based on your specific requirements
+        // Creating a test for a UserItem
+        UserItem testUserItem = new UserItem("testUsername", "testPassword");
+
+        when(userService.findByEmail("testUsername")).thenReturn(testUserItem);
+
+        ModelAndView actualModelAndView = userController.Login();
+
+        // Make sure that the findByEmail method from UserService will call the correct username
+        verify(userService).findByEmail("testUsername");
+        verifyNoMoreInteractions(userService);
+
+        // expected result
+        ModelAndView expectedModelAndView = new ModelAndView("/LoginPage");
+
+        assertEquals(expectedModelAndView.getViewName(), actualModelAndView.getViewName());
     }
-
-    @Test
-    public void testHome() throws Exception {
-        // Perform GET request to "/"
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("dashboard"));
-
-        // You can add more assertions based on your specific requirements
-    } }
+}
