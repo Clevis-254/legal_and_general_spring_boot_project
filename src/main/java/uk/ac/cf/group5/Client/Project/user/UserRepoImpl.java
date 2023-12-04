@@ -3,7 +3,6 @@ package uk.ac.cf.group5.Client.Project.user;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 
 import java.util.List;
 
@@ -50,4 +49,8 @@ public class UserRepoImpl implements UserRepository{
         );
     }
 
+    public UserItem findByEmail(String username){
+        String sql = "select * from users where username = ?";
+        return jdbctemplate.queryForObject(sql,UserItemMapper, username);
+    }
 }
