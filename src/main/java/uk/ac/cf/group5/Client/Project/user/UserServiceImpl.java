@@ -1,10 +1,6 @@
 package uk.ac.cf.group5.Client.Project.user;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestRepository;
 
 import java.util.List;
 
@@ -27,4 +23,8 @@ private UserRepository userRepository;
     public List<UserItem> getUserItems() {
         return userRepository.getUserItems();
     }
+
+   public  UserItem findByEmail(String username){
+       return userRepository.findByEmail(username);
+   };
 }

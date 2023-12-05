@@ -14,7 +14,7 @@ public class UserItem {
     private String password;
 
 
-    public UserItem(){
+    public UserItem ( String testUsername, String testPassword){
         this(0L,"","","");
     }
 

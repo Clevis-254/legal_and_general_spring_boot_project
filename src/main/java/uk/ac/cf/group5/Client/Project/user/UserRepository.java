@@ -9,4 +9,5 @@ public interface UserRepository {
     UserItem getUserItem(String username);
 
     void add(UserItem Item);
+    UserItem findByEmail(String username);
 }

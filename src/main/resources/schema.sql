@@ -1,3 +1,5 @@
+
+drop table if exists responses;
 drop table if exists adminUsers;
 drop table if exists requests;
 drop table if exists questions;
@@ -22,7 +24,7 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     enabled boolean default true,
-    role VARCHAR(50) default 'ROLE_USER',
+    role VARCHAR(50),
     PRIMARY KEY (id)
 );
 

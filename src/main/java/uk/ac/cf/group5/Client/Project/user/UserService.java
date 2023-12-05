@@ -8,4 +8,6 @@ public interface UserService {
 
     void add(UserItem Item);
 
+    UserItem findByEmail(String email);
+
 }
