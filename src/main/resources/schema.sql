@@ -12,9 +12,9 @@ drop table if exists users;
 
 -- -----------------------------------------------------
 
--- CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
+ CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
 
--- USE `group_5_client_project`;
+ USE `group_5_client_project`;
 
 
 

@@ -28,12 +28,12 @@ public class securityConfiguration {
             "/403",
             "/css/**",
             "/images/**",
-            "/login"
+            "/login",
+            "/LoginPage"
     };
 
     @Autowired
     private DataSource dataSource;
-
 
 
     @Bean
@@ -57,8 +57,8 @@ public class securityConfiguration {
                         .requestMatchers("/thankYou").hasRole( "USER"))
 
                 .formLogin(form -> form
-                        //.loginPage("/login")
-                        //.permitAll()
+                        .loginPage("/login")
+                        .permitAll()
                         .successHandler((request, response, authentication) -> {
                             for (GrantedAuthority auth : authentication.getAuthorities()) {
                                 if (auth.getAuthority().equals("ROLE_ADMIN")) {
