@@ -49,14 +49,20 @@ class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm
                     <span th:text="${requestItem.id}" class="font-light text-base"></span>
                 </span>
                 <div class="flex space-x-3">
-                    <span class="font-semibold text-base">Status:
-                                    <span th:text="${requestItem.approved ? 'Approved' : 'Pending'}"
-                                          th:class="${requestItem.approved ? 'bg-green-300' : 'bg-red-300'}"></span>
-                                </span>
-               <!-- <span class="font-semibold text-base">Status:
-                    <span th:text="${requestItem.approved ? 'Approved'  : 'Pending'}"
-                          class="font-light text-base"></span>
-                </span>-->
+                    <span class="font-semibold text-base">
+                        Status:
+                        <span th:if="${requestItem.approved eq 'pending'}"
+                              class="bg-gray-300 text-gray-600">Pending
+                        </span>
+                    <span th:if="${requestItem.approved eq 'approved'}"
+                          class="bg-green-300 text-green-600">
+                    Approved
+                    </span>
+                    </span>
+                    <!-- <span class="font-semibold text-base">Status:
+                         <span th:text="${requestItem.approved ? 'Approved'  : 'Pending'}"
+                               class="font-light text-base"></span>
+                     </span>-->
                     <span class="font-semibold text-base">Date requested:
                         <span th:text="${#dates.format(requestItem.requested, 'yyyy-MM-dd')}"
                       class="font-light text-base"></span>

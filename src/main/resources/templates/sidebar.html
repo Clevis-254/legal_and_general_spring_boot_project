@@ -13,11 +13,19 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
   <div class="flex flex-col space-y-16">
     <div class="flex items-center justify-between w-full max-w-[12rem] mx-auto">
       <a th:href="@{/dashboard}" class="flex justify-evenly hover:opacity-75 focus-ring">
-               <span><img alt="logo" src="/images/legal%20logo.png"/>
+               <span><img alt="logo" src="/images/legal%20logo.png" class="w-auto h-20 rounded-md"/>
             </span>
       </a>
     </div>
-    <!--TODO add user profile picture and username.-->
+<!--    <div class="flex flex-col items-center space-y-3">-->
+<!--&lt;!&ndash;      <img th:if="${user.profilePicture != null}" th:src="@{'/path/to/profile/pictures/' +&ndash;&gt;-->
+<!--&lt;!&ndash;       ${user.profilePicture}}" alt="User Profile Picture" &ndash;&gt;-->
+<!--&lt;!&ndash;           class="rounded-full w-20 h-20 object-cover border-2 border-gray-300">&ndash;&gt;-->
+<!--      <img src="/images/profile%20.jpg" alt="Empty Profile Picture" class="rounded-full w-20 h-20 object-cover border-2 border-gray-300">-->
+<!--      <span class="text-xl font-semibold capitalize"></span>-->
+<!--    </div>-->
+
+
     <div class="flex flex-col w-48 mx-auto space-y-3 transition-colors">
       <a th:href="@{/dashboard}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
@@ -41,7 +49,7 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
             </clipPath>
           </defs>
         </svg>
-        <span class="font-light">Dashboard</span>
+        <span class="font-light">Home</span>
       </a>
       <a th:href="@{/reviews}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
@@ -79,7 +87,7 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
         </svg>
         <span class="font-light">Requests</span>
       </a>
-      <a th:href="@{/}"class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+      <a th:href="@{/settings}"class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 width="12"
                 height="12"

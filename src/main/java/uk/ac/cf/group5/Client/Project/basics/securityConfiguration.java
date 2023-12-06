@@ -48,7 +48,9 @@ public class securityConfiguration {
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         // .requestMatchers("/dashboard/**").hasRole("ADMIN")
 //                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
-                        //.requestMatchers("/LoginSuccess").hasRole("USER")
+                        .requestMatchers("/settings").hasRole("USER")
+                        .requestMatchers("/settings").hasRole("USER")
+                        .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
                         // .requestMatchers("/dashboard/**").hasRole( "USER")
                         .requestMatchers("/reviews").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
@@ -57,8 +59,8 @@ public class securityConfiguration {
                         .requestMatchers("/thankYou").hasRole( "USER"))
 
                 .formLogin(form -> form
-                        //.loginPage("/login")
-                        //.permitAll()
+                        .loginPage("/login")
+                        .permitAll()
                         .successHandler((request, response, authentication) -> {
                             for (GrantedAuthority auth : authentication.getAuthorities()) {
                                 if (auth.getAuthority().equals("ROLE_ADMIN")) {

@@ -23,7 +23,7 @@ public class RequestRepositoryImpl implements RequestRepository {
 
         RequestItemMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
-                rs.getBoolean("approved"),
+                rs.getString("approved"),
                 rs.getLong("userid"),
                 rs.getString("username"),
                 rs.getDate("requested")
