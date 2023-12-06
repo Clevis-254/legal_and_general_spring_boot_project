@@ -1,20 +1,204 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:fragment="css_file"
-          th:href="@{/css/build.css}" rel="stylesheet"
-    >
-    <link th:fragment="favicon"
-          th:href="@{/images/favicon .ico}"
-          rel="shortcut icon"
-          type="image/x-icon">
-    <title>Add contacts</title>
+    <title>Contact Adding Form</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css">
 </head>
-<body>
-    <form th:action="@{/form/employee/contacts}" method="post"
+<body class="bg-gray-100 py-8 px-4">
+
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-md shadow-md">
+    <h2 class="text-2xl font-semibold mb-4 flex items-center justify-between">
+        <span>Add Contacts</span>
+        <span id="categoryCounts" class="text-base font-normal"></span>
+    </h2>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
+            <div class="bg-white p-4 rounded-md">
+                <!-- Form to add contacts -->
+                <form id="contactForm">
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                        <input type="email" id="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="firstName" class="block text-sm font-medium text-gray-700">First Name:</label>
+                        <input type="text" id="firstName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name:</label>
+                        <input type="text" id="lastName"  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+                        <select id="category" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                            <option value="">Select Category</option>
+                            <option value="manager">Manager</option>
+                            <option value="peer">Peer</option>
+                            <option value="external">External Stakeholder</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <button type="button" onclick="addContact()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Add Contact</button>
+                    </div>
+                </form>
+                <!-- End of form -->
+            </div>
+        </div>
+        <div class="col-span-1">
+            <div class="bg-white p-4 rounded-md">
+                <h3 class="text-lg font-semibold mb-2">Contacts List</h3>
+                <div id="contactsList" class="grid gap-2"></div>
+                <button onclick="submitContacts()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md mt-4" id="submitButton" disabled>Submit Contacts</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    var contacts = [];
+    var categoryCount = {
+        manager: 0,
+        peer: 0,
+        external: 0
+    };
+    var categoryTargets = {
+        manager: 1,
+        peer: 5,
+        external: 5
+    };
+    const COMPRESSED_VIEW_LIMIT = 4;
+
+    function addContact() {
+        var email = document.getElementById('email').value;
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var category = document.getElementById('category').value;
+
+        if (email && firstName && lastName && category) {
+            var contact = {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                category: category
+            };
+
+            contacts.push(contact);
+            updateCategoryCount(category);
+            displayContacts();
+            clearInputs();
+        } else {
+            alert('Please fill in all fields.');
+        }
+    }
+
+    function displayContacts() {
+        var list = document.getElementById('contactsList');
+        list.innerHTML = '';
+
+        contacts.forEach(function (contact, index) {
+            var card = document.createElement('div');
+            card.className = 'bg-gray-200 p-4 rounded-md';
+
+            var contactInfo = document.createElement('div');
+            contactInfo.className = 'flex justify-between items-center';
+
+            var contactText = document.createElement('span');
+            contactText.className = 'font-semibold';
+            if (contacts.length > COMPRESSED_VIEW_LIMIT) {
+                contactText.textContent = contact.firstName + ' ' + contact.lastName;
+            } else {
+                contactText.textContent = contact.firstName + ' ' + contact.lastName + ' - ' + contact.email + ' (' + contact.category + ')';
+            }
+            contactInfo.appendChild(contactText);
+
+            var deleteButton = document.createElement('button');
+            deleteButton.innerHTML = '<i class="bx bx-trash text-red-500"></i>';
+            deleteButton.className = 'text-red-500 font-semibold';
+            deleteButton.onclick = function () {
+                deleteContact(index, contact.category);
+            };
+            contactInfo.appendChild(deleteButton);
+
+            card.appendChild(contactInfo);
+            list.appendChild(card);
+        });
+
+        validateSubmission();
+    }
+
+    function deleteContact(index, category) {
+        contacts.splice(index, 1);
+        updateCategoryCount(category, -1); // Decrease count when contact is deleted
+        displayContacts();
+    }
+
+    function clearInputs() {
+        document.getElementById('email').value = '';
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('category').value = '';
+    }
+
+    function updateCategoryCount(category, change = 1) {
+        categoryCount[category] += change;
+        displayCategoryCount();
+    }
+
+    function displayCategoryCount() {
+        var categoryCounts = document.getElementById('categoryCounts');
+        categoryCounts.innerHTML = '';
+
+        for (var key in categoryCount) {
+            var count = document.createElement('span');
+            count.className = 'mr-4';
+            count.textContent = key.charAt(0).toUpperCase() + key.slice(1) + ': ' + categoryCount[key] + '/' + categoryTargets[key];
+            categoryCounts.appendChild(count);
+        }
+    }
+
+    function submitContacts() {
+        // Check if minimum counts are met for submission
+        if (categoryCount['manager'] >= categoryTargets['manager'] && categoryCount['peer'] >= categoryTargets['peer'] && categoryCount['external'] >= categoryTargets['external']) {
+            // Here you can handle the submission of contacts list
+            console.log("Contacts:", contacts); // Log contacts list to console for demonstration
+            // AJAX request to send contacts to the Spring Boot endpoint
+            $.ajax({
+                url: '/contacts/add',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(contacts),
+                success: function(response) {
+                    console.log('Contacts sent successfully:', response);
+                    // Handle success, if needed
+                },
+                error: function(error) {
+                    console.error('Error sending contacts:', error);
+                    // Handle errors, if needed
+                }
+            });
+
+        } else {
+            alert('Minimum counts not met. Please add the required contacts.');
+        }
+    }
+
+    function validateSubmission() {
+        var submitButton = document.getElementById('submitButton');
+        if (categoryCount['manager'] >= categoryTargets['manager'] && categoryCount['peer'] >= categoryTargets['peer'] && categoryCount['external'] >= categoryTargets['external']) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+</script>
+
 </body>
 </html>

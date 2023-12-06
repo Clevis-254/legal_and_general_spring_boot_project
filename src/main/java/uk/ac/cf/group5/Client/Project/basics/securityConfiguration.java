@@ -57,8 +57,8 @@ public class securityConfiguration {
                         .requestMatchers("/thankYou").hasRole( "USER"))
 
                 .formLogin(form -> form
-                        //.loginPage("/login")
-                        //.permitAll()
+                        .loginPage("/login")
+                        .permitAll()
                         .successHandler((request, response, authentication) -> {
                             for (GrantedAuthority auth : authentication.getAuthorities()) {
                                 if (auth.getAuthority().equals("ROLE_ADMIN")) {
@@ -72,8 +72,8 @@ public class securityConfiguration {
                 )
 
 //                .formLogin(form -> form
-//                        //.loginPage("/login")
-//                        //.permitAll()
+                        //.loginPage("/login")
+                        //.permitAll()
 //                      //  .defaultSuccessUrl("/dashboard",false)
 //                        .defaultSuccessUrl("/LoginSuccess", true)
 //

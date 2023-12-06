@@ -1,9 +1,10 @@
-
+use group_5_client_project;
 drop table if exists responses;
 drop table if exists adminUsers;
 drop table if exists requests;
 drop table if exists questions;
 drop table if exists responses;
+drop table if exists contacts;
 drop table if exists users;
 
 -- -----------------------------------------------------
@@ -56,4 +57,13 @@ CREATE TABLE responses(
     answer4 INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
-)
+);
+
+CREATE TABLE contacts(
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    category INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id));
