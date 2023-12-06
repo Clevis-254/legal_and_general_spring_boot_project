@@ -5,6 +5,7 @@ drop table if exists requests;
 drop table if exists questions;
 drop table if exists responses;
 drop table if exists users;
+drop table if exists submissions;
 
 -- -----------------------------------------------------
 
@@ -57,3 +58,12 @@ CREATE TABLE responses(
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 )
+
+CREATE TABLE submissions (
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    status BOOLEAN DEFAULT FALSE,
+    date_started DATE NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
+);
