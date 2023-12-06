@@ -14,7 +14,7 @@ lg:left-0 h-screen bg-gray-200 flex flex-col justify-between w-1/6 py-16 rounded
 rounded" id="side-bar" th:fragment="sidebarFragment">
   <div class="flex flex-col space-y-16">
     <div class="flex items-center justify-between w-full max-w-[12rem] mx-auto">
-      <a th:href="@{/}" class="flex justify-evenly hover:opacity-75 focus-ring">
+      <a th:href="@{/Admin/AdminDashboard}" class="flex justify-evenly hover:opacity-75 focus-ring">
                <span><img alt="nothing" src="/images/legal%20logo.png"/>
             </span>
       </a>
@@ -45,7 +45,7 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
         </svg>
         <span class="font-light">Search Employee</span>
       </a>
-      <a th:href="@{/Admin/AdminMenu}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+      <a th:href="@{/Admin/ViewRequests}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
