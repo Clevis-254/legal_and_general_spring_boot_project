@@ -19,7 +19,7 @@ public class ViewRequestsController {
     public ModelAndView getViewRequests(){
         ModelAndView ViewRequests = new ModelAndView("Admin/ViewRequests");
         List<RequestItem> allRequestItems = viewRequestsImpl.getAllRequestItems();
-        ViewRequests.addObject("requestItems", allRequestItems);
+        ViewRequests.addObject("allRequestItems", allRequestItems);
         return ViewRequests;
     }
 }
