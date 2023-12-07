@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Requests</title>
+    <link th:replace="~{base :: css_file}"/>
+    <link th:replace="~{base :: favicon}">
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+ <main class="flex flex-col items-center w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto
+ sm:py-16 justify-items-center lg:p-16">
+            <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
+                <span class="text-3xl font-bold text-left ">All 360 requests</span>
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+
+                </div>
+            </div>
+     <table>
+         <tbody>
+         <tr th:each="allRequestItems, iStat : ${allRequestItems}">
+             <td>
+                 <div
+                         class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow
+                   sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100"
+                 >
+                     <div class="flex flex-col space-y-4">
+                         <span class="font-bold text-2xl">Request :
+                            <span th:text="${allRequestItems.id}" class="font-light text-base"></span>
+                         </span>
+                         <div class="flex space-x-3">
+                         <span class="font-bold text-2xl">User :
+                             <span th:text="${allRequestItems.name}" class="font-light text-base"></span>
+                         </span>
+                             <span class="font-semibold text-base">Date requested:
+                        <span th:text="${#dates.format(allRequestItems.requested, 'yyyy-MM-dd')}"
+                              class="font-light text-base">
+                        </span>
+                             </span>
+                         <div class="flex space-x-3">
+                             <a th:href="@{/Admin/approve}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                                 <svg xmlns="http://www.w3.org/2000/svg"
+                                      width="32"
+                                      height="32"
+                                      viewBox="0 0 24 24"
+                                      fill="none">
+                                     <path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10Z"
+                                           stroke="#028844"
+                                           stroke-width="1.5"
+                                           stroke-linecap="round"
+                                           stroke-linejoin="round"></path>
+                                     <path d="m7.75 12 2.83 2.83 5.67-5.66"
+                                           stroke="#028844"
+                                           stroke-width="1.5"
+                                           stroke-linecap="round"
+                                           stroke-linejoin="round"></path>
+                                 </svg>
+
+                             </a>
+                             <a th:href="@{/}" class="flex items-end w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                                 <svg xmlns="http://www.w3.org/2000/svg"
+                                      width="32"
+                                      height="32"
+                                      viewBox="0 0 24 24"
+                                      fill="none">
+                                     <path
+                                         d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17"
+                                         stroke="#E22922"
+                                         stroke-width="1.5"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round">
+
+                                     </path>
+                                 </svg>
+                             </a>
+                         </div>
+                     </div>
+                     </div>
+                 </div>
+             </td>
+         </tr>
+         </tbody>
+     </table>
+ </main>
+</body>
+</html>

@@ -3,7 +3,9 @@ package uk.ac.cf.group5.Client.Project.user;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import jakarta.validation.Valid;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,30 +22,30 @@ public class UserController {
         this.user = userService;
     }
 
+
     @GetMapping("/login")
     public ModelAndView Login(){
         ModelAndView login = new ModelAndView("/LoginPage");
         return login;
     }
-    @GetMapping("/")
-    public String home() {
-        return "redirect:dashboard";
-    }
-    @GetMapping("/LoginSuccess")
-    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws Exception, ServletException {
-        String role = authResult.getAuthorities().toString();
 
-        if(role.contains("ROLE_ADMIN")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
-        }
-        else if(role.contains("ROLE_USER")){
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
-
-        }
-        else {response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/login"));
-
-        }
-    }
+//    @GetMapping("/LoginSuccess")
+//    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
+//            throws Exception, ServletException {
+//        String role = authResult.getAuthorities().toString();
+//
+//
+//        if(role.contains("ROLE_ADMIN")){
+//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
+//        }
+//        else if(role.contains("ROLE_USER")){
+//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
+//
+//        }
+//        else {response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/login"));
+//
+//        }
+//    }
 
     @GetMapping("/settings")
     public ModelAndView settings(Authentication authentication){
@@ -69,9 +71,26 @@ public class UserController {
             return modelAndView;
         }
     }
-    @GetMapping("/logout")
-    public String logout(){
-        return "redirect:login";
+
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
+    @GetMapping("/LoginSuccess")
+    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws Exception, ServletException {
+        String role = authResult.getAuthorities().toString();
+
+        if(role.contains("ROLE_ADMIN")){
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
+        }
+        else if(role.contains("ROLE_USER")){
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
+
+        }
+        else {response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/login"));
+
+        }
     }
 
 }

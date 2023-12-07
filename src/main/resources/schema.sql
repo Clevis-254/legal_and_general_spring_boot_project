@@ -12,9 +12,9 @@ drop table if exists users;
 
 -- -----------------------------------------------------
 
--- CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
+ CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
 
--- USE `group_5_client_project`;
+ USE `group_5_client_project`;
 
 
 
@@ -33,7 +33,7 @@ CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
     approved VARCHAR(20) default 'pending',
-    username VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)

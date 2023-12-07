@@ -15,7 +15,7 @@ public class RequestItem {
      */
     private String approved;
     private Long userId;
-    private String username;
+    private String name;
 
     private Date requested;
 

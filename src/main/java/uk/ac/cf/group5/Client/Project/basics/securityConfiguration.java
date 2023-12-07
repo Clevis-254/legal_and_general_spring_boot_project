@@ -35,28 +35,27 @@ public class securityConfiguration {
     private DataSource dataSource;
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
             Exception {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                        //.requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
-                        // .requestMatchers("/dashboard/**").hasRole("ADMIN")
-//                        .requestMatchers("/LoginSuccess").hasRole("ADMIN")
+
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
+
+
                         // .requestMatchers("/dashboard/**").hasRole( "USER")
-                        .requestMatchers("/reviews").hasRole( "USER")
-                        .requestMatchers("/request360").hasRole( "USER")
-                        .requestMatchers("/requests").hasRole( "USER")
-                        .requestMatchers("/form/employee").hasRole( "USER")
-                        .requestMatchers("/thankYou").hasRole( "USER"))
+                        .requestMatchers("/reviews").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
+                        .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/form/employee").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/thankYou").hasAnyRole("ADMIN","USER"))
 
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -73,13 +72,6 @@ public class securityConfiguration {
                         .failureUrl("/login?error=true")
                 )
 
-//                .formLogin(form -> form
-//                        //.loginPage("/login")
-//                        //.permitAll()
-//                      //  .defaultSuccessUrl("/dashboard",false)
-//                        .defaultSuccessUrl("/LoginSuccess", true)
-//
-//                        .failureUrl("/login?error=true"))
 
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/login"))
                 .exceptionHandling(exceptions -> exceptions
