@@ -52,12 +52,14 @@ class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm
                     <span class="font-semibold text-base">
                         Status:
                         <span th:if="${requestItem.approved eq 'pending'}"
-                              class="bg-gray-300 text-gray-600">Pending
+                              class="bg-gray-300 text-gray-600">PENDING
                         </span>
-                    <span th:if="${requestItem.approved eq 'approved'}"
-                          class="bg-green-300 text-green-600">
-                    Approved
-                    </span>
+                        <span th:if="${requestItem.approved eq 'approved'}"
+                          class="bg-green-300 text-green-600">APPROVED
+                         </span>
+                        <span th:if="${requestItem.approved eq 'cancelled'}"
+                              class="bg-red-300 text-red-600">CANCELLED
+                        </span>
                     </span>
                     <span class="font-semibold text-base">Date requested:
                         <span th:text="${#dates.format(requestItem.requested, 'yyyy-MM-dd')}"

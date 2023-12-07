@@ -38,7 +38,7 @@
                         </span>
                              </span>
                          <div class="flex space-x-3">
-                             <a th:href="@{/Admin/approve}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                             <a th:href="@{/Admin/approve/{id} (id=${allRequestItems.id})}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
                                  <svg xmlns="http://www.w3.org/2000/svg"
                                       width="32"
                                       height="32"
@@ -57,7 +57,7 @@
                                  </svg>
 
                              </a>
-                             <a th:href="@{/}" class="flex items-end w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                             <a th:href="@{/Admin/cancelled/{id} (id=${allRequestItems.id})}" class="flex items-end w-full px-4 py-2 space-x-3 hover:bg-white rounded">
                                  <svg xmlns="http://www.w3.org/2000/svg"
                                       width="32"
                                       height="32"

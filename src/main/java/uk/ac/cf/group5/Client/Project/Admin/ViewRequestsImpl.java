@@ -38,11 +38,16 @@ public class ViewRequestsImpl {
     }
 
     public void setApproved(RequestItem request){
-        String RequestInsertSql = "update requests set approved = approved where id = ?";
-        jdbctemplate.update(RequestInsertSql,
-                request.getId(),
-                request.getApproved()
+        String RequestUpdateSql = "update requests set approved = 'approved' where id = ?";
+        jdbctemplate.update(RequestUpdateSql,
+                request.getId()
                 );
+    }
+    public void setCancelled(RequestItem request){
+        String RequestUpdateSql = "update requests set approved = 'cancelled' where id = ?";
+        jdbctemplate.update(RequestUpdateSql,
+                request.getId()
+        );
     }
 
 }

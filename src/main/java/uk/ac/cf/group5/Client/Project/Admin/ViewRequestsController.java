@@ -23,12 +23,19 @@ public class ViewRequestsController {
         ViewRequests.addObject("allRequestItems", allRequestItems);
         return ViewRequests;
     }
-    @GetMapping("Admin/approve")
+    @GetMapping("Admin/approve/{id}")
     public ModelAndView approveRequest(@PathVariable("id") Long id){
-        ModelAndView approve = new ModelAndView("Admin/ViewRequests");
         RequestItem approved = viewRequestsImpl.getRequest(id);
         viewRequestsImpl.setApproved(approved);
         ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
         return result;
     }
+    @GetMapping("Admin/cancelled/{id}")
+    public ModelAndView cancelRequest(@PathVariable("id") Long id){
+        RequestItem approved = viewRequestsImpl.getRequest(id);
+        viewRequestsImpl.setCancelled(approved);
+        ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
+        return result;
+    }
+
 }

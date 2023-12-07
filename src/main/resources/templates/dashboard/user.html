@@ -48,6 +48,10 @@
                           class="bg-green-300 text-green-600">
                     Approved
                     </span>
+                                <span th:if="${requestItem.approved eq 'cancelled'}"
+                                      class="bg-red-300 text-red-600">
+                    Cancelled
+                    </span>
                     </span>
                         </td>
                     </tr>
