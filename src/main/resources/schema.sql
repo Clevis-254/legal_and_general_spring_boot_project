@@ -1,8 +1,8 @@
 
 drop table if exists responses;
-drop table if exists adminUsers;
 drop table if exists requests;
 drop table if exists questions;
+drop table if exists contact_questions;
 drop table if exists responses;
 drop table if exists users;
 
@@ -56,4 +56,12 @@ CREATE TABLE responses(
     answer4 INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
-)
+);
+
+CREATE TABLE contact_questions(
+    id INT not null  auto_increment,
+    question VARCHAR(255) NOT NULL,
+    category VARCHAR(50) NOT NULL ,
+    date_added  Date default current_date,
+    primary key (id)
+);

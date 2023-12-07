@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contact form</title>
+
+    <link th:fragment="css_file"
+          th:href="@{/css/build.css}" rel="stylesheet"
+    >
+    <link th:fragment="favicon"
+          th:href="@{/images/favicon .ico}"
+          rel="shortcut icon"
+          type="image/x-icon">
+</head>
+<body class="flex w-full h-full bg-gray-200">
+<div class="flex flex-col justify-items-center max-h-full w-full pl-10 pr-6 space-y-4">
+    <div class="flex justify-evenly w-full space-y-10">
+
+        <a href="https://www.legalandgeneral.com/" target="_blank"><img src="/images/legal%20logo.png" alt="logo" class="w-auto h-40"></a>
+        <h1 class="font-bold text-6xl">L & G Feedback Form</h1>
+    </div>
+        <th:block th:each="question : ${questionItems}">
+<!--                <span th:text="${question.category}" class="font-semibold text-2xl ml-5"></span>-->
+                <div class="flex flex-col space-y-3 ml-10">
+                    <span th:text="${question.question}" class="text-xl font-light font-sans"></span>
+                    <div class="flex flex-col">
+                        <label>
+                            <input type="radio" th:name="${' + question.id + .answer'}" th:value="1" required>
+                            Never (1)
+                        </label>
+                        <label>
+                            <input type="radio" th:name="${' + question.id + .answer'}" th:value="2" required>
+                            Rarely (2)
+                        </label>
+                        <label>
+                            <input type="radio" th:name="${' + question.id + .answer'}" th:value="3" required>
+                            Sometimes (3)
+                        </label>
+                        <label>
+                            <input type="radio" th:name="${' + question.id + .answer'}" th:value="4" required>
+                            Often (4)
+                        </label>
+                        <label>
+                            <input type="radio" th:name="${' + question.id + .answer'}" th:value="5" required>
+                            Always (5)
+                        </label>
+                    </div>
+                </div>
+        </th:block>
+    <div class="flex flex-col space-y-6 ml-10">
+        <div th:each="question : ${getTextAreaQuestions}">
+            <div>
+
+                <p><span th:text="${question.question}"></span></p>
+
+                <textarea th:id="${'question_' + question.id}" th:name="${'question_' + question.id}" rows="4" cols="50"
+                          required></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

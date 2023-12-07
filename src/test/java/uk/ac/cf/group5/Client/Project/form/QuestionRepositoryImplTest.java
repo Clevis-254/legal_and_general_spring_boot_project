@@ -7,10 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import uk.ac.cf.group5.Client.Project.Form.Question;
-import uk.ac.cf.group5.Client.Project.Form.QuestionRepository;
-import uk.ac.cf.group5.Client.Project.Form.QuestionServiceImpl;
+import uk.ac.cf.group5.Client.Project.UserForm.Question;
+import uk.ac.cf.group5.Client.Project.UserForm.QuestionRepository;
+import uk.ac.cf.group5.Client.Project.UserForm.QuestionServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;

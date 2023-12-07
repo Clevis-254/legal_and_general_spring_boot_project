@@ -20,6 +20,7 @@ public class RequestItem {
     private Date requested;
 
     public RequestItem() {
+
         this(0L,  "", 0L,"",new Date());
     }
 
