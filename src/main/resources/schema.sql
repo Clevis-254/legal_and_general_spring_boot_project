@@ -61,9 +61,9 @@ CREATE TABLE responses(
 
 CREATE TABLE submissions (
     id INT NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
+    requestID INT NOT NULL,
     status BOOLEAN DEFAULT FALSE,
     date_started DATE NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (userID) REFERENCES users(id)
+    FOREIGN KEY (requestID) REFERENCES requests(id)
 );
