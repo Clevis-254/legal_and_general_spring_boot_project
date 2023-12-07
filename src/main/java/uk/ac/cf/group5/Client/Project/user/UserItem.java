@@ -14,8 +14,12 @@ public class UserItem {
     private String password;
 
 
-    public UserItem ( String testUsername, String testPassword){
+    public UserItem (){
         this(0L,"","","");
+    }
+
+    public boolean isNew() {
+        return this.username == null;
     }
 
 }

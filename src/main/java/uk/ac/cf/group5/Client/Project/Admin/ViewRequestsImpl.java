@@ -21,14 +21,33 @@ public class ViewRequestsImpl {
 
         ViewRequestMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
-                rs.getBoolean("approved"),
+                rs.getString("approved"),
                 rs.getLong("userid"),
-                rs.getString("username"),
+                rs.getString("name"),
                 rs.getDate("requested")
         );
     }
-    public List<RequestItem> getAllRequestItems(){
-        String sql = "select * from requests where approved = ?";
-        return jdbctemplate.query(sql, ViewRequestMapper,false);
+    public List<RequestItem> getPendingRequestItems() {
+        String sql = "SELECT * FROM requests WHERE approved = 'pending'";
+        return jdbctemplate.query(sql, ViewRequestMapper);
     }
+
+    public RequestItem getRequest(Long id){
+        String sql = "select * from requests where id = ?";
+        return jdbctemplate.queryForObject(sql, ViewRequestMapper, id);
+    }
+
+    public void setApproved(RequestItem request){
+        String RequestUpdateSql = "update requests set approved = 'approved' where id = ?";
+        jdbctemplate.update(RequestUpdateSql,
+                request.getId()
+                );
+    }
+    public void setCancelled(RequestItem request){
+        String RequestUpdateSql = "update requests set approved = 'cancelled' where id = ?";
+        jdbctemplate.update(RequestUpdateSql,
+                request.getId()
+        );
+    }
+
 }

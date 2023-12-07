@@ -32,8 +32,8 @@ CREATE TABLE users(
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approved BOOLEAN default false,
-    username VARCHAR(50) NOT NULL,
+    approved VARCHAR(20) default 'pending',
+    name VARCHAR(50) NOT NULL,
     requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)

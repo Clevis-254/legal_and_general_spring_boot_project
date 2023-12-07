@@ -52,7 +52,7 @@ public class RequestController {
         UserItem userItem = user.getUserItem(employee);
 
         RequestItem requestItem = new RequestItem();
-        requestItem.setUsername(userItem.getUsername());
+        requestItem.setName(userItem.getName());
         requestItem.setUserId(userItem.getId());
 
         request.add(requestItem);
