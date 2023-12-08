@@ -7,6 +7,7 @@ public interface UserRepository {
     List<UserItem> getUserItems();
 
     UserItem getUserItem(String username);
+    UserItem getItem(long id);
 
     void add(UserItem Item);
     UserItem findByEmail(String username);

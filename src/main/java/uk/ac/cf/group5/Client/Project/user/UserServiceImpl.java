@@ -15,7 +15,9 @@ private UserRepository userRepository;
         userRepository.add(user);
     }
 
-
+    public UserItem getItem(long id) {
+        return userRepository.getItem(id);
+    }
 
     public UserItem getUserItem(String username) {
          return userRepository.getUserItem(username);

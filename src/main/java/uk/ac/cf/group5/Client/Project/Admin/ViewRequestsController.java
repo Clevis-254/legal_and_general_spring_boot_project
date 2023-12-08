@@ -27,14 +27,17 @@ public class ViewRequestsController {
     public ModelAndView approveRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
         viewRequestsImpl.setApproved(approved);
-        ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
+        Long userid = approved.getUserId();
+        ModelAndView result = new ModelAndView("redirect:/Admin/ApproveEmail/{userid}");
+        result.addObject("userid", userid);
         return result;
     }
     @GetMapping("Admin/cancelled/{id}")
     public ModelAndView cancelRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
+        RequestItem userid = viewRequestsImpl.getUserID(id);
         viewRequestsImpl.setCancelled(approved);
-        ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
+        ModelAndView result = new ModelAndView("redirect:Admin/DenyEmail/{userid}");
         return result;
     }
 

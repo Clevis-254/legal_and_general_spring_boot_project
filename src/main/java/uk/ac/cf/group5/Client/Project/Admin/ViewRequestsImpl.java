@@ -22,7 +22,7 @@ public class ViewRequestsImpl {
         ViewRequestMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
                 rs.getString("approved"),
-                rs.getLong("userid"),
+                rs.getLong("userID"),
                 rs.getString("name"),
                 rs.getDate("requested")
         );
@@ -48,6 +48,10 @@ public class ViewRequestsImpl {
         jdbctemplate.update(RequestUpdateSql,
                 request.getId()
         );
+    }
+    public RequestItem getUserID(Long id){
+        String sql = "select userID from requests where id = ?";
+        return jdbctemplate.queryForObject(sql, ViewRequestMapper, id);
     }
 
 }

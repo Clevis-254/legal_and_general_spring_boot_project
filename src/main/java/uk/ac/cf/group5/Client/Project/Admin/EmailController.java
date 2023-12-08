@@ -1,27 +1,34 @@
 package uk.ac.cf.group5.Client.Project.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.EventListener;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
+import uk.ac.cf.group5.Client.Project.user.UserService;
 
 @Controller
-    public class EmailController {
+public class EmailController {
+    private EmailImpl EmailImpl;
+    private UserService user;
+    @Autowired
+    private EmailService emailService;
 
-        @Autowired
-        private EmailService emailService;
+    @GetMapping("Admin/ApproveEmail/{userid}")
+    public String sendApprovalEmail(@PathVariable("userid") long id) {
+        UserItem User = user.getItem(id);
+        String Username = User.getUsername();
+        String name = User.getName();
+        emailService.sendApprovalEmail(Username, name);
+        return "redirect:/Admin/ViewRequests";
+    }
 
-        @GetMapping("/send-email")
-        public String sendEmail() {
-
-
-            emailService.sendEmail(to, subject, body);
-
-            // Redirect to a confirmation page or handle as needed
-            return "email-sent-success";
-        }
-        @EventListener(ApplicationReadyEvent.class)
-    public void sendMail(){
-            senderService.send
-        }
+    @GetMapping("Admin/DenyEmail/{userid}")
+    public String sendDenyEmail(@PathVariable("userid") long id) {
+        UserItem User = user.getItem(id);
+        String Username = User.getUsername();
+        String name = User.getName();
+        emailService.sendDenyEmail(Username, name);
+        return "redirect:/Admin/ViewRequests";
+    }
 }
