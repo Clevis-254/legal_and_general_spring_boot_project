@@ -1,11 +1,11 @@
 use group_5_client_project;
-drop table if exists responses;
-drop table if exists adminUsers;
-drop table if exists requests;
-drop table if exists questions;
-drop table if exists responses;
-drop table if exists contacts;
-drop table if exists users;
+DROP TABLE IF EXISTS submissions;
+DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS contacts;
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS results;
+DROP TABLE IF EXISTS users;
 
 -- -----------------------------------------------------
 
@@ -40,6 +40,15 @@ CREATE TABLE requests(
     FOREIGN KEY (userID) REFERENCES users(id)
 );
 
+CREATE TABLE results(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    date_added DATE NOT NULL,
+    current_status VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
+);
+
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
     question_text VARCHAR(255) NOT NULL,
@@ -48,22 +57,34 @@ CREATE TABLE questions(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE responses(
-    id INT NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
-    answer1 INT NOT NULL,
-    answer2 INT NOT NULL,
-    answer3 INT NOT NULL,
-    answer4 INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (userID) REFERENCES users(id)
-);
-
 CREATE TABLE contacts(
     id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    fname VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    category INT NOT NULL,
+    category VARCHAR(50),
+    result_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id));
+    FOREIGN KEY (result_id) REFERENCES results(id));
+
+CREATE TABLE answers
+    (
+        id INT NOT NULL AUTO_INCREMENT,
+        questionID INT NOT NULL,
+        answer VARCHAR(255) NOT NULL,
+        resultID INT NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (questionID) REFERENCES questions(id),
+        FOREIGN KEY (resultID) REFERENCES results(id)
+    );
+
+CREATE TABLE submissions(
+                            id INT NOT NULL AUTO_INCREMENT,
+                            userID INT,
+                            contactID INT,
+                            resultsID INT NOT NULL,
+                            PRIMARY KEY (id),
+                            FOREIGN KEY (userID) REFERENCES users(id),
+                            FOREIGN KEY (contactID) REFERENCES contacts(id),
+                            FOREIGN KEY (resultsID) REFERENCES results(id)
+);

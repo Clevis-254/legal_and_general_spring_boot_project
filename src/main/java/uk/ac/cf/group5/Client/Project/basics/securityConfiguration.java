@@ -53,8 +53,10 @@ public class securityConfiguration {
                         .requestMatchers("/reviews").hasRole( "USER")
                         .requestMatchers("/request360").hasRole( "USER")
                         .requestMatchers("/requests").hasRole( "USER")
-                        .requestMatchers("/form/employee").hasRole( "USER")
-                        .requestMatchers("/thankYou").hasRole( "USER"))
+                        .requestMatchers("/form/**").hasRole( "USER")
+                        .requestMatchers("/form/addContact").hasRole( "USER")
+                        .requestMatchers("/thankYou").hasRole( "USER")
+                )
 
                 .formLogin(form -> form
                         .loginPage("/login")

@@ -1,14 +1,11 @@
 package uk.ac.cf.group5.Client.Project.Form;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactForm;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactItem;
-import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactsRepository;
+import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactRepositoryImpl;
+import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactService;
 import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionItem;
 import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionService;
 
@@ -18,9 +15,10 @@ import java.util.List;
 public class FormController {
 
     private final QuestionService questionService;
-
-    public FormController(QuestionService questionService) {
+    private final ContactService contactService;
+    public FormController(QuestionService questionService, ContactService contactService) {
         this.questionService = questionService;
+        this.contactService = contactService;
     }
 
     @GetMapping("/form/employee")
@@ -36,35 +34,32 @@ public class FormController {
         return "redirect:/form/employee/contacts";
     }
 
+
     @GetMapping("/form/employee/contacts")
     public ModelAndView getEmployeeContacts() {
         ModelAndView modelAndView = new ModelAndView("form/contacts");
-        List<ContactItem> contacts = null;
-        modelAndView.addObject("contacts", null);
+        modelAndView.addObject("reviewID", 1); // TODO: replace with actual review ID
+        modelAndView.addObject("contact", new ContactItem());
+        List<ContactItem> contacts = contactService.getContactItems(1); // Fetch contacts from the database
+        modelAndView.addObject("contacts", contacts);
         return modelAndView;
     }
 
-    @PostMapping("/form/employee/contacts")
-    public String addContacts(@RequestBody List<ContactItem> contacts) {
-        // Process the received contacts here (e.g., save to a database)
-        for (ContactItem contact : contacts) {
-            ContactForm contactForm = new ContactForm();
-            contactForm.setName(contact.getName());
-            contactForm.setEmail(contact.getEmail());
-            contactForm.setCategory(contact.getCategory());
-            // Save contacts to a database
-            ContactsRepository contactsRepository = new ContactsRepository();
-            contactsRepository.addContact(contactForm);
-        }
-        // Example: printing received contacts to the console
-        for (ContactItem contact : contacts) {
-            System.out.println(contact.toString());
-            // Save contacts to a database or perform necessary operations
-        }
+    @PostMapping("/form/addContact")
+    public String addContact(@ModelAttribute ContactItem contact) {
+        // Process and save the received contact to the database
+        System.out.println(contact.toString());
+        contactService.save(contact, 1); // TODO: Replace with actual result ID
+        return "redirect:/form/employee/contacts"; // Redirect to the contact form page
+    }
 
-        // Return a success message or any response if needed
-    return "redirect:/form/thankYou";
-}
+    @GetMapping("/form/deleteContact/{id}")
+    public String deleteContact(@PathVariable Long id){
+            // Delete contact by id
+            contactService.delete(id);
+        return "redirect:/form/employee/contacts"; // Redirect back to the contacts list
+    }
+
 
     @GetMapping("/thankYou")
     public ModelAndView getThankYou() {
