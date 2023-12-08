@@ -13,8 +13,8 @@ values
     ('Actively seeking out opportunities to support others in their work.', curdate(), 'collaborative'),
     ('As being open and approachable', curdate(), 'collaborative');
 
-insert into requests (userID, username, requested )
+insert into requests (userID, name, requested )
 values
-('1', 'group5superuser@gmail.com', curdate()),
-('2', 'group5employeetest@gmail.com', curdate());
+('1', 'adminJerry', curdate()),
+('2', 'userHoward', curdate());
 

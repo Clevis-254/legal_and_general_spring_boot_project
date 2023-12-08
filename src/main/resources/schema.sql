@@ -1,11 +1,13 @@
 
+USE `group_5_client_project`;
 drop table if exists responses;
 drop table if exists adminUsers;
-drop table if exists requests;
 drop table if exists questions;
 drop table if exists responses;
-drop table if exists users;
 drop table if exists submissions;
+drop table if exists Reviews;
+drop table if exists requests;
+drop table if exists users;
 
 -- -----------------------------------------------------
 
@@ -33,8 +35,8 @@ CREATE TABLE users(
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    approved BOOLEAN default false,
-    username VARCHAR(50) NOT NULL,
+    approved VARCHAR(20) default 'pending',
+    name VARCHAR(50) NOT NULL,
     requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
@@ -57,13 +59,15 @@ CREATE TABLE responses(
     answer4 INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
-)
+);
 
-CREATE TABLE submissions (
+CREATE TABLE Reviews(
     id INT NOT NULL AUTO_INCREMENT,
+    userId INT NOT NULL ,
     requestID INT NOT NULL,
     status BOOLEAN DEFAULT FALSE,
     date_started DATE NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (requestID) REFERENCES requests(id)
+    FOREIGN KEY (requestID) REFERENCES requests(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
 );

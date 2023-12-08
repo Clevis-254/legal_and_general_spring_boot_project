@@ -23,9 +23,9 @@ public class RequestRepositoryImpl implements RequestRepository {
 
         RequestItemMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
-                rs.getBoolean("approved"),
+                rs.getString("approved"),
                 rs.getLong("userid"),
-                rs.getString("username"),
+                rs.getString("name"),
                 rs.getDate("requested")
         );
     }
@@ -34,12 +34,12 @@ public class RequestRepositoryImpl implements RequestRepository {
     public void add(RequestItem request) {
         String RequestInsertSql =
                 "insert into requests " +
-                        "(userid,username)" +
+                        "(userid,name)" +
                         " values (?,?)";
         jdbctemplate.update(RequestInsertSql,
                 request.getUserId(),
                 //request.getApproved(),
-                request.getUsername()
+                request.getName()
         );
     }
 

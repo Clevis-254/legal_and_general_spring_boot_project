@@ -24,14 +24,23 @@ public class ReviewRepoImp implements ReviewRepository{
 
         ReviewItemMapper = (rs, i) -> new ReviewItem(
                 rs.getLong("id"),
+                rs.getLong("userid"),
                 rs.getLong("requestId"),
                 rs.getString("status"),
                 rs.getDate("dateRequested")
         );
     }
 
-    static List<ReviewItem> findByRequestIdAndStatus(String requestId, String inProgress) {
-        return null;
+//    public List<ReviewItem> getReviewItems(Long userId){
+//        String sql = "select * from reviews where userid = ?";
+//        return jdbctemplate.query(sql, ReviewItemMapper, userId);
+//    }
+
+
+
+    public List<ReviewItem> getInProgressReviews() {
+        String sql = "SELECT * FROM reviews WHERE status = 'in progress'";
+        return jdbctemplate.query(sql, ReviewItemMapper);
     }
 
     public void add(Long Id){

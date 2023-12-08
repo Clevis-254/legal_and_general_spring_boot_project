@@ -8,9 +8,10 @@ import java.util.List;
 public interface ReviewRepository {
 
 
-    static List<ReviewItem> findByRequestIdAndStatus(String requestId, String inProgress) {
+    static List<ReviewItem> getReviewItems(String requestId, String inProgress) {
         return null;
     }
+
 
     void add(Long Id);
 }

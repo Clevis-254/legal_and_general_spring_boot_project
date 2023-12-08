@@ -10,9 +10,11 @@ import java.util.Date;
 public class ReviewItem {
 
     private Long id;
-
+    private Long userId;
     private Long requestId;
     private String status;
     private Date dateRequested;
 
+    public ReviewItem() { this( 0L,  0L, 0L,"",new Date());
+    }
 }
