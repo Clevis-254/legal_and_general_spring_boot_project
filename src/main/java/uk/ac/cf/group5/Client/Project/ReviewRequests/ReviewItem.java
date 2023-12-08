@@ -15,6 +15,7 @@ public class ReviewItem {
     private String status;
     private Date dateRequested;
 
-    public ReviewItem() { this( 0L,  0L, 0L,"",new Date());
+    public ReviewItem(){ this( 0L,  0L, 0L,"",new Date());
+
     }
 }

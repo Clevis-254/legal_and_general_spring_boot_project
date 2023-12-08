@@ -5,17 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 
 import java.util.List;
 
 @Controller
 public class ViewRequestsController {
+    private AdminReviewRepoimp AdminReviewRepoimp;
     private ViewRequestsImpl viewRequestsImpl;
 
 
-    public ViewRequestsController(ViewRequestsImpl aViewRequestsImpl) {
+
+    public ViewRequestsController(ViewRequestsImpl aViewRequestsImpl,AdminReviewRepoimp adminReviewRepoimp ) {
         this.viewRequestsImpl = aViewRequestsImpl;
+        this.AdminReviewRepoimp = adminReviewRepoimp;
     }
 
     @GetMapping("Admin/ViewRequests")
@@ -40,5 +44,12 @@ public class ViewRequestsController {
         return result;
     }
 
+    @GetMapping("Admin/AdminReviews")
+    public ModelAndView getViewReviews() {
+        ModelAndView viewReviews = new ModelAndView("Admin/AdminReviews");
+        List<ReviewItem> allReviewItems = AdminReviewRepoimp.getReview();
+        viewReviews.addObject("allReviewItems", allReviewItems);
+        return viewReviews;
+    }
 }
 

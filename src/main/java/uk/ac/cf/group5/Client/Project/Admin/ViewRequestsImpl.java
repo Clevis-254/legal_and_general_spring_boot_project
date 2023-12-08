@@ -50,8 +50,5 @@ public class ViewRequestsImpl {
         );
     }
 
-    public void addReview(RequestItem requestItem){
-
-    }
 
 }
