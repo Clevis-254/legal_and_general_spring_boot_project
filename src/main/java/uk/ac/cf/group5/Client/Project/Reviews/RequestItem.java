@@ -9,17 +9,19 @@ import java.util.Date;
 @AllArgsConstructor
 public class RequestItem {
     private Long id;
-    private Boolean approved; // Updated field name to follow Java naming conventions
+    /*
+    @ approved
+    changed it to string so that it can accomodate the cancelled function.
+     */
+    private String approved;
     private Long userId;
-    private String username;
+    private String name;
 
     private Date requested;
 
     public RequestItem() {
-        this(0L,  false, 0L,"",new Date());
+        this(0L,  "", 0L,"",new Date());
     }
 
-    public RequestItem(Long id, Boolean approved, Long userId, String username) {
-        this(id, approved, userId, username, new Date());
-    }
+
 }

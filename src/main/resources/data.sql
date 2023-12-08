@@ -15,3 +15,9 @@ values
 
 insert into results (userid, date_added, current_status) values
     (1, curdate(), 'pending');
+
+insert into requests (userID, name, requested )
+values
+('1', 'adminJerry', curdate()),
+('2', 'userHoward', curdate());
+

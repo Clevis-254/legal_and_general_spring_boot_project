@@ -14,14 +14,18 @@ lg:left-0 h-screen bg-gray-200 flex flex-col justify-between w-1/6 py-16 rounded
 rounded" id="side-bar" th:fragment="sidebarFragment">
   <div class="flex flex-col space-y-16">
     <div class="flex items-center justify-between w-full max-w-[12rem] mx-auto">
-      <a th:href="@{/}" class="flex justify-evenly hover:opacity-75 focus-ring">
+      <a th:href="@{/Admin/AdminDashboard}" class="flex justify-evenly hover:opacity-75 focus-ring">
+
+<!--               <span><img alt="logo" src="/images/legal%20logo.png" class="w-auto h-20 rounded-md"/></span>-->
+
                <span><img alt="nothing" src="/images/legal%20logo.png"/>
+
             </span>
       </a>
     </div>
 
     <div class="flex flex-col w-48 mx-auto space-y-3 transition-colors">
-      <a th:href="@{/Admin/AdminMenu}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+      <a th:href="@{/Admin/AdminDashboard}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 width="12"
                 height="12"
@@ -43,9 +47,16 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
             </clipPath>
           </defs>
         </svg>
-        <span class="font-light">Search Employee</span>
+        <span class="font-light">Home</span>
       </a>
+
       <a th:href="@{/Admin/AdminMenu}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M22 11v6c0 4-1 5-5 5H7c-4 0-5-1-5-5V7c0-4 1-5 5-5h1.5c1.5 0 1.83.44 2.4 1.2l1.5 2c.38.5.6.8 1.6.8h3c4
+           0 5 1 5 5Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10">
+          </path>
+
+      <a th:href="@{/Admin/ViewRequests}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -59,10 +70,11 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
                   stroke-width="1.5"
                   d="M21.47 19V5c0-2-1-3-3-3h-4c-2 0-3 1-3 3v14c0 2 1 3 3 3h4c2 0 3-1 3-3zM11.47 6h5M11.47 18h4M11.47 13.95l5 .05M11.47 10h3M5.49 2C3.86 2 2.53 3.33 2.53 4.95v12.96c0 .45.19 1.13.42 1.52l.82 1.36c.94 1.57 2.49 1.57 3.43 0l.82-1.36c.23-.39.42-1.07.42-1.52V4.95C8.44 3.33 7.11 2 5.49 2zM8.44 7H2.53"
           ></path>
+
         </svg>
         <span class="font-light">View Requests</span>
       </a>
-      <a th:href="@{/}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+      <a th:href="@{/Admin/ViewRequests}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -77,26 +89,59 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
                   d="M21.47 19V5c0-2-1-3-3-3h-4c-2 0-3 1-3 3v14c0 2 1 3 3 3h4c2 0 3-1 3-3zM11.47 6h5M11.47 18h4M11.47 13.95l5 .05M11.47 10h3M5.49 2C3.86 2 2.53 3.33 2.53 4.95v12.96c0 .45.19 1.13.42 1.52l.82 1.36c.94 1.57 2.49 1.57 3.43 0l.82-1.36c.23-.39.42-1.07.42-1.52V4.95C8.44 3.33 7.11 2 5.49 2zM8.44 7H2.53"
           ></path>
         </svg>
-        <span class="font-light">Pending 360s</span>
+        <span class="font-light">Pending requests</span>
       </a>
-      <a th:href="@{/Admin/AdminMenu}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
-        <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-        >
-          <path
-                  stroke="#000000"
-                  stroke-linecap="round"
-                  stroke-width="1.5"
-                  d="M21.47 19V5c0-2-1-3-3-3h-4c-2 0-3 1-3 3v14c0 2 1 3 3 3h4c2 0 3-1 3-3zM11.47 6h5M11.47 18h4M11.47 13.95l5 .05M11.47 10h3M5.49 2C3.86 2 2.53 3.33 2.53 4.95v12.96c0 .45.19 1.13.42 1.52l.82 1.36c.94 1.57 2.49 1.57 3.43 0l.82-1.36c.23-.39.42-1.07.42-1.52V4.95C8.44 3.33 7.11 2 5.49 2zM8.44 7H2.53"
-          ></path>
-        </svg>
-        <span class="font-light">Completed 360s</span>
+<!--      <a th:href="@{/Admin/AdminMenu}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">-->
+<!--        <svg-->
+<!--                xmlns="http://www.w3.org/2000/svg"-->
+<!--                width="12"-->
+<!--                height="12"-->
+<!--                viewBox="0 0 24 24"-->
+<!--                fill="none"-->
+<!--        >-->
+<!--          <path-->
+<!--                  stroke="#000000"-->
+<!--                  stroke-linecap="round"-->
+<!--                  stroke-width="1.5"-->
+<!--                  d="M21.47 19V5c0-2-1-3-3-3h-4c-2 0-3 1-3 3v14c0 2 1 3 3 3h4c2 0 3-1 3-3zM11.47 6h5M11.47 18h4M11.47 13.95l5 .05M11.47 10h3M5.49 2C3.86 2 2.53 3.33 2.53 4.95v12.96c0 .45.19 1.13.42 1.52l.82 1.36c.94 1.57 2.49 1.57 3.43 0l.82-1.36c.23-.39.42-1.07.42-1.52V4.95C8.44 3.33 7.11 2 5.49 2zM8.44 7H2.53"-->
+<!--          ></path>-->
+<!--        </svg>-->
+<!--        <span class="font-light">Completed 360s</span>-->
+<!--      </a>-->
+      <a th:href="@{/static}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="m13.26 3.6-8.21 8.69c-.31.33-.61.98-.67 1.43l-.37 3.24c-.13 1.17.71 1.97 1.87 1.77l3.22-.55c.45-.08
+          1.08-.41 1.39-.75l8.21-8.69c1.42-1.5 2.06-3.21-.15-5.3-2.2-2.07-3.87-1.34-5.29.16Z" stroke="black"
+                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
+          </path><path d="M11.89 5.05a6.126 6.126 0 0 0 5.45 5.15M3 22h18" stroke="black" stroke-width="1.5"
+                       stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span class="font-light">Edit Questions</span>
       </a>
-      <a th:href="@{/}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+<!--      <a th:href="@{/static}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">-->
+<!--        <svg-->
+<!--                width="12"-->
+<!--                height="12"-->
+<!--                viewBox="0 0 12 12"-->
+<!--                fill="none"-->
+<!--                xmlns="http://www.w3.org/2000/svg"-->
+<!--        >-->
+<!--          <g clip-path="url(#clip0_8_539)">-->
+<!--            <path-->
+<!--                    d="M4.45 3.77999C4.605 1.98 5.53 1.245 7.555 1.245H7.62C9.855 1.245 10.75 2.14 10.75 4.375V7.635C10.75 9.87 9.855 10.765 7.62 10.765H7.555C5.545 10.765 4.62 10.04 4.455 8.27M7.5 6H1.81M2.925 4.325L1.25 6L2.925 7.675"-->
+<!--                    stroke="#2C2C2C"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--            />-->
+<!--          </g>-->
+<!--          <defs>-->
+<!--            <clipPath id="clip0_8_539">-->
+<!--              <rect width="12" height="12" fill="white" />-->
+<!--            </clipPath>-->
+<!--          </defs>-->
+<!--        </svg>-->
+<!--        <span class="font-light">Logout</span>-->
+<!--      </a>-->
+      <a th:href="@{/Admin/AdminSettings}"class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
         <svg
                 width="12"
                 height="12"
@@ -126,32 +171,14 @@ rounded" id="side-bar" th:fragment="sidebarFragment">
             </clipPath>
           </defs>
         </svg>
-        <span class="font-light">Edit Questions</span>
+        <span class="font-light">settings</span>
       </a>
-      <a th:href="@{/}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
-        <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clip-path="url(#clip0_8_539)">
-            <path
-                    d="M4.45 3.77999C4.605 1.98 5.53 1.245 7.555 1.245H7.62C9.855 1.245 10.75 2.14 10.75 4.375V7.635C10.75 9.87 9.855 10.765 7.62 10.765H7.555C5.545 10.765 4.62 10.04 4.455 8.27M7.5 6H1.81M2.925 4.325L1.25 6L2.925 7.675"
-                    stroke="#2C2C2C"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_8_539">
-              <rect width="12" height="12" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-        <span class="font-light">Logout</span>
-      </a>
+      <form th:action="@{/logout}" th:method="post">
+        <input type="submit" value="logout"/>
+        <input th:name="${_csrf.parameterName}"
+               th:type="hidden"
+               th:value="${_csrf.token}"/>
+      </form>
     </div>
   </div>
 </aside>

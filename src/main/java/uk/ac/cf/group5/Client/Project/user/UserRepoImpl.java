@@ -38,6 +38,29 @@ public class UserRepoImpl implements UserRepository{
     }
 
     public void add(UserItem user) {
+        if (user.isNew()){
+            insert(user);
+        } else {
+            update(user);
+        }
+    }
+
+    public UserItem findByEmail(String username){
+        String sql = "select * from users where username = ?";
+        return jdbctemplate.queryForObject(sql,UserItemMapper, username);
+    }
+
+    private void update(UserItem user) {
+        String UserInsertSql =
+                "update users set name = ?, password = ? where username = ?";
+        jdbctemplate.update(UserInsertSql,
+                user.getName(),
+                user.getPassword(),
+                user.getUsername()
+        );
+    }
+
+    private void insert(UserItem user) {
         String UserInsertSql =
                 "insert into users " +
                         "(name, username, password)" +
@@ -49,8 +72,4 @@ public class UserRepoImpl implements UserRepository{
         );
     }
 
-    public UserItem findByEmail(String username){
-        String sql = "select * from users where username = ?";
-        return jdbctemplate.queryForObject(sql,UserItemMapper, username);
-    }
 }

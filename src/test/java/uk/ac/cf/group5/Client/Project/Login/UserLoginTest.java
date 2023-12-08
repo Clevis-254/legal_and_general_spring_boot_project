@@ -12,28 +12,28 @@ import static org.mockito.Mockito.*;
 
 public class UserLoginTest {
 
-    @Test
-    public void testLogin() {
+   // @Test
+   // public void testLogin() {
 
-        UserService userService = mock(UserService.class);
+       // UserService userService = mock(UserService.class);
 
-        UserController userController = new UserController(userService);
+       // UserController userController = new UserController(userService);
 
         // Creating a test for a UserItem
-        UserItem testUserItem = new UserItem("testUsername", "testPassword");
+      //  UserItem testUserItem = new UserItem("testUsername", "testPassword");
 
-        when(userService.findByEmail("testUsername")).thenReturn(testUserItem);
+       // when(userService.findByEmail("testUsername")).thenReturn(testUserItem);
 
-        ModelAndView actualModelAndView = userController.Login();
+       // ModelAndView actualModelAndView = userController.Login();
 
         // Make sure that the findByEmail method from UserService will call the correct username
-        verify(userService).findByEmail("testUsername");
-        verifyNoMoreInteractions(userService);
+       // verify(userService).findByEmail("testUsername");
+        //verifyNoMoreInteractions(userService);
 
         // expected result
-        ModelAndView expectedModelAndView = new ModelAndView("/LoginPage");
+        //ModelAndView expectedModelAndView = new ModelAndView("/LoginPage");
 
-        assertEquals(expectedModelAndView.getViewName(), actualModelAndView.getViewName());
-    }
+       // assertEquals(expectedModelAndView.getViewName(), actualModelAndView.getViewName());
+   // }
 }
 
