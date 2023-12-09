@@ -9,20 +9,20 @@ import java.util.List;
 @Repository
 public class ReviewRepoImp implements ReviewRepository{
 
-    private final JdbcTemplate jdbctemplate;
+    private static JdbcTemplate jdbctemplate;
 
-    private RowMapper<ReviewItem> ReviewItemMapper;
+    private static RowMapper<ReviewItem> ViewReviewMapper;
 
     public ReviewRepoImp(JdbcTemplate ajdbctemplate){
 
-        this.jdbctemplate = ajdbctemplate;
+        jdbctemplate = ajdbctemplate;
 
-        setReviewItemMapper();
+        setReviewMapper();
     }
 
-    private void setReviewItemMapper() {
+    private void setReviewMapper() {
 
-        ReviewItemMapper = (rs, i) -> new ReviewItem(
+        ViewReviewMapper = (rs, i) -> new ReviewItem(
                 rs.getLong("id"),
                 rs.getLong("userid"),
                 rs.getLong("requestId"),
@@ -38,9 +38,9 @@ public class ReviewRepoImp implements ReviewRepository{
 
 
 
-    public List<ReviewItem> getInProgressReviews() {
+    public static List<ReviewItem> getInProgressReviewItems() {
         String sql = "SELECT * FROM reviews WHERE status = 'in progress'";
-        return jdbctemplate.query(sql, ReviewItemMapper);
+        return jdbctemplate.query(sql, ViewReviewMapper);
     }
 
     public void add(Long Id){

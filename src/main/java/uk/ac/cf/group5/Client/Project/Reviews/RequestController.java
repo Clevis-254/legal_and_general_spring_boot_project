@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
+import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewRepoImp;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewService;
@@ -25,17 +26,25 @@ public class RequestController {
         this.review = reviewService;
     }
 
-    @GetMapping("/reviews")
+    @GetMapping("/Reviews")
     public ModelAndView getReviews(Authentication authentication) {
         String employee = authentication.getName();
         UserItem userItem = user.getUserItem(employee);
         Long userId = userItem.getId();
 
-        ModelAndView reviews = new ModelAndView("360's/reviews");
+        ModelAndView reviews = new ModelAndView("360's/Reviews");
         List<ReviewItem> reviewItems = review.getReviewItems(userId);
         reviews.addObject("reviewItems", reviewItems);
 
         return reviews;
+    }
+
+    @GetMapping("/Reviews")
+    public ModelAndView getViewReviews() {
+        ModelAndView viewReviews = new ModelAndView("360's/Reviews");
+        List<ReviewItem> allReviewItems = ReviewRepoImp.getInProgressReviewItems();
+        viewReviews.addObject("allReviewItems", allReviewItems);
+        return viewReviews;
     }
 
     @GetMapping("/requests")
