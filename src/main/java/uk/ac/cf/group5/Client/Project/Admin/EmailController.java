@@ -9,14 +9,17 @@ import uk.ac.cf.group5.Client.Project.user.UserService;
 
 @Controller
 public class EmailController {
-    private EmailImpl EmailImpl;
+
+    @Autowired
     private UserService user;
     @Autowired
     private EmailService emailService;
 
     @GetMapping("Admin/ApproveEmail/{userid}")
     public String sendApprovalEmail(@PathVariable("userid") long id) {
+
         UserItem User = user.getItem(id);
+        System.out.println(user);
         String Username = User.getUsername();
         String name = User.getName();
         emailService.sendApprovalEmail(Username, name);
@@ -26,6 +29,7 @@ public class EmailController {
     @GetMapping("Admin/DenyEmail/{userid}")
     public String sendDenyEmail(@PathVariable("userid") long id) {
         UserItem User = user.getItem(id);
+        System.out.println(user);
         String Username = User.getUsername();
         String name = User.getName();
         emailService.sendDenyEmail(Username, name);

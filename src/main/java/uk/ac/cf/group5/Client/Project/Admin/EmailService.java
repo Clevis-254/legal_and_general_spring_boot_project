@@ -28,7 +28,7 @@ public class EmailService {
         System.out.println("got to email");
         message.setFrom("group5superuser@gmail.com");
         message.setTo(username);
-        message.setText("Hello "+ name +", Sorry but your 360 Request has been denied. Please go to your 360 page to begin.");
+        message.setText("Hello "+ name +", Sorry but your 360 Request has been denied. Please contact an admin about this issue if you still wish to start a 360.");
         message.setSubject("360 request Not Approved");
 
         mailSender.send(message);
