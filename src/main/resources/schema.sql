@@ -1,9 +1,10 @@
-
+drop table if exists answers;
+drop table if exists submissions;
 drop table if exists responses;
-drop table if exists requests;
-drop table if exists questions;
+drop table if exists results;
 drop table if exists contact_questions;
-drop table if exists responses;
+drop table if exists questions;
+drop table if exists requests;
 drop table if exists users;
 
 -- -----------------------------------------------------
@@ -27,7 +28,7 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     enabled boolean default true,
-    role VARCHAR(50) default 'ROLE_USER',
+    role VARCHAR(50) NOT NULL default'ROLE_USER',
     PRIMARY KEY (id)
 );
 
@@ -83,18 +84,20 @@ CREATE TABLE results(
 CREATE TABLE submissions(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
-    resultsID INT NOT NULL,
+--     resultsID INT NOT NULL,
+    requestID INT NOT NULL ,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id),
-    FOREIGN KEY (resultsID) REFERENCES results(id)
+    FOREIGN KEY (requestID) REFERENCES requests(id)
+--    FOREIGN KEY (resultsID) REFERENCES results(id)
 );
 
 CREATE TABLE answers(
-    ans_id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     question_id INT NOT NULL,
     sub_id INT NOT NULL,
-    answer_text VARCHAR(255) NOT NULL,
-    PRIMARY KEY(ans_id),
+    answer VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id),
     FOREIGN KEY(question_id) REFERENCES questions(id),
     FOREIGN KEY(sub_id) REFERENCES submissions (id)
 );

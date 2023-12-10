@@ -10,9 +10,11 @@ public class AnswerItem {
 
     private Long question_id;
 
+    private Long sub_id;
     private String answer;
 
     public  AnswerItem(){
-        this(0L,0l,"");
+
+        this(0L,0L,0L,"");
     }
 }

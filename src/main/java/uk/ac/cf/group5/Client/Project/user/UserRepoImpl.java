@@ -1,13 +1,18 @@
 package uk.ac.cf.group5.Client.Project.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class UserRepoImpl implements UserRepository{
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private JdbcTemplate jdbctemplate;
     private RowMapper<UserItem> UserItemMapper;
 
@@ -39,12 +44,19 @@ public class UserRepoImpl implements UserRepository{
         String sql = "select * from users where role ='ROLE_USER'";
         return jdbctemplate.query(sql, UserItemMapper);
     }
+    public boolean checkUserExists(UserItem userItem) {
+        String email = userItem.getUsername();
+        String sql = "select count(*) from users where username = ?";
+        int count = jdbctemplate.queryForObject(sql, Integer.class, email);
+
+        return count > 0;
+    }
 
     public void add(UserItem user) {
-        if (user.isNew()){
-            insert(user);
-        } else {
+        if (checkUserExists(user)){
             update(user);
+        } else {
+            insert(user);
         }
     }
 
@@ -63,7 +75,15 @@ public class UserRepoImpl implements UserRepository{
         );
     }
 
+    public void encodePassword(UserItem user) {
+        String plainPassword = user.getPassword();
+        String encodedPassword = passwordEncoder.encode(plainPassword);
+        user.setPassword(encodedPassword);
+//        System.out.println(encodedPassword);
+//        System.out.println(plainPassword);
+    }
     private void insert(UserItem user) {
+        encodePassword(user);
         String UserInsertSql =
                 "insert into users " +
                         "(firstname,secondname, username, password,role)" +

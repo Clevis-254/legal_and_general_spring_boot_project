@@ -21,9 +21,9 @@ public class UserItem {
         this(0L,"","","","","");
     }
 
-    public boolean isNew() {
-
-        return this.username == null;
-    }
+//    public boolean isNew() {
+//
+//        return this.username == null;
+//    }
 
 }
