@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>members</title>
+  <link th:replace="~{base :: css_file}"/>
+  <link th:replace="~{base :: favicon}">
 </head>
-<body>
-$END$
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+<main
+        class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
+>
+  <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
+    <span class="text-3xl font-bold text-left ">Members Available</span>
+    <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+      <a
+              class="flex items-center h-10 px-4 space-x-4 border rounded sm:h-12 focus-ring border-dark"
+              th:href="@{/Admin/add}">
+        <span class="text-sm text-base">Add  user</span>
+        <svg
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+                  d="M6 11.0001H16.6667M11.3333 16.3334V5.66675"
+                  stroke="#2C2C2C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <table>
+    <tbody>
+    <tr th:each="userItem, iStat : ${UserItems}">
+      <td>
+        <div
+                class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow
+                   sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100"
+        >
+          <div class="flex flex-col space-y-4">
+                <span th:text="${userItem.firstname + ' ' + userItem.secondname}"
+                      class="font-bold text-2xl"></span>
+            <div class="flex space-x-3">
+                <span class="font-semibold text-base">Username :
+                    <span th:text="${userItem.username}" class="font-light text-base"></span>
+                </span>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</main>
 </body>
 </html>

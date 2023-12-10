@@ -16,7 +16,7 @@ public class ViewRequestsController {
     public ViewRequestsController(ViewRequestsImpl aViewRequestsImpl) {
         this.viewRequestsImpl = aViewRequestsImpl;
     }
-    @GetMapping("Admin/ViewRequests")
+    @GetMapping("Admin/ViewPendingRequests")
     public ModelAndView getViewRequests(){
         ModelAndView ViewRequests = new ModelAndView("Admin/ViewRequests");
         List<RequestItem> allRequestItems = viewRequestsImpl.getPendingRequestItems();
@@ -27,14 +27,14 @@ public class ViewRequestsController {
     public ModelAndView approveRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
         viewRequestsImpl.setApproved(approved);
-        ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
+        ModelAndView result = new ModelAndView("redirect:/Admin/ViewPendingRequests");
         return result;
     }
     @GetMapping("Admin/cancelled/{id}")
     public ModelAndView cancelRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
         viewRequestsImpl.setCancelled(approved);
-        ModelAndView result = new ModelAndView("redirect:/Admin/ViewRequests");
+        ModelAndView result = new ModelAndView("redirect:/Admin/ViewPendingRequests");
         return result;
     }
 

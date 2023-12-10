@@ -33,14 +33,14 @@
                  th:field="*{username}" class="focus:border-green-400 p-2 border rounded-full w-full"/>
         </div>
         <div class="flex items-center space-x-4">
-          <label th:for="*{name}">name:</label>
-          <input type="text" id="name" name="name" placeholder="name" th:field="*{name}"
+          <label th:for="*{firstname}">First name:</label>
+          <input type="text" id="name" name="name" placeholder="name" th:field="*{firstname}"
                  class="focus:border-green-400 p-2 border rounded-full w-full"/>
         </div>
         <div class="flex items-center space-x-2">
-          <label th:for="*{password}">Password:</label>
-          <input type="password" id="password" name="password" placeholder="Password"
-                 class="focus:border-green-400 p-2 border rounded-full w-full"/>
+          <label th:for="*{secondname}">Second name:</label>
+            <input type="text" id="secondname" name="secondname" placeholder="secondname" th:field="*{secondname}"
+                   class="focus:border-green-400 p-2 border rounded-full w-full"/>
         </div>
       </div>
       <button type="submit" class="bg-blue-500 flex items-center justify-center w-fit h-12 font-light rounded  text-white p-2

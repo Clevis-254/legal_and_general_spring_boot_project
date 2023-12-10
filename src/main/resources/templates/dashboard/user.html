@@ -33,7 +33,7 @@
                     <tr th:if="${requestItems.empty}" class="w-full">
                         <td class="text-center py-2">Make a request</td>
                     </tr>
-                    <tr th:each="requestItem : ${requestItems}" class="w-full">
+                    <tr th:each="requestItem ,iStat: ${requestItems}" th:if="${iStat.index} &lt; 5" class="w-full">
                         <td class="flex justify-between p-2 border-b">
                         <span class="border-r pr-2">
                             Request ID:

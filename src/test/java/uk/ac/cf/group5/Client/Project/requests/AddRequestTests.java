@@ -36,9 +36,9 @@ public class AddRequestTests {
     @Test
     @WithMockUser(username="dave", roles="USER")
     public void shouldGetThreeItems() throws Exception {
-        RequestItem request1 = new RequestItem(1L,"pending",1l,"dave",new Date());
-        RequestItem request2 = new RequestItem(2l,"pending",1l,"dave",new Date());
-        RequestItem request3 = new RequestItem(3L,"pending",1l,"dave",new Date());
+        RequestItem request1 = new RequestItem(1L,"pending",1l,"dave","johnson",new Date());
+        RequestItem request2 = new RequestItem(2l,"pending",1l,"dave","johnson",new Date());
+        RequestItem request3 = new RequestItem(3L,"pending",1l,"dave","johnson",new Date());
 
         List<RequestItem> requestItems = Arrays.asList(request1, request2, request3);
 

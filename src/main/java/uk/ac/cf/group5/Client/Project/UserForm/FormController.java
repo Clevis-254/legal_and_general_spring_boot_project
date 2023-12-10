@@ -55,4 +55,9 @@ public class FormController {
         contact.addObject("getTextAreaQuestions",getTextAreaQuestions);
         return contact;
     }
+    @PostMapping("/form/other")
+    public ModelAndView receiveAnswer(){
+        ModelAndView result = new ModelAndView();
+        return result;
+    }
 }

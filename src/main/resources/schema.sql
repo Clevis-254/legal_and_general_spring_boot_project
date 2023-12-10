@@ -16,24 +16,31 @@ drop table if exists users;
 
  USE `group_5_client_project`;
 
-
+-- changed the database schema so that the admin is able to view the user first and second names when seeing
+-- a request made
+-- also the first and second names are used to add the users item into the user's table
 
 CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    firstname VARCHAR(255) NOT NULL,
+    secondname VARCHAR(255) NOT NULL ,
     password VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     enabled boolean default true,
-    role VARCHAR(50),
+    role VARCHAR(50) default 'ROLE_USER',
     PRIMARY KEY (id)
 );
 
 
+-- changed the database schema so that the admin is able to view the user first and second names when seeing
+-- a request made
+-- also the first and second names are used to add the users item into the user's table
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
     approved VARCHAR(20) default 'pending',
-    name VARCHAR(50) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    secondname varchar(50) not null ,
     requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
@@ -64,4 +71,30 @@ CREATE TABLE contact_questions(
     category VARCHAR(50) NOT NULL ,
     date_added  Date default current_date,
     primary key (id)
+);
+CREATE TABLE results(
+  id INT NOT NULL AUTO_INCREMENT,
+  userID INT NOT NULL,
+  date_added DATE NOT NULL,
+  current_status VARCHAR(30) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (userID) REFERENCES users(id)
+);
+CREATE TABLE submissions(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    resultsID INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id),
+    FOREIGN KEY (resultsID) REFERENCES results(id)
+);
+
+CREATE TABLE answers(
+    ans_id INT NOT NULL AUTO_INCREMENT,
+    question_id INT NOT NULL,
+    sub_id INT NOT NULL,
+    answer_text VARCHAR(255) NOT NULL,
+    PRIMARY KEY(ans_id),
+    FOREIGN KEY(question_id) REFERENCES questions(id),
+    FOREIGN KEY(sub_id) REFERENCES submissions (id)
 );

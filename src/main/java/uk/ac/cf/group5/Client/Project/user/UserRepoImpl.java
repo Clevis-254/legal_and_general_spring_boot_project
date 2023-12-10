@@ -22,9 +22,11 @@ public class UserRepoImpl implements UserRepository{
 
         UserItemMapper = (rs, i) -> new UserItem(
                 rs.getLong("id"),
-                rs.getString("name"),
+                rs.getString("firstname"),
+                rs.getString("secondname"),
                 rs.getString("username"),
-                rs.getString("password")
+                rs.getString("password"),
+                rs.getString("role")
         );
     }
 
@@ -32,8 +34,9 @@ public class UserRepoImpl implements UserRepository{
         String sql = "select * from users where username = ?";
         return jdbctemplate.queryForObject(sql,UserItemMapper, username);
     }
+    // using role users only employee list is suppossed to be generated to the admin.
     public List<UserItem> getUserItems() {
-        String sql = "select * from users";
+        String sql = "select * from users where role ='ROLE_USER'";
         return jdbctemplate.query(sql, UserItemMapper);
     }
 
@@ -52,10 +55,10 @@ public class UserRepoImpl implements UserRepository{
 
     private void update(UserItem user) {
         String UserInsertSql =
-                "update users set name = ?, password = ? where username = ?";
+                "update users set firstname = ?,secondname = ?  where username = ?";
         jdbctemplate.update(UserInsertSql,
-                user.getName(),
-                user.getPassword(),
+                user.getFirstname(),
+                user.getSecondname(),
                 user.getUsername()
         );
     }
@@ -63,12 +66,14 @@ public class UserRepoImpl implements UserRepository{
     private void insert(UserItem user) {
         String UserInsertSql =
                 "insert into users " +
-                        "(name, username, password)" +
-                        " values (?,?,?)";
+                        "(firstname,secondname, username, password,role)" +
+                        " values (?,?,?,?,?)";
         jdbctemplate.update(UserInsertSql,
                 user.getUsername(),
-                user.getName(),
-                user.getPassword()
+                user.getFirstname(),
+                user.getSecondname(),
+                user.getPassword(),
+                user.getRole()
         );
     }
 

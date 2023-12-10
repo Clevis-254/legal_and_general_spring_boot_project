@@ -15,13 +15,14 @@ public class RequestItem {
      */
     private String approved;
     private Long userId;
-    private String name;
+    private String firstname;
 
+    private String secondname;
     private Date requested;
 
     public RequestItem() {
 
-        this(0L,  "", 0L,"",new Date());
+        this(0L,  "", 0L,"","",new Date());
     }
 
 

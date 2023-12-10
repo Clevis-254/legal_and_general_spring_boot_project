@@ -23,12 +23,13 @@ public class ViewRequestsImpl {
                 rs.getLong("id"),
                 rs.getString("approved"),
                 rs.getLong("userid"),
-                rs.getString("name"),
+                rs.getString("firstname"),
+                rs.getString("secondname"),
                 rs.getDate("requested")
         );
     }
     public List<RequestItem> getPendingRequestItems() {
-        String sql = "SELECT * FROM requests WHERE approved = 'pending'";
+        String sql = "SELECT * FROM requests WHERE approved = 'pending' order by id desc";
         return jdbctemplate.query(sql, ViewRequestMapper);
     }
 
