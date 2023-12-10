@@ -55,7 +55,7 @@ public class securityConfiguration {
                         .requestMatchers("/reviews").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/form/employee").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/thankYou").hasAnyRole("ADMIN","USER"))
 
                 .formLogin(form -> form

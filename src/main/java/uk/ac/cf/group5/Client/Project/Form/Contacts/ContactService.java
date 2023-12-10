@@ -16,4 +16,9 @@ public interface ContactService {
 
     void delete(Long id);
 
+    Integer getManagerCount(Integer resultID);
+
+    Integer getPeerCount(Integer resultID);
+
+    Integer getExternalCount(Integer resultID);
 }

@@ -37,6 +37,24 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
+    public Integer getManagerCount(Integer resultID) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Manager' AND result_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    }
+
+    @Override
+    public Integer getPeerCount(Integer resultID) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Peer' AND result_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    }
+
+    @Override
+    public Integer getExternalCount(Integer resultID) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'External' AND result_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    }
+
+    @Override
     public void deleteContact(Long contactID) {
         String sql = "DELETE FROM contacts WHERE id = ?";
         jdbcTemplate.update(sql, contactID);

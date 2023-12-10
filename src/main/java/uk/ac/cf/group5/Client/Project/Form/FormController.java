@@ -40,6 +40,9 @@ public class FormController {
         ModelAndView modelAndView = new ModelAndView("form/contacts");
         modelAndView.addObject("reviewID", 1); // TODO: replace with actual review ID
         modelAndView.addObject("contact", new ContactItem());
+        modelAndView.addObject("managerCount", contactService.getManagerCount(1)); // TODO: replace with actual review ID
+        modelAndView.addObject("peerCount",contactService.getPeerCount(1)); // TODO: replace with actual review ID
+        modelAndView.addObject("externalCount",contactService.getExternalCount(1)); // TODO: replace with actual review ID
         List<ContactItem> contacts = contactService.getContactItems(1); // Fetch contacts from the database
         modelAndView.addObject("contacts", contacts);
         return modelAndView;

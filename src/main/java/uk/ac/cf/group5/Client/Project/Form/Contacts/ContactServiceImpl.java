@@ -32,4 +32,19 @@ public class ContactServiceImpl implements ContactService{
     public void delete(Long id) {
         contactRepository.deleteContact(id);
     }
+
+    @Override
+    public Integer getManagerCount(Integer resultID) {
+        return contactRepository.getManagerCount(resultID);
+    }
+
+    @Override
+    public Integer getPeerCount(Integer resultID) {
+        return contactRepository.getPeerCount(resultID);
+    }
+
+    @Override
+    public Integer getExternalCount(Integer resultID) {
+        return contactRepository.getExternalCount(resultID);
+    }
 }
