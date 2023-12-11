@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
+    @Autowired
    private UserService user;
 
     public  UserController( UserService userService){this.user = userService;}
+
 
 
     @GetMapping("/login")
@@ -27,23 +30,7 @@ public class UserController {
         return login;
     }
 
-//    @GetMapping("/LoginSuccess")
-//    public void LoginSuccessRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
-//            throws Exception, ServletException {
-//        String role = authResult.getAuthorities().toString();
-//
-//
-//        if(role.contains("ROLE_ADMIN")){
-//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/Admin/AdminMenu"));
-//        }
-//        else if(role.contains("ROLE_USER")){
-//            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/dashboard"));
-//
-//        }
-//        else {response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+ "/login"));
-//
-//        }
-//    }
+
 
     @GetMapping("/settings")
     public ModelAndView settings(Authentication authentication){

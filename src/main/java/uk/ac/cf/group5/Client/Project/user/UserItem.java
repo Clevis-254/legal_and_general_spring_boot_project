@@ -9,7 +9,7 @@ public class UserItem {
     private Long id;
     private String name;
 
-    private  String username;
+    private String username;
 
     private String password;
 
