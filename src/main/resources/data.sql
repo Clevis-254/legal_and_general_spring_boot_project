@@ -17,5 +17,16 @@ values
     ('Actively seeking out opportunities to support others in their work.', curdate(), 'collaborative'),
     ('As being open and approachable', curdate(), 'collaborative');
 
+insert into results (userid, date_added, current_status) values
+    (1, curdate(), 'pending'),
+    (2, curdate(), 'pending');
 
+insert into requests (userID, name, requested )
+values
+('1', 'adminJerry', curdate()),
+('2', 'userHoward', curdate());
+
+insert into contacts (id, fname, surname, email, category, result_id ) values
+    (1, 'Jerry', 'Garcia', 'email@domain.com', 'manager', 2),
+    (2, 'Howard', 'Hughes', 'email@domain.com', 'peer', 2);
 

@@ -42,6 +42,7 @@ public class securityConfiguration {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                        //.requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
@@ -55,7 +56,7 @@ public class securityConfiguration {
                         .requestMatchers("/Reviews").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/form/employee").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/thankYou").hasAnyRole("ADMIN","USER"))
 
                 .formLogin(form -> form
