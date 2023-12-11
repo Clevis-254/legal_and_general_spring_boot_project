@@ -21,4 +21,6 @@ public interface ContactService {
     Integer getPeerCount(Integer resultID);
 
     Integer getExternalCount(Integer resultID);
+
+    List<ContactItem> getAllContacts();
 }

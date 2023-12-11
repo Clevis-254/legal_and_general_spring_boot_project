@@ -14,10 +14,10 @@ public interface ContactRepository {
 
     void deleteContact(Long contactID);
 
-    List<ContactItem> getAllContacts(Integer resultID);
+    List<ContactItem> getResultContacts(Integer resultID);
 
     ContactItem getContact(Long id);
 
 
-
+    List<ContactItem> getAllContacts();
 }

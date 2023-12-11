@@ -21,8 +21,8 @@ public class ContactRepositoryImpl implements ContactRepository{
     // Setter for RowMapper
     public void setContactMapper() {
         ContactMapper = (rs, i) -> new ContactItem(
-                rs.getLong("id"),
-                rs.getLong("result_id"),
+                rs.getInt("id"),
+                rs.getInt("result_id"),
                 rs.getString("fname"),
                 rs.getString("surname"),
                 rs.getString("email"),
@@ -61,7 +61,7 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
-    public List<ContactItem> getAllContacts(Integer resultID) {
+    public List<ContactItem> getResultContacts(Integer resultID) {
         String sql = "SELECT * FROM contacts WHERE result_id = ?";
         return jdbcTemplate.query(sql, ContactMapper, resultID);
     }
@@ -70,6 +70,12 @@ public class ContactRepositoryImpl implements ContactRepository{
     public ContactItem getContact(Long id) {
         String sql = "SELECT * FROM contacts WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, ContactMapper, id);
+    }
+
+    @Override
+    public List<ContactItem> getAllContacts() {
+        String sql = "SELECT * FROM contacts";
+        return jdbcTemplate.query(sql, ContactMapper);
     }
 
 }

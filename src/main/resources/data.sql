@@ -21,3 +21,7 @@ values
 ('1', 'adminJerry', curdate()),
 ('2', 'userHoward', curdate());
 
+insert into contacts (id, fname, surname, email, category, result_id ) values
+    (1, 'Jerry', 'Garcia', 'email@domain.com', 'manager', 1),
+    (2, 'Howard', 'Hughes', 'email@domain.com', 'peer', 1);
+

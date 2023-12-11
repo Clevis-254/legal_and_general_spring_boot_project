@@ -15,7 +15,7 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public List<ContactItem> getContactItems(Integer resultID) {
-        return contactRepository.getAllContacts(resultID);
+        return contactRepository.getResultContacts(resultID);
     }
 
     @Override
@@ -46,5 +46,10 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public Integer getExternalCount(Integer resultID) {
         return contactRepository.getExternalCount(resultID);
+    }
+
+    @Override
+    public List<ContactItem> getAllContacts() {
+        return contactRepository.getAllContacts();
     }
 }
