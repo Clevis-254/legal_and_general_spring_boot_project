@@ -29,7 +29,8 @@ public class securityConfiguration {
             "/css/**",
             "/images/**",
             "/login",
-            "/form/other"
+            "/form/other",
+            "/error"
     };
 
     @Autowired
@@ -52,7 +53,7 @@ public class securityConfiguration {
 
 
                         // .requestMatchers("/dashboard/**").hasRole( "USER")
-                        .requestMatchers("/reviews").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/Reviews").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/form/employee").hasAnyRole("ADMIN", "USER")

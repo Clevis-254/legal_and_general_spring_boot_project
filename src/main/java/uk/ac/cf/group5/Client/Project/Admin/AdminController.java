@@ -44,7 +44,7 @@ public class AdminController {
                     ,model.asMap());
             return modelAndView;
         } else {
-            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(), userItem.getUsername()
+            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(),userItem.getUsername()
                     ,userItem.getPassword(), userItem.getRole());
             user.add(newUser);
             ModelAndView modelAndView = new ModelAndView("redirect:/Admin/AdminSettings");
@@ -73,7 +73,7 @@ public class AdminController {
                     ,model.asMap());
             return modelAndView;
         } else {
-            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(), userItem.getUsername()
+            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(),userItem.getUsername()
                     ,userItem.getPassword(), userItem.getRole());
             user.add(newUser);
             ModelAndView modelAndView = new ModelAndView("redirect:/Admin/users");

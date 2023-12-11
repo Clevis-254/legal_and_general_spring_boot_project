@@ -1,9 +1,11 @@
+
 drop table if exists answers;
 drop table if exists submissions;
-drop table if exists responses;
-drop table if exists results;
-drop table if exists contact_questions;
 drop table if exists questions;
+drop table if exists responses;
+drop table if exists submissions;
+drop table if exists Reviews;
+drop table if exists contact_questions;
 drop table if exists requests;
 drop table if exists users;
 
@@ -46,6 +48,16 @@ CREATE TABLE requests(
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
+CREATE TABLE Reviews(
+    id INT NOT NULL AUTO_INCREMENT,
+    userId INT NOT NULL ,
+    requestID INT NOT NULL,
+    status varchar(50) not null default 'in_progress',
+    date_started Date default current_date,
+    PRIMARY KEY (id),
+    FOREIGN KEY (requestID) REFERENCES requests(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
 
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
@@ -66,6 +78,7 @@ CREATE TABLE responses(
     FOREIGN KEY (userID) REFERENCES users(id)
 );
 
+
 CREATE TABLE contact_questions(
     id INT not null  auto_increment,
     question VARCHAR(255) NOT NULL,
@@ -73,31 +86,23 @@ CREATE TABLE contact_questions(
     date_added  Date default current_date,
     primary key (id)
 );
-CREATE TABLE results(
-  id INT NOT NULL AUTO_INCREMENT,
-  userID INT NOT NULL,
-  date_added DATE NOT NULL,
-  current_status VARCHAR(30) NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (userID) REFERENCES users(id)
-);
 CREATE TABLE submissions(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
---     resultsID INT NOT NULL,
-    requestID INT NOT NULL ,
+    reviewID INT NOT NULL,
+
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id),
-    FOREIGN KEY (requestID) REFERENCES requests(id)
---    FOREIGN KEY (resultsID) REFERENCES results(id)
+    FOREIGN KEY (reviewID) REFERENCES Reviews(id)
 );
 
-CREATE TABLE answers(
-    id INT NOT NULL AUTO_INCREMENT,
-    question_id INT NOT NULL,
-    sub_id INT NOT NULL,
-    answer VARCHAR(255) NOT NULL,
-    PRIMARY KEY(id),
-    FOREIGN KEY(question_id) REFERENCES questions(id),
-    FOREIGN KEY(sub_id) REFERENCES submissions (id)
+CREATE TABLE answers
+(
+    id          INT          NOT NULL AUTO_INCREMENT,
+    question_id INT          NOT NULL,
+    sub_id      INT          NOT NULL,
+    answer      VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (question_id) REFERENCES questions (id),
+    FOREIGN KEY (sub_id) REFERENCES submissions (id)
 );

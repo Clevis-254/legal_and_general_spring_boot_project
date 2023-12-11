@@ -26,7 +26,7 @@ public class SubmissionRepoImpl implements SubmissionRepo{
         SubmissionItemMapper = (rs, i) -> new submissionItem(
                 rs.getLong("id"),
                 rs.getLong("userID"),
-                rs.getLong("requestID")
+                rs.getLong("reviewID")
         );
     }
 
@@ -35,17 +35,17 @@ public class SubmissionRepoImpl implements SubmissionRepo{
     public void add(submissionItem Item) {
         String submissionInsertSql =
                 "insert into submissions " +
-                        "(userID, requestID)" +
+                        "(userID, reviewID)" +
                         " values (?,?)";
         jdbctemplate.update(submissionInsertSql,
-                Item.getRequestID(),
+                Item.getReviewID(),
                 Item.getUserID()
         );
     }
 
     @Override
     public submissionItem getSubmissionItem(Long id) {
-        String sql = "select * from submissions where requestID = ?";
+        String sql = "select * from submissions where reviewID = ?";
         return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
     }
 }

@@ -96,5 +96,14 @@ public class UserRepoImpl implements UserRepository{
                 user.getRole()
         );
     }
+    public UserItem getItem(long id) {
+        String sql = "select * from users where id = ?";
+        return jdbctemplate.queryForObject(sql,UserItemMapper, id);
+    }
+
+
+
+
+
 
 }

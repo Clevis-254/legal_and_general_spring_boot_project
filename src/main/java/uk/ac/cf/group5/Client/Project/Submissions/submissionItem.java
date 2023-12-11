@@ -14,18 +14,18 @@ public class submissionItem {
 
     private Long userID;
 
-    private Long requestID;
+    private Long reviewID;
 
-    private Map<Long,String> answers;
-
+//    private Map<Long,String> answers;
+//new HashMap()
 
     public submissionItem(){
-        this(0L,0L,0L,new HashMap());
+        this(0L,0L,0L);
     }
 
-    public void addAnswer(Long questionId, String answerText){
-        answers.put(questionId,answerText);
-    }
+//    public void addAnswer(Long questionId, String answerText){
+//        answers.put(questionId,answerText);
+//    }
 
 
 }

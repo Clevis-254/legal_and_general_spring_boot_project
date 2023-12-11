@@ -51,5 +51,10 @@ public class ViewRequestsImpl {
                 request.getId()
         );
     }
+    public RequestItem getUserID(Long id){
+        String sql = "select userID from requests where id = ?";
+        return jdbctemplate.queryForObject(sql, ViewRequestMapper, id);
+    }
+
 
 }
