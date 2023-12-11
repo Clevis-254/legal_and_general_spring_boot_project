@@ -5,19 +5,21 @@
   <title>Admin Menu</title>
   <link th:fragment="css_file" th:href="@{/css/build.css}" rel="stylesheet">
 </head>
-<body>
-<form class= "items-center flex justify-evenly" method="get" th:action="@{/AdminMenu}">
-  <div class="flex flex-col w-full items-center">
-  <span class="text-center text-3xl font-bold">Welcome to admin page
-  </span>
-    <div class="skeleton w-100 h-800 space-x-10 items-center">
-      <a th:href="@{/Admin/AdminDashboard}" type="button"  class=" text-white bg-blue-700 hover:bg-blue-900 font-bold items-center py-10 px-15 space-x-5 rounded">Admin Page</a>
+<body class="bg-gray-200">
+<form class="flex items-center justify-center h-screen" method="get" th:action="@{/AdminMenu}">
+  <div class="flex flex-col items-center mt-8 font-roboto">
+    <div class="mb-4">
+      <a href="/">
+        <img src="/images/logo%203.png" alt="Logo">
+      </a>
+    </div>
+    <span class="text-center text-3xl font-bold mb-4">Welcome to the Admin Menu</span>
+    <div class="flex space-x-5">
+      <a th:href="@{/Admin/AdminDashboard}" type="button" class="flex-grow text-5xl text-white bg-blue-700 hover:bg-blue-900 font-bold py-10 px-20 md:py-20 md:px-40 border-black border-2 rounded-lg">Admin Page</a>
 
-      <a th:href="@{/dashboard} "type="button"  class="text-white bg-red-700 hover:bg-red-900 font-bold items-center py-10 px-15 space-x-5 rounded">User Page</a>
-
+      <a th:href="@{/dashboard}" type="button" class="flex-grow text-5xl text-white bg-red-700 hover:bg-red-900 font-bold py-10 px-20 md:py-20 md:px-40 border-black border-2 rounded-lg">User Page</a>
     </div>
   </div>
 </form>
-
 </body>
 </html>

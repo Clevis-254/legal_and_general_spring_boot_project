@@ -1,8 +1,11 @@
 package uk.ac.cf.group5.Client.Project.Reviews;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.ModelAndView;
+import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
+import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewService;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
@@ -14,20 +17,33 @@ public class RequestController {
     private RequestService request;
     private UserService user;
 
-    public  RequestController(RequestService requestService,UserService userService){
+    private ReviewService review;
+
+    public  RequestController(RequestService requestService,UserService userService, ReviewService reviewService){
         this.request = requestService;
         this.user = userService;
+        this.review = reviewService;
     }
-    @GetMapping("/reviews")
-    public ModelAndView getReviews(Authentication authentication){
-        //String employee = authentication.getName();
-        //UserItem userItem = user.getUserItem(employee);
-        //Long id =  userItem.getId();
-        ModelAndView reviews = new ModelAndView("360's/view360's");
-        //List<RequestItem> requestItems = request.getRequestItems(id);
-        //reviews.addObject("RequestItems", requestItems);
+
+    @GetMapping("/Reviews")
+    public ModelAndView getReviews(Authentication authentication) {
+        String employee = authentication.getName();
+        UserItem userItem = user.getUserItem(employee);
+        Long userId = userItem.getId();
+        ModelAndView reviews = new ModelAndView("360's/Reviews");
+        List<ReviewItem> reviewItems = review.getReviewItems(userId);
+        reviews.addObject("reviewItems", reviewItems);
+
         return reviews;
     }
+
+/*    @GetMapping("/Reviews")
+    public ModelAndView getViewReviews() {
+        ModelAndView viewReviews = new ModelAndView("360's/Reviews");
+        List<ReviewItem> allReviewItems = ReviewRepoImp.getInProgressReviewItems();
+        viewReviews.addObject("allReviewItems", allReviewItems);
+        return viewReviews;
+    }*/
 
     @GetMapping("/requests")
     public ModelAndView getRequest(Authentication authentication){

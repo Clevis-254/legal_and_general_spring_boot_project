@@ -72,10 +72,10 @@ CREATE TABLE answers
         id INT NOT NULL AUTO_INCREMENT,
         questionID INT NOT NULL,
         answer VARCHAR(255) NOT NULL,
-        resultID INT NOT NULL,
+        subID INT NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (questionID) REFERENCES questions(id),
-        FOREIGN KEY (resultID) REFERENCES results(id)
+        FOREIGN KEY (subID) REFERENCES submissions(id)
     );
 
 CREATE TABLE submissions(
@@ -87,4 +87,15 @@ CREATE TABLE submissions(
                             FOREIGN KEY (userID) REFERENCES users(id),
                             FOREIGN KEY (contactID) REFERENCES contacts(id),
                             FOREIGN KEY (resultsID) REFERENCES results(id)
+);
+
+CREATE TABLE Reviews(
+    id INT NOT NULL AUTO_INCREMENT,
+    userId INT NOT NULL ,
+    requestID INT NOT NULL,
+    status varchar(50) not null default 'in_progress',
+    date_started Date default current_date,
+    PRIMARY KEY (id),
+    FOREIGN KEY (requestID) REFERENCES requests(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
 );
