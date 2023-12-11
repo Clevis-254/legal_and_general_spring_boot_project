@@ -39,8 +39,9 @@ public class ViewRequestsImpl {
     }
 
     public void setApproved(RequestItem request){
-        String RequestUpdateSql = "update requests set approved = 'approved' where id = ?";
+        String RequestUpdateSql = "update requests set approved = ? where id = ?";
         jdbctemplate.update(RequestUpdateSql,
+                request.getApproved(),
                 request.getId()
                 );
     }

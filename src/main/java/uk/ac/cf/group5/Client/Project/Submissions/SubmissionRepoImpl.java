@@ -44,9 +44,9 @@ public class SubmissionRepoImpl implements SubmissionRepo{
     }
 
     @Override
-    public submissionItem getSubmissionItem() {
-        String sql = "select * from submissions where  = ?";
-        return jdbctemplate.queryForObject(sql,SubmissionItemMapper);
+    public submissionItem getSubmissionItem(Long id) {
+        String sql = "select * from submissions where requestID = ?";
+        return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
     }
 }
 

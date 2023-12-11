@@ -26,39 +26,39 @@ INSERT INTO contact_questions (question, category) VALUES
 
 -- Insert questions for the second category
 INSERT INTO contact_questions (question, category) VALUES
-                                               ('Experimenting to learn what works and pivoting when it doesn''t.', 'SecondCategory'),
-                                               ('Accepting and building on others'' ideas and opinions to achieve the best possible outcome.', 'SecondCategory'),
-                                               ('Working for the good of the collective rather than your own priorities.', 'SecondCategory'),
-                                               ('Promoting and discussing how our purpose connects to the greater customer outcomes.', 'SecondCategory');
+                                               ('Experimenting to learn what works and pivoting when it doesn''t.', 'Purposeful'),
+                                               ('Accepting and building on others'' ideas and opinions to achieve the best possible outcome.', 'Purposeful'),
+                                               ('Working for the good of the collective rather than your own priorities.', 'Purposeful'),
+                                               ('Promoting and discussing how our purpose connects to the greater customer outcomes.', 'Purposeful');
 
 -- Insert questions for the third category
 INSERT INTO contact_questions (question, category) VALUES
-                                               ('Actively asking for feedback and receiving it with curiosity.', 'ThirdCategory'),
-                                               ('Listening openly to really understand.', 'ThirdCategory'),
-                                               ('Taking the time to get to know others.', 'ThirdCategory'),
-                                               ('Having the courage to challenge constructively and respectfully.', 'ThirdCategory');
+                                               ('Actively asking for feedback and receiving it with curiosity.', 'Straight-Forward'),
+                                               ('Listening openly to really understand.', 'Straight-Forward'),
+                                               ('Taking the time to get to know others.', 'Straight-Forward'),
+                                               ('Having the courage to challenge constructively and respectfully.', 'Straight-Forward');
 
 -- Insert questions for the fourth category
 INSERT INTO contact_questions (question, category) VALUES
-                                               ('Demonstrating high levels of self-awareness.', 'FourthCategory'),
-                                               ('Creating an environment of trust where you trust others and earn others'' trust in return.', 'FourthCategory'),
-                                               ('Empowering others to get on with their work and helping clear obstacles out of the way.', 'FourthCategory'),
-                                               ('Behaving consistently across different situations.', 'FourthCategory');
+                                               ('Demonstrating high levels of self-awareness.', 'Authentic'),
+                                               ('Creating an environment of trust where you trust others and earn others'' trust in return.', 'Authentic'),
+                                               ('Empowering others to get on with their work and helping clear obstacles out of the way.', 'Authentic'),
+                                               ('Behaving consistently across different situations.', 'Authentic');
 
 -- Insert questions for the fifth category
 INSERT INTO contact_questions (question, category) VALUES
-                                               ('Ruthlessly prioritizing and communicating it clearly.', 'FifthCategory'),
-                                               ('Talking openly about your mistakes to help others learn.', 'FifthCategory'),
-                                               ('Creating a climate where people feel safe and are encouraged to speak up.', 'FifthCategory'),
-                                               ('Anticipating and responding to change at pace.', 'FifthCategory'),
-                                               ('Driving commercial value that focuses on our customers and shareholders.', 'FifthCategory');
+                                               ('Ruthlessly prioritizing and communicating it clearly.', 'Agile'),
+                                               ('Talking openly about your mistakes to help others learn.', 'Agile'),
+                                               ('Creating a climate where people feel safe and are encouraged to speak up.', 'Agile'),
+                                               ('Anticipating and responding to change at pace.', 'Agile'),
+                                               ('Driving commercial value that focuses on our customers and shareholders.', 'Agile');
 
 -- Insert questions for the sixth category
 INSERT INTO contact_questions (question, category) VALUES
-                                               ('Driving enterprise-wide success.', 'SixthCategory'),
-                                               ('Driving outcomes that start with our customers.', 'SixthCategory'),
-                                               ('Pushing boundaries to create opportunities for future success.', 'SixthCategory'),
-                                               ('Thinking about the future and changes that are needed.', 'SixthCategory');
+                                               ('Driving enterprise-wide success.', 'Ambitious'),
+                                               ('Driving outcomes that start with our customers.', 'Ambitious'),
+                                               ('Pushing boundaries to create opportunities for future success.', 'Ambitious'),
+                                               ('Thinking about the future and changes that are needed.', 'Ambitious');
 
 insert into contact_questions (question, category) VALUEs('What do you consider to be your superpower? :', 'textarea');
 insert into contact_questions (question, category) VALUEs('What is the one thing you could do to improve your impact? :', 'textarea');

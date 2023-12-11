@@ -4,5 +4,5 @@ public interface SubmissionRepo {
 
     void add(submissionItem Item);
 
-    submissionItem getSubmissionItem();
+    submissionItem getSubmissionItem(Long id);
 }

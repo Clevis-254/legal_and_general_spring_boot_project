@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
+
+import java.security.KeyStore;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,7 @@ public class ViewRequestsController {
     @GetMapping("Admin/approve/{id}")
     public ModelAndView approveRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
+        approved.setApproved("approved");
         viewRequestsImpl.setApproved(approved);
         ModelAndView result = new ModelAndView("redirect:/Admin/ViewPendingRequests");
         return result;
@@ -35,6 +38,20 @@ public class ViewRequestsController {
         RequestItem approved = viewRequestsImpl.getRequest(id);
         viewRequestsImpl.setCancelled(approved);
         ModelAndView result = new ModelAndView("redirect:/Admin/ViewPendingRequests");
+        return result;
+    }
+    @GetMapping("Admin/dashboard/approve/{id}")
+    public ModelAndView ApproveRequest(@PathVariable("id") Long id){
+        RequestItem approved = viewRequestsImpl.getRequest(id);
+        viewRequestsImpl.setApproved(approved);
+        ModelAndView result = new ModelAndView("redirect:/Admin/AdminDashboard");
+        return result;
+    }
+    @GetMapping("Admin/dashboard/cancelled/{id}")
+    public ModelAndView CancelRequest(@PathVariable("id") Long id){
+        RequestItem approved = viewRequestsImpl.getRequest(id);
+        viewRequestsImpl.setCancelled(approved);
+        ModelAndView result = new ModelAndView("redirect:/Admin/AdminDashboard");
         return result;
     }
 

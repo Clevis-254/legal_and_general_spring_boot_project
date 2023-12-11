@@ -23,48 +23,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//public class ApproveRequestTests {
-//
-//    @Autowired
-//    private MockMvc mvc;
-//
-//    @MockBean
-//    private RequestRepository repository;
-//
-//    @MockBean
-//    private ViewRequestsImpl viewRequestsImpl;
-//
-//    @Test
-//    @WithMockUser(username = "James", roles = "ADMIN")
-//    public void shouldApproveThreeItems() throws Exception {
-//        RequestItem request1 = new RequestItem(1L, "pending", 1L, "dave", new Date());
-//        RequestItem request2 = new RequestItem(2L, "pending", 1L, "dave", new Date());
-//        RequestItem request3 = new RequestItem(3L, "pending", 1L, "dave", new Date());
-//
-//        List<RequestItem> requestItems = Arrays.asList(request1, request2, request3);
-//
-//        when(viewRequestsImpl.getRequest(1L)).thenReturn(request1);
-//        when(viewRequestsImpl.getRequest(2L)).thenReturn(request2);
-//        when(viewRequestsImpl.getRequest(3L)).thenReturn(request3);
-//
-//        mvc.perform(MockMvcRequestBuilders.get("/Admin/approve/1"))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/Admin/ViewRequests"));
-//
-//        viewRequestsImpl.setApproved(request1);
-//        viewRequestsImpl.setApproved(request2);
-//        viewRequestsImpl.setApproved(request3);
-//
-//        System.out.println("Request 1 after approval: " + request1);
-//        System.out.println("Request 2 after approval: " + request2);
-//        System.out.println("Request 3 after approval: " + request3);
-//
-//        assertEquals("approved", request1.getApproved());
-//        assertEquals("approved", request2.getApproved());
-//        assertEquals("approved", request3.getApproved());
-//    }
-//
-//
-//}
+@SpringBootTest
+@AutoConfigureMockMvc
+public class ApproveRequestTests {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private RequestRepository repository;
+
+/*    @Autowired
+    private ViewRequestsImpl viewRequestsImpl;*/
+
+    @Test
+    @WithMockUser(username = "James", roles = "ADMIN")
+    public void shouldApprovePendingRequest() throws Exception {
+
+        //GIVEN REQUEST 1 IS IN THE DATABASE AND IS PENDING
+
+        //WHEN REQUEST 1 IS APPROVED
+        mvc.perform(MockMvcRequestBuilders.get("/Admin/approve/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/Admin/ViewPendingRequests"));
+
+        //AND REQUEST 1 IS THEN RETRIEVED
+        RequestItem updatedRequest = repository.getRequestItems(1L).get(0);
+
+        System.out.println("Request 1 after approval: " + updatedRequest);
+
+        //THEN REQUEST 1 SHOULD BE APPROVED
+        assertEquals("approved", updatedRequest.getApproved());
+
+    }
+
+
+}
