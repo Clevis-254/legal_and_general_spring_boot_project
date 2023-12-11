@@ -1,9 +1,12 @@
 
+USE `group_5_client_project`;
 drop table if exists responses;
 drop table if exists adminUsers;
-drop table if exists requests;
 drop table if exists questions;
 drop table if exists responses;
+drop table if exists submissions;
+drop table if exists Reviews;
+drop table if exists requests;
 drop table if exists users;
 
 -- -----------------------------------------------------
@@ -56,4 +59,15 @@ CREATE TABLE responses(
     answer4 INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
-)
+);
+
+CREATE TABLE Reviews(
+    id INT NOT NULL AUTO_INCREMENT,
+    userId INT NOT NULL ,
+    requestID INT NOT NULL,
+    status varchar(50) not null default 'in_progress',
+    date_started Date default current_date,
+    PRIMARY KEY (id),
+    FOREIGN KEY (requestID) REFERENCES requests(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+);

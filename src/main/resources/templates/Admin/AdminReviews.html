@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Reviews</title>
+    <link th:replace="~{base :: css_file}"/>
+    <link th:replace="~{base :: favicon}">
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+<main class="flex flex-col items-center w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
+    <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
+        <span class="text-3xl font-bold text-left">All Reviews</span>
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+            <!-- Add any additional content here if needed -->
+        </div>
+    </div>
+    <table>
+        <tbody>
+        <tr th:each="reviewItem, iStat : ${allReviewItems}">
+            <td>
+                <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
+                    <div class="flex flex-col space-y-4">
+                        <span class="font-bold text-2xl">Review:
+                            <span th:text="${reviewItem.id}" class="font-light text-base"></span>
+                        </span>
+                        <div class="flex space-x-3">
+                            <span class="font-bold text-2xl">User:
+                                <span th:text="${reviewItem.userId}" class="font-light text-base"></span>
+                            </span>
+                            <span class="font-semibold text-base">Date Started:
+                                <span th:text="${#dates.format(reviewItem.date_started, 'yyyy-MM-dd')}" class="font-light text-base"></span>
+                            </span>
+                            <span class="font-semibold text-base">Review Status:
+                                <span th:text="${reviewItem.status}" class="font-light text-base"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

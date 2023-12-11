@@ -54,4 +54,5 @@ public class ViewRequestsImpl {
         return jdbctemplate.queryForObject(sql, ViewRequestMapper, id);
     }
 
+
 }
