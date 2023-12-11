@@ -5,14 +5,48 @@
     <title>requests</title>
     <link th:replace="~{base :: css_file}"/>
     <link th:replace="~{base :: favicon}">
+    <style>
+
+        table {
+            width: 250%;
+            margin-top: 5px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .font-light {
+            font-weight: lighter;
+        }
+
+        .bg-gray-300 {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+
+        .text-gray-600 {
+            color: #374151;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+
+    </style>
 </head>
 <body class="flex w-full max-h-full">
 <div th:replace="sidebar :: sidebarFragment"></div>
 <main class="flex flex-col w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
-    <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
-        <span class="text-3xl font-bold text-left">My reviews</span>
-        <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
-
+    <span class="text-3xl font-bold text-left">My Reviews</span>
+    <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
         <table>
             <tbody>
             <tr th:each="reviewItem : ${reviewItems}">
@@ -40,7 +74,6 @@
             </tr>
             </tbody>
         </table>
-    </div>
     </div>
 </main>
 </body>
