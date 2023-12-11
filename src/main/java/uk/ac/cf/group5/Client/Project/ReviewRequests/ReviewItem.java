@@ -13,7 +13,7 @@ public class ReviewItem {
     private Long userId;
     private Long requestId;
     private String status;
-    private Date dateRequested;
+    private Date date_started;
 
     public ReviewItem(){ this( 0L,  0L, 0L,"",new Date());
 

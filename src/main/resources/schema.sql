@@ -65,8 +65,8 @@ CREATE TABLE Reviews(
     id INT NOT NULL AUTO_INCREMENT,
     userId INT NOT NULL ,
     requestID INT NOT NULL,
-    status BOOLEAN DEFAULT FALSE,
-    date_started DATE NOT NULL,
+    status varchar(50) not null default 'in_progress',
+    date_started Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (requestID) REFERENCES requests(id),
     FOREIGN KEY (userId) REFERENCES users(id)

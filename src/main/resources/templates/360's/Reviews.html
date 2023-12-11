@@ -11,10 +11,11 @@
 <main class="flex flex-col w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
     <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
         <span class="text-3xl font-bold text-left">My reviews</span>
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
 
         <table>
             <tbody>
-            <tr th:each="reviewItem : ${allReviewItems}">
+            <tr th:each="reviewItem : ${reviewItems}">
                 <td>
                     <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
                         <div class="flex flex-col space-y-4">
@@ -24,12 +25,12 @@
                             <div class="flex space-x-3">
                                 <span class="font-semibold text-base">
                                     Status:
-                                    <span th:if="${reviewItem.status eq 'in progress'}"
+                                    <span th:if="${reviewItem.status eq 'in_progress'}"
                                           class="bg-gray-300 text-gray-600">IN PROGRESS
                                     </span>
                                 </span>
                                 <span class="font-semibold text-base">Date started:
-                                    <span th:text="${#dates.format(reviewItem.dateRequested, 'yyyy-MM-dd')}"
+                                    <span th:text="${#dates.format(reviewItem.date_started, 'yyyy-MM-dd')}"
                                           class="font-light text-base"></span>
                                 </span>
                             </div>
@@ -39,6 +40,7 @@
             </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </main>
 </body>

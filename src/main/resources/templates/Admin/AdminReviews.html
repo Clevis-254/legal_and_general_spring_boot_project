@@ -29,7 +29,7 @@
                                 <span th:text="${reviewItem.userId}" class="font-light text-base"></span>
                             </span>
                             <span class="font-semibold text-base">Date Started:
-                                <span th:text="${#dates.format(reviewItem.dateRequested, 'yyyy-MM-dd')}" class="font-light text-base"></span>
+                                <span th:text="${#dates.format(reviewItem.date_started, 'yyyy-MM-dd')}" class="font-light text-base"></span>
                             </span>
                             <span class="font-semibold text-base">Review Status:
                                 <span th:text="${reviewItem.status}" class="font-light text-base"></span>

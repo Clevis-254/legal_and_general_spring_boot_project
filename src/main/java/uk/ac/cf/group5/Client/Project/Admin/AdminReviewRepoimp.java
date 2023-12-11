@@ -33,7 +33,7 @@ public class AdminReviewRepoimp {
 
 
     public List<ReviewItem> getReview() {
-        String sql = "SELECT * FROM reviews WHERE id = ?";
+        String sql = "SELECT * FROM Reviews WHERE status = 'in_progress'";
         return jdbctemplate.query(sql, ReviewItemMapper);
     }
 }
