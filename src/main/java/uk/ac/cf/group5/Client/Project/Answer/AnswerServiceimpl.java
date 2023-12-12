@@ -3,6 +3,8 @@ package uk.ac.cf.group5.Client.Project.Answer;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.group5.Client.Project.user.UserRepository;
 
+import java.util.List;
+
 @Service
 public class AnswerServiceimpl implements AnswerService{
 
@@ -13,7 +15,10 @@ public class AnswerServiceimpl implements AnswerService{
     }
 
     @Override
-    public void add(AnswerItem answerItem) {
-        answerRepo.add(answerItem);
+    public void add(List<AnswerItem> answerItems) {
+        for (AnswerItem answer : answerItems) {
+            answerRepo.add(answer);
+        }
     }
+
 }

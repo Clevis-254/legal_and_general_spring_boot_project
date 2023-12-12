@@ -4,7 +4,9 @@ drop table if exists submissions;
 drop table if exists questions;
 drop table if exists responses;
 drop table if exists submissions;
-drop table if exists Reviews;
+drop table if exists contacts;
+drop table if exists results;
+drop table if exists reviews;
 drop table if exists contact_questions;
 drop table if exists requests;
 drop table if exists users;
@@ -48,7 +50,7 @@ CREATE TABLE requests(
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
-CREATE TABLE Reviews(
+CREATE TABLE reviews(
     id INT NOT NULL AUTO_INCREMENT,
     userId INT NOT NULL ,
     requestID INT NOT NULL,
@@ -59,6 +61,15 @@ CREATE TABLE Reviews(
     FOREIGN KEY (userId) REFERENCES users(id)
 );
 
+CREATE TABLE if not exists results(
+    id INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    date_added DATE NOT NULL,
+    current_status VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userID) REFERENCES users(id)
+);
+
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
     question_text VARCHAR(255) NOT NULL,
@@ -67,42 +78,41 @@ CREATE TABLE questions(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE responses(
+CREATE TABLE contacts(
     id INT NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
-    answer1 INT NOT NULL,
-    answer2 INT NOT NULL,
-    answer3 INT NOT NULL,
-    answer4 INT NOT NULL,
+    fname VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    category VARCHAR(50),
+    reviewsId INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (userID) REFERENCES users(id)
-);
+    FOREIGN KEY (reviewsId) REFERENCES reviews(id));
 
-
-CREATE TABLE contact_questions(
-    id INT not null  auto_increment,
-    question VARCHAR(255) NOT NULL,
-    category VARCHAR(50) NOT NULL ,
-    date_added  Date default current_date,
-    primary key (id)
-);
 CREATE TABLE submissions(
-    id INT NOT NULL AUTO_INCREMENT,
-    userID INT NOT NULL,
-    reviewID INT NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (userID) REFERENCES users(id),
-    FOREIGN KEY (reviewID) REFERENCES Reviews(id)
+id INT NOT NULL AUTO_INCREMENT,
+contactID INT NOT NULL,
+reviewID INT NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (contactID) REFERENCES contacts(id),
+FOREIGN KEY (reviewID) REFERENCES reviews(id)
+);
+CREATE TABLE contact_questions(
+id INT not null  auto_increment,
+question VARCHAR(255) NOT NULL,
+category VARCHAR(50) NOT NULL ,
+date_added  Date default current_date,
+primary key (id)
 );
 
 CREATE TABLE answers
-(
-    id          INT          NOT NULL AUTO_INCREMENT,
-    question_id INT          NOT NULL,
-    sub_id      INT          NOT NULL,
-    answer      VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (question_id) REFERENCES questions (id),
-    FOREIGN KEY (sub_id) REFERENCES submissions (id)
-);
+    (
+        id INT NOT NULL AUTO_INCREMENT,
+        questionID INT NOT NULL,
+        answer VARCHAR(255) NOT NULL,
+        subID INT NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (questionID) REFERENCES contact_questions(id),
+        FOREIGN KEY (subID) REFERENCES submissions(id)
+    );
+
+

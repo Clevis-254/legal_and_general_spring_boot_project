@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
 
 import java.util.List;
 
@@ -44,19 +45,25 @@ public class ReviewRepoImp implements ReviewRepository{
 //        return jdbctemplate.query(sql, ViewReviewMapper);
 //    }
 
-    public List<ReviewItem> getReviewItems(Long userId){
-        String sql = "SELECT * FROM Reviews WHERE userId = ? and status = 'in_progress'";
+    public List<ReviewItem> getReviewItems(long userId){
+        String sql = "SELECT * FROM reviews WHERE userId = ? and status = 'in_progress'";
         return jdbctemplate.query(sql, ViewReviewMapper, userId);
     }
 
-    public void add(RequestItem Item) {
-        String ReviewInsertSql =
-                "insert into Reviews " +
-                        "(userId,RequestId)" +
-                        " values (?,?)";
-        jdbctemplate.update(ReviewInsertSql,
-                Item.getUserId(),
-                Item.getId()
-        );
+    public void add(Long userID, Long requestID) {
+        String reviewInsertSql =
+                "INSERT INTO reviews " +
+                        "(userId, RequestId)" +
+                        " VALUES (?, ?)";
+        jdbctemplate.update(reviewInsertSql, userID, requestID);
+    }
+
+    public ReviewItem getReview(long userId) {
+        String sql = "select * from reviews where userId = ?";
+        return jdbctemplate.queryForObject(sql,ViewReviewMapper, userId);
+    }
+    public ReviewItem getItem(long reviewID) {
+        String sql = "select * from reviews where id = ?";
+        return jdbctemplate.queryForObject(sql,ViewReviewMapper, reviewID);
     }
 }

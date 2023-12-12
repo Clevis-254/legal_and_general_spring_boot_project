@@ -1,4 +1,6 @@
-package uk.ac.cf.group5.Client.Project.UserForm;
+
+package uk.ac.cf.group5.Client.Project.Form.Survey;
+
 
 public class Response {
     private Long responseID;

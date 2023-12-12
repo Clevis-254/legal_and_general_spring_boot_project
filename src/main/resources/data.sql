@@ -21,6 +21,10 @@ values
     ('Actively seeking out opportunities to support others in their work.', curdate(), 'collaborative'),
     ('As being open and approachable', curdate(), 'collaborative');
 
+insert into results (userid, date_added, current_status) values
+    (1, curdate(), 'pending'),
+    (2, curdate(), 'pending');
+
 
 insert into requests (userID, firstname,secondname, requested )
 values
@@ -72,5 +76,10 @@ INSERT INTO contact_questions (question, category) VALUES
 insert into contact_questions (question, category) VALUEs('What do you consider to be your superpower? :', 'textarea');
 insert into contact_questions (question, category) VALUEs('What is the one thing you could do to improve your impact? :', 'textarea');
 
+
+
+-- insert into contacts (id, fname, surname, email, category, reviewsId ) values
+--    (1, 'Jerry', 'Garcia', 'email@domain.com', 'manager', 2),
+--    (2, 'Howard', 'Hughes', 'email@domain.com', 'peer', 2);
 
 

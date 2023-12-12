@@ -3,23 +3,20 @@ package uk.ac.cf.group5.Client.Project.Submissions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @AllArgsConstructor
 @Data
-public class submissionItem {
+public class SubmissionItem {
 
     private Long id;
 
-    private Long userID;
+    private Long contactID;
 
     private Long reviewID;
 
 //    private Map<Long,String> answers;
 //new HashMap()
 
-    public submissionItem(){
+    public SubmissionItem(){
         this(0L,0L,0L);
     }
 

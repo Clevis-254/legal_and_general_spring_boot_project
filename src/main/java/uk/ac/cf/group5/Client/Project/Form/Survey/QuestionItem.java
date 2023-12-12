@@ -1,14 +1,14 @@
-package uk.ac.cf.group5.Client.Project.UserForm;
 
-public class Question {
+package uk.ac.cf.group5.Client.Project.Form.Survey;
+public class QuestionItem {
 private Long id;
     private String questionText;
     private String category;
 
-    public Question() {
+    public QuestionItem() {
     }
 
-    public Question(Long id, String questionText, String category) {
+    public QuestionItem(Long id, String questionText, String category) {
         this.id = id;
         this.questionText = questionText;
         this.category = category;

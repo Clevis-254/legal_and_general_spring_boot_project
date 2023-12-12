@@ -3,16 +3,15 @@ package uk.ac.cf.group5.Client.Project.Submissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import uk.ac.cf.group5.Client.Project.user.UserItem;
+
 @Repository
 public class SubmissionRepoImpl implements SubmissionRepo{
 
     @Autowired
 
     private JdbcTemplate jdbctemplate;
-    private RowMapper<submissionItem> SubmissionItemMapper;
+    private RowMapper<SubmissionItem> SubmissionItemMapper;
 
     public SubmissionRepoImpl(JdbcTemplate ajdbctemplate){
 
@@ -23,30 +22,33 @@ public class SubmissionRepoImpl implements SubmissionRepo{
 
     private void setSubmissionMapper() {
 
-        SubmissionItemMapper = (rs, i) -> new submissionItem(
+        SubmissionItemMapper = (rs, i) -> new SubmissionItem(
                 rs.getLong("id"),
-                rs.getLong("userID"),
+                rs.getLong("contactID"),
                 rs.getLong("reviewID")
         );
     }
 
 
     @Override
-    public void add(submissionItem Item) {
+    public void add(Long contactID, Long reviewID) {
         String submissionInsertSql =
-                "insert into submissions " +
-                        "(userID, reviewID)" +
-                        " values (?,?)";
-        jdbctemplate.update(submissionInsertSql,
-                Item.getReviewID(),
-                Item.getUserID()
-        );
+                "INSERT INTO submissions " +
+                        "(contactID, reviewID)" +
+                        " VALUES (?, ?)";
+
+        jdbctemplate.update(submissionInsertSql, contactID, reviewID);
     }
 
     @Override
-    public submissionItem getSubmissionItem(Long id) {
+    public SubmissionItem getSubmissionItem(Long id) {
         String sql = "select * from submissions where reviewID = ?";
         return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
+    }
+    @Override
+    public SubmissionItem getSubmission(Long submissionId) {
+        String sql = "select * from submissions where id = ?";
+        return jdbctemplate.queryForObject(sql,SubmissionItemMapper,submissionId);
     }
 }
 

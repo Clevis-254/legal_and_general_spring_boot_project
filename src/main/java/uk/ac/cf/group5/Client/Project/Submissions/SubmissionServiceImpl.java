@@ -1,7 +1,6 @@
 package uk.ac.cf.group5.Client.Project.Submissions;
 
 import org.springframework.stereotype.Service;
-import uk.ac.cf.group5.Client.Project.Answer.AnswerItem;
 
 @Service
 public class SubmissionServiceImpl implements SubmissionService{
@@ -13,11 +12,15 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
 
-    public void add(submissionItem submission) {
-        Repo.add(submission);
+    public void add(Long contactID, Long reviewID) {
+        Repo.add(contactID,reviewID);
     }
 
-     public submissionItem getSubmissionItem(Long id){
+     public SubmissionItem getSubmissionItem(Long id){
         return Repo.getSubmissionItem(id);
      }
+
+    public SubmissionItem getSubmission(Long submissionId){
+        return Repo.getSubmission(submissionId);
+    }
 }

@@ -34,7 +34,7 @@ public class AnswerRepoimpl implements AnswerRepo{
     public void add(AnswerItem Item) {
         String answersInsertSql =
                 "insert into answers " +
-                        "(question_id,sub_id, answer)" +
+                        "(questionID,subID, answer)" +
                         " values (?,?,?)";
         jdbctemplate.update(answersInsertSql,
                 Item.getQuestion_id(),

@@ -39,6 +39,8 @@ public class ViewRequestsController {
         approved.setApproved("approved");
         viewRequestsImpl.setApproved(approved);
         Long userid = approved.getUserId();
+        Long requestId = approved.getUserId();
+        reviewService.add(userid,requestId);
         ModelAndView result = new ModelAndView("redirect:/Admin/ApproveEmail/{userid}");
         result.addObject("userid", userid);
         return result;
