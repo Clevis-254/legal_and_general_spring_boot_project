@@ -41,6 +41,7 @@ CREATE TABLE requests(
 
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
+    question_num INT
     question_text VARCHAR(255) NOT NULL,
     date_added DATE NOT NULL,
     category VARCHAR(30) NOT NULL,
