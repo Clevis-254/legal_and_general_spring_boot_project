@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewServiceImpl;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
-
 import java.util.List;
 
 @Controller
@@ -26,7 +25,8 @@ public class ViewRequestsController {
         this.reviewService = aReview;
     }
 
-    @GetMapping("Admin/ViewRequests")
+
+    @GetMapping("Admin/ViewPendingRequests")
     public ModelAndView getViewRequests() {
         ModelAndView ViewRequests = new ModelAndView("Admin/ViewRequests");
         List<RequestItem> allRequestItems = viewRequestsImpl.getPendingRequestItems();
@@ -36,8 +36,11 @@ public class ViewRequestsController {
     @GetMapping("Admin/approve/{id}")
     public ModelAndView approveRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
+        approved.setApproved("approved");
         viewRequestsImpl.setApproved(approved);
         Long userid = approved.getUserId();
+        Long requestId = approved.getUserId();
+        reviewService.add(userid,requestId);
         ModelAndView result = new ModelAndView("redirect:/Admin/ApproveEmail/{userid}");
         result.addObject("userid", userid);
         return result;
@@ -45,8 +48,24 @@ public class ViewRequestsController {
     @GetMapping("Admin/cancelled/{id}")
     public ModelAndView cancelRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
-        Long userid = approved.getUserId();
         viewRequestsImpl.setCancelled(approved);
+        Long userid = approved.getUserId();
+        ModelAndView result = new ModelAndView("redirect:/Admin/DenyEmail/{userid}");
+        result.addObject("userid", userid);
+        return result;
+    }
+    @GetMapping("Admin/dashboard/approve/{id}")
+    public ModelAndView ApproveRequest(@PathVariable("id") Long id){
+        RequestItem approved = viewRequestsImpl.getRequest(id);
+        viewRequestsImpl.setApproved(approved);
+        ModelAndView result = new ModelAndView("redirect:/Admin/AdminDashboard");
+        return result;
+    }
+    @GetMapping("Admin/dashboard/cancelled/{id}")
+    public ModelAndView CancelRequest(@PathVariable("id") Long id){
+        RequestItem approved = viewRequestsImpl.getRequest(id);
+        viewRequestsImpl.setCancelled(approved);
+        Long userid = approved.getUserId();
         ModelAndView result = new ModelAndView("redirect:/Admin/DenyEmail/{userid}");
         result.addObject("userid", userid);
         return result;

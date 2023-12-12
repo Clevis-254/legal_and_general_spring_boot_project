@@ -21,9 +21,9 @@ public class EmailController {
         UserItem User = user.getItem(id);
         System.out.println(user);
         String Username = User.getUsername();
-        String name = User.getName();
+        String name = User.getFirstname();
         emailService.sendApprovalEmail(Username, name);
-        return "redirect:/Admin/ViewRequests";
+        return "redirect:/Admin/ViewPendingRequests";
     }
 
     @GetMapping("Admin/DenyEmail/{userid}")
@@ -31,8 +31,8 @@ public class EmailController {
         UserItem User = user.getItem(id);
         System.out.println(user);
         String Username = User.getUsername();
-        String name = User.getName();
+        String name = User.getFirstname();
         emailService.sendDenyEmail(Username, name);
-        return "redirect:/Admin/ViewRequests";
+        return "redirect:/Admin/ViewPendingRequests";
     }
 }

@@ -11,12 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
+import java.util.List;
+
 @Controller
-public class AdminMenuController {
+public class AdminController {
 
     private UserService user;
 
-    public  AdminMenuController( UserService userService){
+    public AdminController(UserService userService){
         this.user = userService;
     }
 
@@ -42,10 +44,39 @@ public class AdminMenuController {
                     ,model.asMap());
             return modelAndView;
         } else {
-            UserItem newUser = new UserItem(userItem.getId(),userItem.getName(),userItem.getUsername()
-                    ,userItem.getPassword());
+            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(),userItem.getUsername()
+                    ,userItem.getPassword(), userItem.getRole());
             user.add(newUser);
             ModelAndView modelAndView = new ModelAndView("redirect:/Admin/AdminSettings");
+            return modelAndView;
+        }
+    }
+
+    @GetMapping("Admin/users")
+    public ModelAndView allUsers(){
+        ModelAndView users = new ModelAndView("Admin/Members");
+        List<UserItem> UserItems = user.getUserItems();
+        users.addObject("UserItems",UserItems);
+        return users;
+    }
+    @GetMapping("Admin/add")
+    public ModelAndView addUser(){
+        ModelAndView add = new ModelAndView("Admin/add");
+        UserItem newUser = new UserItem();
+        add.addObject("newUser",newUser);
+        return add;
+    }
+    @PostMapping("Admin/add")
+    public  ModelAndView receiveUser(@Valid UserItem userItem, BindingResult Result, Model model){
+        if (Result.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("Admin/add"
+                    ,model.asMap());
+            return modelAndView;
+        } else {
+            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(),userItem.getUsername()
+                    ,userItem.getPassword(), userItem.getRole());
+            user.add(newUser);
+            ModelAndView modelAndView = new ModelAndView("redirect:/Admin/users");
             return modelAndView;
         }
     }

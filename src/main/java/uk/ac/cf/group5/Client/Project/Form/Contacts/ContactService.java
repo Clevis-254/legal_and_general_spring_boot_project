@@ -8,19 +8,19 @@ import java.util.List;
 public interface ContactService {
 
 
-    List<ContactItem> getContactItems(Integer resultID);
+    List<ContactItem> getContactItems(long reviewsID);
 
-    ContactItem getContactItem(Long id);
+   ContactItem getContactItem(long reviewsId);
 
-    void save(ContactItem menuItem, Integer resultID);
+    void save(ContactItem menuItem, long reviewsID);
 
     void delete(Long id);
 
-    Integer getManagerCount(Integer resultID);
+    Integer getManagerCount(long reviewsID);
 
-    Integer getPeerCount(Integer resultID);
+    Integer getPeerCount(long reviewsID);
 
-    Integer getExternalCount(Integer resultID);
+    Integer getExternalCount(long reviewsID);
 
     List<ContactItem> getAllContacts();
 }

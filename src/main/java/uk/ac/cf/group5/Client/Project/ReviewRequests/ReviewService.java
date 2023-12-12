@@ -8,8 +8,12 @@ import java.util.List;
 @Service
 public interface ReviewService {
 
-    void add(RequestItem review);
+    void add(Long userID, Long RequestID);
+
+    ReviewItem getReview(long userId);
 
     List<ReviewItem> getReviewItems(Long userId);
+
+    ReviewItem getItem(long reviewID);
 }
 

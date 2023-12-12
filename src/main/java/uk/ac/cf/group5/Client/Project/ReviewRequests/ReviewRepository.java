@@ -7,8 +7,9 @@ import java.util.List;
 public interface ReviewRepository {
 
 
-    List<ReviewItem> getReviewItems(Long userId);
+    List<ReviewItem> getReviewItems(long userId);
 
-
-    void add(RequestItem Item);
+    ReviewItem getReview(long userId);
+    void add(Long userID, Long RequestID);
+    ReviewItem getItem(long reviewID);
 }

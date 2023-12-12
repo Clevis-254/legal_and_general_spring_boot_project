@@ -4,19 +4,19 @@ import java.util.List;
 
 public interface ContactRepository {
 
-    void saveContact(ContactItem contact, Integer resultID);
+    void saveContact(ContactItem contact, long reviewsID);
 
-    Integer getManagerCount(Integer resultID);
+    Integer getManagerCount(long reviewsID);
 
-    Integer getPeerCount(Integer resultID);
+    Integer getPeerCount(long reviewsID);
 
-    Integer getExternalCount(Integer resultID);
+    Integer getExternalCount(long reviewsID);
 
     void deleteContact(Long contactID);
 
-    List<ContactItem> getResultContacts(Integer resultID);
+    List<ContactItem> getResultContacts(long reviewsID);
 
-    ContactItem getContact(Long id);
+    ContactItem getContact(Long reviewsId);
 
 
     List<ContactItem> getAllContacts();

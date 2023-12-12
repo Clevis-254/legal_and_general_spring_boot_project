@@ -14,18 +14,14 @@ public class ContactServiceImpl implements ContactService{
     }
 
     @Override
-    public List<ContactItem> getContactItems(Integer resultID) {
-        return contactRepository.getResultContacts(resultID);
+    public List<ContactItem> getContactItems(long reviewsId ) {
+        return contactRepository.getResultContacts(reviewsId );
     }
 
-    @Override
-    public ContactItem getContactItem(Long id) {
-        return contactRepository.getContact(id);
-    }
 
     @Override
-    public void save(ContactItem contactItem, Integer resultID) {
-        contactRepository.saveContact(contactItem, resultID);
+    public void save(ContactItem contactItem, long reviewsId ) {
+        contactRepository.saveContact(contactItem, reviewsId );
     }
 
     @Override
@@ -34,22 +30,28 @@ public class ContactServiceImpl implements ContactService{
     }
 
     @Override
-    public Integer getManagerCount(Integer resultID) {
-        return contactRepository.getManagerCount(resultID);
+    public Integer getManagerCount(long reviewsId ) {
+        return contactRepository.getManagerCount(reviewsId );
     }
 
     @Override
-    public Integer getPeerCount(Integer resultID) {
-        return contactRepository.getPeerCount(resultID);
+    public Integer getPeerCount(long reviewsId ) {
+        return contactRepository.getPeerCount(reviewsId );
     }
 
     @Override
-    public Integer getExternalCount(Integer resultID) {
-        return contactRepository.getExternalCount(resultID);
+    public Integer getExternalCount(long reviewsId ) {
+        return contactRepository.getExternalCount(reviewsId );
     }
 
     @Override
     public List<ContactItem> getAllContacts() {
         return contactRepository.getAllContacts();
     }
+
+    @Override
+   public ContactItem getContactItem(long reviewsId){
+        return contactRepository.getContact(reviewsId);
+    }
 }
+

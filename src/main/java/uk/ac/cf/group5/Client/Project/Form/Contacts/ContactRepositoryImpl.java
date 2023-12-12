@@ -21,8 +21,8 @@ public class ContactRepositoryImpl implements ContactRepository{
     // Setter for RowMapper
     public void setContactMapper() {
         ContactMapper = (rs, i) -> new ContactItem(
-                rs.getInt("id"),
-                rs.getInt("result_id"),
+                rs.getLong("id"),
+                rs.getLong("reviewsId"),
                 rs.getString("fname"),
                 rs.getString("surname"),
                 rs.getString("email"),
@@ -31,27 +31,27 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
-    public void saveContact(ContactItem contact, Integer resultID) {
-        String sql = "INSERT INTO contacts (fname, surname , email, category, result_id) VALUES (?, ?, ?, ?,?)";
-        jdbcTemplate.update(sql, contact.getFirstName(), contact.getLastName()  , contact.getEmail(), contact.getCategory(), resultID);
+    public void saveContact(ContactItem contact, long reviewsId ) {
+        String sql = "INSERT INTO contacts (fname, surname , email, category, reviewsId ) VALUES (?, ?, ?, ?,?)";
+        jdbcTemplate.update(sql, contact.getFirstName(), contact.getLastName()  , contact.getEmail(), contact.getCategory(), reviewsId );
     }
 
     @Override
-    public Integer getManagerCount(Integer resultID) {
-        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Manager' AND result_id = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    public Integer getManagerCount(long reviewsId ) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Manager' AND reviewsId  = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, reviewsId );
     }
 
     @Override
-    public Integer getPeerCount(Integer resultID) {
-        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Peer' AND result_id = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    public Integer getPeerCount(long reviewsId ) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Peer' AND reviewsId  = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, reviewsId);
     }
 
     @Override
-    public Integer getExternalCount(Integer resultID) {
-        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'External' AND result_id = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, resultID);
+    public Integer getExternalCount(long reviewsId) {
+        String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'External' AND reviewsId  = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, reviewsId );
     }
 
     @Override
@@ -61,15 +61,15 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
-    public List<ContactItem> getResultContacts(Integer resultID) {
-        String sql = "SELECT * FROM contacts WHERE result_id = ?";
-        return jdbcTemplate.query(sql, ContactMapper, resultID);
+    public List<ContactItem> getResultContacts(long reviewsId ) {
+        String sql = "SELECT * FROM contacts WHERE reviewsId  = ?";
+        return jdbcTemplate.query(sql, ContactMapper, reviewsId );
     }
 
     @Override
-    public ContactItem getContact(Long id) {
-        String sql = "SELECT * FROM contacts WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, ContactMapper, id);
+    public ContactItem getContact(Long reviewsId) {
+        String sql = "SELECT * FROM contacts WHERE reviewsId = ?";
+        return jdbcTemplate.queryForObject(sql, ContactMapper, reviewsId);
     }
 
     @Override

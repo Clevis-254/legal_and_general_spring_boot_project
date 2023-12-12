@@ -1,5 +1,5 @@
-package uk.ac.cf.group5.Client.Project.Form.Survey;
 
+package uk.ac.cf.group5.Client.Project.Form.Survey;
 public class QuestionItem {
 private Long id;
     private String questionText;

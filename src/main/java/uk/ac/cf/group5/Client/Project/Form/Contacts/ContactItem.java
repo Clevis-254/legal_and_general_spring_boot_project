@@ -3,8 +3,8 @@ package uk.ac.cf.group5.Client.Project.Form.Contacts;
 
 
 public class ContactItem {
-    private Integer id;
-    private Integer resultID;
+    private Long id;
+    private Long reviewsId;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,9 +13,9 @@ public class ContactItem {
     public ContactItem() {
     }
 
-    public ContactItem(Integer id, Integer resultID, String firstName, String lastName , String email, String category) {
+    public ContactItem(Long id, Long reviewsID, String firstName, String lastName , String email, String category) {
         this.id = id;
-        this.resultID = resultID;
+        this.reviewsId = reviewsID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -24,7 +24,7 @@ public class ContactItem {
 
     // Getters
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
     public String getFirstName() {
@@ -42,8 +42,8 @@ public class ContactItem {
    public String getCategory(){
         return category;}
 
-    public Integer getResultID() {
-        return resultID;
+    public Long getResultID() {
+        return reviewsId;
     }
 
     // Setters
@@ -63,11 +63,11 @@ public class ContactItem {
         this.category = category;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void setResultID(Integer resultID) {
-        this.resultID = resultID;
+    public void setResultID(long resultID) {
+        this.reviewsId = resultID;
     }
 }

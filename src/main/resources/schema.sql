@@ -1,11 +1,15 @@
-use group_5_client_project;
-DROP TABLE IF EXISTS submissions;
-DROP TABLE IF EXISTS answers;
-DROP TABLE IF EXISTS contacts;
-DROP TABLE IF EXISTS requests;
-DROP TABLE IF EXISTS questions;
-DROP TABLE IF EXISTS results;
-DROP TABLE IF EXISTS users;
+
+drop table if exists answers;
+drop table if exists submissions;
+drop table if exists questions;
+drop table if exists responses;
+drop table if exists submissions;
+drop table if exists contacts;
+drop table if exists results;
+drop table if exists reviews;
+drop table if exists contact_questions;
+drop table if exists requests;
+drop table if exists users;
 
 -- -----------------------------------------------------
 
@@ -17,30 +21,47 @@ DROP TABLE IF EXISTS users;
 
  USE `group_5_client_project`;
 
-
+-- changed the database schema so that the admin is able to view the user first and second names when seeing
+-- a request made
+-- also the first and second names are used to add the users item into the user's table
 
 CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    firstname VARCHAR(255) NOT NULL,
+    secondname VARCHAR(255) NOT NULL ,
     password VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
     enabled boolean default true,
-    role VARCHAR(50),
+    role VARCHAR(50) NOT NULL default'ROLE_USER',
     PRIMARY KEY (id)
 );
 
 
+-- changed the database schema so that the admin is able to view the user first and second names when seeing
+-- a request made
+-- also the first and second names are used to add the users item into the user's table
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
     approved VARCHAR(20) default 'pending',
-    name VARCHAR(50) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    secondname varchar(50) not null ,
     requested Date default current_date,
     PRIMARY KEY (id),
     FOREIGN KEY (userID) REFERENCES users(id)
 );
+CREATE TABLE reviews(
+    id INT NOT NULL AUTO_INCREMENT,
+    userId INT NOT NULL ,
+    requestID INT NOT NULL,
+    status varchar(50) not null default 'in_progress',
+    date_started Date default current_date,
+    PRIMARY KEY (id),
+    FOREIGN KEY (requestID) REFERENCES requests(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
 
-CREATE TABLE results(
+CREATE TABLE if not exists results(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
     date_added DATE NOT NULL,
@@ -63,9 +84,25 @@ CREATE TABLE contacts(
     surname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     category VARCHAR(50),
-    result_id INT,
+    reviewsId INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (result_id) REFERENCES results(id));
+    FOREIGN KEY (reviewsId) REFERENCES reviews(id));
+
+CREATE TABLE submissions(
+id INT NOT NULL AUTO_INCREMENT,
+contactID INT NOT NULL,
+reviewID INT NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (contactID) REFERENCES contacts(id),
+FOREIGN KEY (reviewID) REFERENCES reviews(id)
+);
+CREATE TABLE contact_questions(
+id INT not null  auto_increment,
+question VARCHAR(255) NOT NULL,
+category VARCHAR(50) NOT NULL ,
+date_added  Date default current_date,
+primary key (id)
+);
 
 CREATE TABLE answers
     (
@@ -74,28 +111,8 @@ CREATE TABLE answers
         answer VARCHAR(255) NOT NULL,
         subID INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (questionID) REFERENCES questions(id),
+        FOREIGN KEY (questionID) REFERENCES contact_questions(id),
         FOREIGN KEY (subID) REFERENCES submissions(id)
     );
 
-CREATE TABLE submissions(
-                            id INT NOT NULL AUTO_INCREMENT,
-                            userID INT,
-                            contactID INT,
-                            resultsID INT NOT NULL,
-                            PRIMARY KEY (id),
-                            FOREIGN KEY (userID) REFERENCES users(id),
-                            FOREIGN KEY (contactID) REFERENCES contacts(id),
-                            FOREIGN KEY (resultsID) REFERENCES results(id)
-);
 
-CREATE TABLE Reviews(
-    id INT NOT NULL AUTO_INCREMENT,
-    userId INT NOT NULL ,
-    requestID INT NOT NULL,
-    status varchar(50) not null default 'in_progress',
-    date_started Date default current_date,
-    PRIMARY KEY (id),
-    FOREIGN KEY (requestID) REFERENCES requests(id),
-    FOREIGN KEY (userId) REFERENCES users(id)
-);
