@@ -37,7 +37,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 QuestionItem question = new QuestionItem();
                 question.setId(resultSet.getLong("id"));
                 question.setQuestionNum(resultSet.getInt("question_num"));
-                question.setQuestionText(resultSet.getString("question_text"));
+                question.setQuestionText(resultSet.getString("question_User_text"));
                 question.setCategory(resultSet.getString("category"));
                 questions.add(question);
             }
@@ -48,4 +48,5 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
         return questions;
     }
+
 }

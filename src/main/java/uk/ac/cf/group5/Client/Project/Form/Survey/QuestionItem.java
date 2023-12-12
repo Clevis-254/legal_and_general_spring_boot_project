@@ -18,6 +18,7 @@ public class QuestionItem {
         this.questionNum = questionNum;
         this.questionUserText = questionUserText;
         this.category = category;
+        this.date = date;
 
     }
 

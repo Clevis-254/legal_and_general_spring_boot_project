@@ -8,63 +8,116 @@
 </head>
 <body class="flex w-full max-h-full">
 <div th:replace="Adminsidebar :: sidebarFragment"></div>
+
 <div class="flex flex-col items-center w-full p-10 pt-20 space-y-10">
   <div class="flex flex-col items-center justify-between w-full space-y-4">
     <h1 class="text-4xl font-bold text-center">Add Questions</h1>
   </div>
   <div class="flex flex-col items-center w-full max-w-2xl space-y-8">
-    <form th:action="@{/Admin/AddQuestions}" th:method="post" th:object="${Question}" class="flex flex-col space-y-5 w-full">
+    <form th:action="@{/Admin/AddQuestions}" th:method="post" th:object="${question}" class="flex flex-col space-y-5 w-full">
+      <!-- Existing input fields -->
       <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
+
+      <!-- Question Number -->
       <div class="flex items-center space-x-4">
-        <label >Question Number:</label>
-        <input type="text" id="questionNumber" name="questionNumber" placeholder="Enter the question number"
-               class="focus:border-green-400 p-2 border rounded-full w-full"/>
+        <label for="questionNumber">Question Number:</label>
+        <input type="text" id="questionNumber" name="questionNumber" placeholder="Enter the question number" class="focus:border-green-400 p-2 border rounded-full w-full"/>
       </div>
+
+      <!-- Question Text -->
       <div class="flex items-center space-x-4">
-        <label >Question Text:</label>
-        <input type="text" id="questionText" name="questionText"  placeholder="Enter the self question text"
-               class="focus:border-green-400 p-2 border rounded-full w-full"/>
+        <label for="questionText">Question Text:</label>
+        <input type="text" id="questionText" name="questionText" placeholder="Enter the self question text" class="focus:border-green-400 p-2 border rounded-full w-full"/>
       </div>
+
+      <!-- Contact Question Text -->
       <div class="flex items-center space-x-4">
-        <label >Question Text:</label>
-        <input type="text" id="contactQuestionText" name="contactQuestionText"  placeholder="Enter the peer question text"
-               class="focus:border-green-400 p-2 border rounded-full w-full"/>
+        <label for="contactQuestionText">Contact Question Text:</label>
+        <input type="text" id="contactQuestionText" name="contactQuestionText" placeholder="Enter the peer question text" class="focus:border-green-400 p-2 border rounded-full w-full"/>
       </div>
+
+      <!-- Category -->
       <div class="flex items-center space-x-4">
         <label>Category:</label>
+
         <div class="flex items-center space-x-2">
           <label for="CollaborativeCategory">Collaborative</label>
-          <input type="radio" id="CollaborativeCategory" name="Collaborative" value="Collaborative" class="mr-2"/>
-        </div>
-        <div class="flex items-center space-x-2">
-          <label for="PurposefulCategory">Purposeful</label>
-          <input type="radio" id="PurposefulCategory" name="Purposeful" value="Purposeful" class="mr-2"/>
+          <input type="radio" id="CollaborativeCategory" name="category" value="Collaborative" class="mr-2"/>
         </div>
 
         <div class="flex items-center space-x-2">
           <label for="Straight-ForwardCategory">Straight-Forward</label>
-          <input type="radio" id="Straight-ForwardCategory" name="Straight-Forward" value="Straight-Forward" class="mr-2"/>
+          <input type="radio" id="Straight-ForwardCategory" name="Category" value="Straight-Forward" class="mr-2"/>
         </div>
-      </div>
+
       <div class="flex items-center space-x-2">
         <label for="AuthenticCategory">Authentic</label>
-        <input type="radio" id="AuthenticCategory" name="Authentic" value="Authentic" class="mr-2"/>
+        <input type="radio" id="AuthenticCategory" name="Category" value="Authentic" class="mr-2"/>
       </div>
         <div class="flex items-center space-x-2">
           <label for="AgileCategory">Agile</label>
-          <input type="radio" id="AgileCategory" name="Agile" value="Agile" class="mr-2"/>
+          <input type="radio" id="AgileCategory" name="Category" value="Agile" class="mr-2"/>
         </div>
       <div class="flex items-center space-x-2">
         <label for="AmbitiousCategory">Ambitious</label>
-        <input type="radio" id="AmbitiousCategory" name="Ambitious" value="Ambitious" class="mr-2"/>
+        <input type="radio" id="AmbitiousCategory" name="Category" value="Ambitious" class="mr-2"/>
       </div>
       <div class="flex items-center space-x-2">
         <label for="textareaCategory">textarea</label>
-        <input type="radio" id="textareaCategory" name="textarea" value="textarea" class="mr-2"/>
+        <input type="radio" id="textareaCategory" name="Category" value="textarea" class="mr-2"/>
+      </div>
       </div>
       <button type="submit" class="bg-blue-500 flex items-center justify-center w-fit h-12 font-light rounded text-white p-2
                           hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue rounded-full px-10 mx-auto w-max">Add Question</button>
     </form>
+  </div>
+
+  <!-- Display All Questions -->
+  <div class="flex flex-col items-center w-full max-w-2xl space-y-8">
+    <h2 class="text-2xl font-bold mb-4">All Questions</h2>
+    <table class="w-full border">
+      <!-- Table headers -->
+      <tr class="bg-gray-200">
+        <th class="p-2">Question Num</th>
+        <th class="p-2">User Text</th>
+        <th class="p-2">Contact Text</th>
+        <th class="p-2">Category</th>
+        <th class="p-2">Question ID</th>
+      </tr>
+
+      <!-- Loop through questions -->
+      <tr th:each="question : ${allQuestions}">
+        <td class="p-2" th:text="${question.questionNumber}"></td>
+        <td class="p-2" th:text="${question.questionText}"></td>
+        <td class="p-2" th:text="${question.contactQuestionText}"></td>
+        <td class="p-2" th:text="${question.category}"></td>
+        <td class="p-2" th:text="${question.id}"></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Display Current Questions -->
+  <div class="flex flex-col items-center w-full max-w-2xl space-y-8">
+    <h2 class="text-2xl font-bold mb-4">Current Questions</h2>
+    <table class="w-full border">
+      <!-- Table headers -->
+      <tr class="bg-gray-200">
+        <th class="p-2">Question Num</th>
+        <th class="p-2">User Text</th>
+        <th class="p-2">Contact Text</th>
+        <th class="p-2">Category</th>
+        <th class="p-2">Question ID</th>
+      </tr>
+
+      <!-- Loop through current questions -->
+      <tr th:each="question : ${currentQuestions}">
+        <td class="p-2" th:text="${question.questionNumber}"></td>
+        <td class="p-2" th:text="${question.questionText}"></td>
+        <td class="p-2" th:text="${question.contactQuestionText}"></td>
+        <td class="p-2" th:text="${question.category}"></td>
+        <td class="p-2" th:text="${question.id}"></td>
+      </tr>
+    </table>
   </div>
 </div>
 </body>
