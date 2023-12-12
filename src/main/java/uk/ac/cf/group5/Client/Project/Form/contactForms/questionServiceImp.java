@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project.contactForms;
+package uk.ac.cf.group5.Client.Project.Form.contactForms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

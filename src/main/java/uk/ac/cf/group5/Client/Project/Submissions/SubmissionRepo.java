@@ -7,4 +7,6 @@ public interface SubmissionRepo {
     SubmissionItem getSubmissionItem(Long id);
 
     SubmissionItem getSubmission(Long submissionId);
+
+    SubmissionItem DeleteSubmissionItem(Long contactID);
 }

@@ -1,10 +1,9 @@
-package uk.ac.cf.group5.Client.Project.contactForms;
+package uk.ac.cf.group5.Client.Project.Form.contactForms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 
 import java.sql.Date;
 import java.util.List;

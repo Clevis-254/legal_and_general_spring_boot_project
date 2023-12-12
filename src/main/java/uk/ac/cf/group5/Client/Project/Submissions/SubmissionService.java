@@ -7,4 +7,6 @@ public interface SubmissionService {
     SubmissionItem getSubmissionItem(Long id);
 
     SubmissionItem getSubmission(Long submissionId);
+
+    SubmissionItem DeleteSubmissionItem(Long contactID);
 }

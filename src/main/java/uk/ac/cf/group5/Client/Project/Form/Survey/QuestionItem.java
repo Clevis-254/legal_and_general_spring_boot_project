@@ -1,17 +1,24 @@
 
 package uk.ac.cf.group5.Client.Project.Form.Survey;
+
+import java.sql.Date;
+
 public class QuestionItem {
-private Long id;
-    private String questionText;
-    private String category;
+    private Long id;
+    private int questionNum;
+    private String questionUserText;
+    private Date date;
+    private  String category;
 
     public QuestionItem() {
     }
 
-    public QuestionItem(Long id, String questionText, String category) {
+    public QuestionItem(Long id, int questionNum, String questionUserText, String category) {
         this.id = id;
-        this.questionText = questionText;
+        this.questionNum = questionNum;
+        this.questionUserText = questionUserText;
         this.category = category;
+
     }
 
     public Long getId() {
@@ -19,8 +26,10 @@ private Long id;
     }
 
     public String getQuestionText() {
-        return questionText;
+        return questionUserText;
     }
+
+    public int getQuestionNum(){return questionNum;}
 
     public String getCategory() {
         return category;
@@ -31,7 +40,10 @@ private Long id;
     }
 
     public void setQuestionText(String questionText) {
-        this.questionText = questionText;
+        this.questionUserText = questionText;
+    }
+    public void setQuestionNum(int questionNum) {
+        this.questionNum = questionNum;
     }
 
     public void setCategory(String category) {
