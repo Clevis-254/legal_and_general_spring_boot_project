@@ -68,7 +68,6 @@ insert into questions (question_num, question_user_text,question_contact_text, d
 insert into questions (question_num, question_user_text,question_contact_text, date_added, category) VALUEs('26','What is the one thing you could do to improve your impact? :','What is the one thing this person could do to improve their  impact? :', curdate(), 'textarea');
 
 
-
--- insert into contacts (id, fname, surname, email, category, reviewsId ) values
---    (1, 'Jerry', 'Garcia', 'email@domain.com', 'manager', 2),
---    (2, 'Howard', 'Hughes', 'email@domain.com', 'peer', 2);
+# insert into contacts (id, fname, surname, email, category, reviewsId ) values
+#    (1, 'Jerry', 'Garcia', 'email@domain.com', 'manager', 1),
+#    (2, 'Howard', 'Hughes', 'email@domain.com', 'peer', 1);

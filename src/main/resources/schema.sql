@@ -90,10 +90,12 @@ CREATE TABLE contacts(
 
 CREATE TABLE submissions(
 id INT NOT NULL AUTO_INCREMENT,
-contactID INT NOT NULL,
+contactID INT,
+userID INT,
 reviewID INT NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (contactID) REFERENCES contacts(id),
+FOREIGN KEY (userID) REFERENCES users(id),
 FOREIGN KEY (reviewID) REFERENCES reviews(id)
 );
 

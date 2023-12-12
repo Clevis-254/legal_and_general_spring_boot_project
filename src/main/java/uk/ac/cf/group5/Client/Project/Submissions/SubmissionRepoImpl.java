@@ -31,13 +31,13 @@ public class SubmissionRepoImpl implements SubmissionRepo{
 
 
     @Override
-    public void add(Long contactID, Long reviewID) {
+    public void add(Long contactID, Long reviewID, Long userID) {
         String submissionInsertSql =
                 "INSERT INTO submissions " +
-                        "(contactID, reviewID)" +
-                        " VALUES (?, ?)";
+                        "(contactID,userID, reviewID)" +
+                        " VALUES (?, ?,?)";
 
-        jdbctemplate.update(submissionInsertSql, contactID, reviewID);
+        jdbctemplate.update(submissionInsertSql, contactID, userID, reviewID);
     }
 
     @Override

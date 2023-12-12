@@ -10,10 +10,12 @@ public class questionItem {
 
     private String question;
 
+    private Integer question_num;
+
     private  String category;
 
     public questionItem(){
-        this(0L,"","");
+        this(0L,"",0, "");
     }
 }
 

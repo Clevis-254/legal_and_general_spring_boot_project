@@ -16,9 +16,12 @@ import uk.ac.cf.group5.Client.Project.Form.contactForms.ContactQuestionService;
 import uk.ac.cf.group5.Client.Project.Form.contactForms.questionItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactService;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,16 +57,52 @@ public class FormController {
     /*
     perhaps should add an id to reference the user answering the form questions.
      */
-    @GetMapping("/form/employee")
-    public ModelAndView getEmployeeForm() {
+    @GetMapping("/form/{id}/employee")
+    public ModelAndView getEmployeeForm(@PathVariable Long id, Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("form/employeeForm");
-        List<QuestionItem> questions = questionService.getAllQuestions();
+        List<String> categories = new ArrayList<>();
+        categories.add("Collaborative");
+        categories.add("Purposeful");
+        categories.add("Straight-Forward");
+        categories.add("Authentic");
+        categories.add("Agile");
+        categories.add("Ambitious");
+        modelAndView.addObject("categories", categories);
+        String employee = authentication.getName();
+        UserItem userItem = user.getUserItem(employee);
+        Long userId = userItem.getId();
+        submission.add(null, id, userId);
+        SubmissionItem submissionItem = submission.getSubmission(id);
+        modelAndView.addObject("submissionItem",submissionItem);
+        Date date = review.getDateForQ(id);
+        List<QuestionItem> questions = questionService.getRadioQuestions(date);
+        System.out.println(questions);
         modelAndView.addObject("questions", questions);
+        List<QuestionItem> textAreaQuestions = questionService.getTextAreaQuestions(date);
+        System.out.println(textAreaQuestions);
+        modelAndView.addObject("textAreaQuestions", textAreaQuestions);
         return modelAndView;
     }
 
     @PostMapping("/form/{id}/employee")
-    public String submitResponses(@PathVariable Long id) {
+    public String receiveEmployeeAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
+        try { ObjectMapper objectMapper = new ObjectMapper();
+            List<AnswerItem> answerList = objectMapper.readValue(answers,
+                    new TypeReference<List<AnswerItem>>() {});
+            for (AnswerItem answer : answerList) {
+                answer.setSub_id(id);
+                Long questionId = answer.getQuestion_id();
+                String answerText = answer.getAnswer();
+            }
+            answerService.add(answerList);
+            //return "Success";
+            // Replace with your response
+        } catch (IOException e) {
+            // Handle JSON parsing exception
+            e.printStackTrace();
+            //return "Error"; //
+            // Replace with your error response
+        }
         return "redirect:/form/employee/{id}/contacts";
     }
 
@@ -90,7 +129,7 @@ public class FormController {
         contactService.save(contact, id);
         ContactItem Item = contactService.getContactItem(id);
         Long contactID = Item.getId();
-        submission.add(contactID,id);
+        submission.add(contactID,id,null);
         return "redirect:/form/employee/{id}/contacts"; // Redirect to the contact form page
     }
 
@@ -108,11 +147,12 @@ public class FormController {
         return modelAndView;
     }
 
-    @GetMapping("/form/{id}")
+    @GetMapping("/form/{id}/contactForm")
     public ModelAndView sentForm(@PathVariable Long id){
         ModelAndView contact = new ModelAndView("form/contactForm");
-        List<questionItem> questionItems = question.questionItems();
-        List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions();
+        Date date = review.getDateForQ(id);
+        List<questionItem> questionItems = question.getRadioQuestions(date);
+        List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions(date);
         SubmissionItem submissionItem = submission.getSubmission(id);
         contact.addObject("questionItems",questionItems);
         contact.addObject("getTextAreaQuestions",getTextAreaQuestions);

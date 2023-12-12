@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -65,5 +66,10 @@ public class ReviewRepoImp implements ReviewRepository{
     public ReviewItem getItem(long reviewID) {
         String sql = "select * from reviews where id = ?";
         return jdbctemplate.queryForObject(sql,ViewReviewMapper, reviewID);
+    }
+
+    public Date getDateForQ(long id){
+        String sql = "select date_started from Reviews where id = ? and status = 'in_progress'";
+        return jdbctemplate.queryForObject(sql, Date.class, id);
     }
 }

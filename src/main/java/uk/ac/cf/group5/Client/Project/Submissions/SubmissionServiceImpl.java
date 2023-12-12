@@ -12,8 +12,8 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
 
-    public void add(Long contactID, Long reviewID) {
-        Repo.add(contactID,reviewID);
+    public void add(Long contactID, Long reviewID, Long userID) {
+        Repo.add(contactID,reviewID,userID);
     }
 
      public SubmissionItem getSubmissionItem(Long id){

@@ -3,48 +3,56 @@ package uk.ac.cf.group5.Client.Project.Form.Survey;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionItem;
 import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionRepository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class QuestionRepositoryImpl implements QuestionRepository {
 
-    private final DataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<QuestionItem> questionItemMapper;
 
     @Autowired
-    public QuestionRepositoryImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public QuestionRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        setQuestionMapper();
+    }
+
+    private void setQuestionMapper() {
+        questionItemMapper = (rs, i) -> new QuestionItem(
+                rs.getLong("id"),
+                rs.getString("question_user_text"),
+                rs.getString("category"),
+                rs.getInt("question_num")
+        );
     }
 
     @Override
     public List<QuestionItem> findAll() {
-        List<QuestionItem> questions = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT id, question_text, category FROM questions");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                QuestionItem question = new QuestionItem();
-                question.setId(resultSet.getLong("id"));
-                question.setQuestionText(resultSet.getString("question_text"));
-                question.setCategory(resultSet.getString("category"));
-                questions.add(question);
-            }
-        } catch (SQLException e) {
-            // Handle exceptions
-            e.printStackTrace();
-        }
-
-        return questions;
+        String sql = "SELECT * FROM questions";
+        return jdbcTemplate.query(sql, questionItemMapper);
     }
+
+    @Override
+    public List<QuestionItem> findTextAreaQuestions(Date date){
+        String sql = "SELECT id, question_user_text, category, question_num FROM questions WHERE category = 'textarea' AND date_added <= ?";
+        return jdbcTemplate.query(sql, questionItemMapper, date);
+    }
+
+    @Override
+    public List<QuestionItem> findRadioQuestions(Date date){
+        String sql = "SELECT id, question_user_text, category, question_num FROM questions WHERE category != 'textarea' AND date_added <= ?";
+        return jdbcTemplate.query(sql, questionItemMapper, date);
+    }
+
+
 }
