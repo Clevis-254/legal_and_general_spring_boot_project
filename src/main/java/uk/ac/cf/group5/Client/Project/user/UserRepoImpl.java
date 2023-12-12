@@ -86,7 +86,7 @@ public class UserRepoImpl implements UserRepository{
         encodePassword(user);
         String UserInsertSql =
                 "insert into users " +
-                        "(firstname,secondname, username, password,role)" +
+                        "(username,firstname, secondname, password,role)" +
                         " values (?,?,?,?,?)";
         jdbctemplate.update(UserInsertSql,
                 user.getUsername(),
