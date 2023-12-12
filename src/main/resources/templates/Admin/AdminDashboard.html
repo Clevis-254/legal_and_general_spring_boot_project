@@ -8,19 +8,213 @@
 </head>
 <body class="flex w-full max-h-full">
 <div th:replace="Adminsidebar :: sidebarFragment"></div>
-<div class="flex flex-col w-full">
-<span class="text-center text-3xl font-bold">Welcome to admin page
-  </span>
+<main
+        class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
+>
+  <div class="flex flex-wrap justify-center gap-8 h-max">
+      <a
+              th:href="@{/Admin/users}"
+              class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-56 border-dark-300 focus-ring"
+      >
+          <svg
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  class="w-auto h-12 lg:h-16"
+                  xmlns="http://www.w3.org/2000/svg"
+          >
+              <rect width="64" height="64" rx="8" fill="#E35E5E" />
+              <path
+                      d="M38.6266 35.2534C40.4533 35.56 42.4666 35.24 43.88 34.2934C45.76 33.04 45.76 30.9867 43.88 29.7334C42.4533 28.7867 40.4133 28.4667 38.5867 28.7867M25.3333 35.2534C23.5066 35.56 21.4933 35.24 20.08 34.2934C18.2 33.04 18.2 30.9867 20.08 29.7334C21.5066 28.7867 23.5466 28.4667 25.3733 28.7867M40 25.5467C39.9161 25.5333 39.8306 25.5333 39.7467 25.5467C38.8568 25.5145 38.0144 25.1376 37.3973 24.4957C36.7803 23.8538 36.437 22.9971 36.44 22.1067C36.44 20.2 37.9733 18.6667 39.88 18.6667C40.7923 18.6667 41.6673 19.0291 42.3124 19.6742C42.9576 20.3194 43.32 21.1943 43.32 22.1067C43.3175 22.9977 42.9706 23.8533 42.3519 24.4944C41.7331 25.1356 40.8904 25.5126 40 25.5467V25.5467ZM23.96 25.5467C24.04 25.5334 24.1333 25.5334 24.2133 25.5467C25.1031 25.5145 25.9456 25.1376 26.5626 24.4957C27.1797 23.8538 27.523 22.9971 27.52 22.1067C27.52 20.2 25.9866 18.6667 24.08 18.6667C23.1676 18.6667 22.2927 19.0291 21.6475 19.6742C21.0024 20.3194 20.64 21.1943 20.64 22.1067C20.6533 23.9734 22.12 25.48 23.96 25.5467ZM32 35.5067C31.9161 35.4933 31.8306 35.4933 31.7467 35.5067C30.8568 35.4745 30.0144 35.0976 29.3973 34.4557C28.7803 33.8138 28.437 32.9571 28.44 32.0667C28.44 30.16 29.9733 28.6267 31.88 28.6267C32.7923 28.6267 33.6673 28.9891 34.3124 29.6342C34.9576 30.2794 35.32 31.1543 35.32 32.0667C35.3067 33.9334 33.84 35.4534 32 35.5067ZM28.12 39.7067C26.24 40.96 26.24 43.0134 28.12 44.2667C30.2533 45.6934 33.7467 45.6934 35.88 44.2667C37.76 43.0134 37.76 40.96 35.88 39.7067C33.76 38.2934 30.2533 38.2934 28.12 39.7067Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+          </svg>
+          <div class="flex flex-col items-center text-lg lg:text-xl">
+              <span class="font-semibold">Members</span>
+              <span th:text="${#lists.size(allUserItems)}"></span>
+          </div>
+      </a>
+      <a
+              th:href="@{/Admin/ViewPendingRequests}"
+              class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-56 border-dark-300 focus-ring"
+      >
+          <svg
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  class="w-auto h-12 lg:h-16"
+                  xmlns="http://www.w3.org/2000/svg"
+          >
+              <rect width="64" height="64" rx="8" fill="#4A93D6" />
+              <path
+                      d="M26.6667 18.6667V22.6667M37.3334 18.6667V22.6667"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+              <path
+                      d="M45.3333 45.3333L44 44M40.2667 44.5333C41.3983 44.5333 42.4835 44.0838 43.2837 43.2837C44.0838 42.4835 44.5333 41.3983 44.5333 40.2667C44.5333 39.1351 44.0838 38.0498 43.2837 37.2497C42.4835 36.4495 41.3983 36 40.2667 36C39.1351 36 38.0498 36.4495 37.2497 37.2497C36.4495 38.0498 36 39.1351 36 40.2667C36 41.3983 36.4495 42.4835 37.2497 43.2837C38.0498 44.0838 39.1351 44.5333 40.2667 44.5333Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+              <path
+                      d="M20.6667 28.12H43.3333M33.8267 45.3333H26.6667C22 45.3333 20 42.6667 20 38.6667V27.3333C20 23.3333 22 20.6667 26.6667 20.6667H37.3333C42 20.6667 44 23.3333 44 27.3333V33.3333"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+              <path
+                      d="M31.9933 34.2667H32.0067M27.0587 34.2667H27.072M27.0587 38.2667H27.072"
+                      stroke="white"
+                      stroke-width="2.66667"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+          </svg>
+          <div class="flex flex-col items-center text-lg lg:text-xl">
+              <span class="font-semibold">Pending</span>
+            <span th:text="${#lists.size(allRequestItems)}"></span>
+          </div>
+      </a>
+
+      <a
+              th:href="@{/Admin/add}"
+              class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-80 border-dark-300 focus-ring"
+      >
+          <img alt="add" src="/images/user.png" class="w-auto h-10 rounded-md"/>
+          <span class="text-lg font-semibold lg:text-xl">Add member</span>
+      </a>
+      <a
+              th:href="@{/Admin/AdminMenu}"
+              class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-80 border-dark-300 focus-ring"
+      >
+          <svg
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  class="w-auto h-12 lg:h-16"
+                  xmlns="http://www.w3.org/2000/svg"
+          >
+              <rect width="64" height="64" rx="8" fill="#A28395" />
+              <path
+                      d="M28 45.3333H36C42.6666 45.3333 45.3333 42.6667 45.3333 36V28C45.3333 21.3333 42.6666 18.6667 36 18.6667H28C21.3333 18.6667 18.6666 21.3333 18.6666 28V36C18.6666 42.6667 21.3333 45.3333 28 45.3333Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+              <path
+                      d="M32 26.8V39.5467M40.5066 36.36V26.1067C40.5066 25.08 39.68 24.3333 38.6666 24.4133H38.6133C36.8266 24.56 34.12 25.48 32.6 26.4267L32.4533 26.52C32.2133 26.6667 31.8 26.6667 31.5466 26.52L31.3333 26.3867C29.8266 25.44 27.12 24.5467 25.3333 24.4C24.32 24.32 23.4933 25.08 23.4933 26.0933V36.36C23.4933 37.1733 24.16 37.9467 24.9733 38.04L25.2133 38.08C27.0533 38.32 29.9066 39.2667 31.5333 40.16L31.5733 40.1733C31.8 40.3067 32.1733 40.3067 32.3866 40.1733C34.0133 39.2667 36.88 38.3333 38.7333 38.08L39.0133 38.04C39.84 37.9467 40.5066 37.1867 40.5066 36.36V36.36Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+          </svg>
+          <span class="text-lg font-semibold lg:text-xl"> Reviews</span>
+      </a>
 </div>
+  <div class="flex w-full justify-between">
+      <div
+              class="flex flex-col space-y-4 rounded-2xl p-6 sm:p-8 w-1/2 h-full  min-h-[30rem] max-h-[40rem] border border-dark-300"
+      >
+          <div class="flex justify-between w-full">
+              <h2 class="text-2xl font-semibold">Pending Requests</h2>
+              <a class="focus-ring" th:href="@{/Admin/ViewPendingRequests}">
+                  <svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                  >
+                      <rect width="32" height="32" rx="4" fill="#2C2C2C" />
+                      <path
+                              d="M10.6667 16H21.3334M16.0001 21.3334V10.6667"
+                              stroke="white"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                      />
+                  </svg>
+              </a>
+          </div>
+          <div class="flex flex-col w-full h-full space-y-4 overflow-y-auto">
+              <table class="w-full rounded-lg p-2">
+                  <tbody>
+                  <tr th:if="${allRequestItems.empty}" class="w-full">
+                      <td class="text-center py-2">No pending Requests</td>
+                  </tr>
+                  <tr th:each="requestItem ,iStat: ${allRequestItems}" th:if="${iStat.index} &lt; 5" class="w-full">
+                      <td class="flex justify-between p-2 border-b">
+                        <span class="border-r pr-2 space-x-2">
+                            <span th:text="${requestItem.firstname}" class="font-semibold text-base"></span>
+                            <span th:text="${requestItem.secondname}" class="font-semibold text-base"></span>
+                        </span>
+                          <span class="font-semibold text-base">
+                        <span th:if="${requestItem.approved eq 'pending'}"
+                              class="bg-gray-300 text-gray-600">Pending
+                        </span>
+                    <span th:if="${requestItem.approved eq 'approved'}"
+                          class="bg-green-300 text-green-600">
+                    Approved
+                    </span>
+                                <span th:if="${requestItem.approved eq 'cancelled'}"
+                                      class="bg-red-300 text-red-600">
+                    Cancelled
+                    </span>
+                    </span>
+                          <div class="flex space-x-3">
+                              <a th:href="@{/Admin/dashboard/approve/{id} (id=${requestItem.id})}" class="flex items-center w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                                  <svg xmlns="http://www.w3.org/2000/svg"
+                                       width="15"
+                                       height="15"
+                                       viewBox="0 0 24 24"
+                                       fill="none">
+                                      <path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10Z"
+                                            stroke="#028844"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                      <path d="m7.75 12 2.83 2.83 5.67-5.66"
+                                            stroke="#028844"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                  </svg>
 
-<div class="flex flex-col w-full">
+                              </a>
+                              <a th:href="@{/Admin/dashboard/cancelled/{id}(id=${requestItem.id})}" class="flex items-end w-full px-4 py-2 space-x-3 hover:bg-white rounded">
+                                  <svg xmlns="http://www.w3.org/2000/svg"
+                                       width="15"
+                                       height="15"
+                                       viewBox="0 0 24 24"
+                                       fill="none">
+                                      <path
+                                              d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17"
+                                              stroke="#E22922"
+                                              stroke-width="1.5"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round">
 
-  <div class="skeleton w-30 h-60">
-    <a th:href="@{/Admin/AdminMenu}" class="text-white bg-blue-800 hover:bg-blue-900  focus:ring-blue-200 font-medium rounded-lg text-xs px-1 py-10   me-2 text-center inline-flex items-center">
-      <span class="font-light">Back to Admin Menu</span>
-    </a>
+                                      </path>
+                                  </svg>
+                              </a>
+                          </div>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
 
   </div>
-</div>
+  </main>
 </body>
 </html>

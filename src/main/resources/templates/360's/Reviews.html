@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>requests</title>
+    <link th:replace="~{base :: css_file}"/>
+    <link th:replace="~{base :: favicon}">
+    <style>
+
+        table {
+            width: 250%;
+            margin-top: 5px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .font-light {
+            font-weight: lighter;
+        }
+
+        .bg-gray-300 {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+
+        .text-gray-600 {
+            color: #374151;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+
+    </style>
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="sidebar :: sidebarFragment"></div>
+<main class="flex flex-col w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
+    <span class="text-3xl font-bold text-left">My Reviews</span>
+    <div class="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+        <table>
+            <tbody>
+            <tr th:each="reviewItem : ${reviewItems}">
+                <td>
+                    <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
+                        <div class="flex flex-col space-y-4">
+                            <span class="font-bold text-2xl">Review :
+                                <span th:text="${reviewItem.id}" class="font-light text-base"></span>
+                            </span>
+                            <div class="flex justify-between">
+                            <div class="flex space-x-3">
+                                <span class="font-semibold text-base">
+                                    Status:
+                                    <span th:if="${reviewItem.status eq 'in_progress'}"
+                                          class="bg-gray-300 text-gray-600">IN PROGRESS
+                                    </span>
+                                </span>
+                                <span class="font-semibold text-base">Date started:
+                                    <span th:text="${#dates.format(reviewItem.date_started, 'yyyy-MM-dd')}"
+                                          class="font-light text-base"></span>
+                                </span>
+                            </div>
+                            <div class="flex items-end space-x-2">
+                                <button class="inline-block
+                                bg-blue-500 text-white rounded-full px-2 py-1
+                                        hover:bg-blue-500 hover:text-black hover:border hover:border-black
+                                        hover:border-solid font-bold">
+                                <a th:href="@{/form/employee/{id}/contacts (id=${reviewItem.id})}"> Add Contacts</a>
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

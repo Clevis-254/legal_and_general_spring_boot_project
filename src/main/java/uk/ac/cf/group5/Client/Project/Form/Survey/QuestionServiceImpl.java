@@ -1,7 +1,12 @@
-package uk.ac.cf.group5.Client.Project.Form;
+
+package uk.ac.cf.group5.Client.Project.Form.Survey;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionItem;
+import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionRepository;
+import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionService;
 
 import java.util.List;
 
@@ -15,7 +20,7 @@ public class QuestionServiceImpl implements QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public List<Question> getAllQuestions() {
+    public List<QuestionItem> getAllQuestions() {
         return questionRepository.findAll();
     }
 }

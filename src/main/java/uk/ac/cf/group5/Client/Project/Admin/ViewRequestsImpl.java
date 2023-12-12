@@ -22,13 +22,14 @@ public class ViewRequestsImpl {
         ViewRequestMapper = (rs, i) -> new RequestItem(
                 rs.getLong("id"),
                 rs.getString("approved"),
-                rs.getLong("userID"),
-                rs.getString("name"),
+                rs.getLong("userid"),
+                rs.getString("firstname"),
+                rs.getString("secondname"),
                 rs.getDate("requested")
         );
     }
     public List<RequestItem> getPendingRequestItems() {
-        String sql = "SELECT * FROM requests WHERE approved = 'pending'";
+        String sql = "SELECT * FROM requests WHERE approved = 'pending' order by id desc";
         return jdbctemplate.query(sql, ViewRequestMapper);
     }
 
@@ -38,8 +39,9 @@ public class ViewRequestsImpl {
     }
 
     public void setApproved(RequestItem request){
-        String RequestUpdateSql = "update requests set approved = 'approved' where id = ?";
+        String RequestUpdateSql = "update requests set approved = ? where id = ?";
         jdbctemplate.update(RequestUpdateSql,
+                request.getApproved(),
                 request.getId()
                 );
     }
@@ -53,5 +55,6 @@ public class ViewRequestsImpl {
         String sql = "select userID from requests where id = ?";
         return jdbctemplate.queryForObject(sql, ViewRequestMapper, id);
     }
+
 
 }

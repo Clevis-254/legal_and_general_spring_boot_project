@@ -20,9 +20,8 @@ public class UserController {
     @Autowired
    private UserService user;
 
-    public  UserController( UserService userService){
-        this.user = userService;
-    }
+    public  UserController( UserService userService){this.user = userService;}
+
 
 
     @GetMapping("/login")
@@ -50,8 +49,8 @@ public class UserController {
                     ,model.asMap());
            return modelAndView;
         } else {
-            UserItem newUser = new UserItem(userItem.getId(),userItem.getName(),userItem.getUsername()
-                                ,userItem.getPassword());
+            UserItem newUser = new UserItem(userItem.getId(),userItem.getFirstname(), userItem.getSecondname(), userItem.getUsername()
+                                ,userItem.getPassword(), userItem.getRole());
             user.add(newUser);
             ModelAndView modelAndView = new ModelAndView("redirect:/settings");
             return modelAndView;
