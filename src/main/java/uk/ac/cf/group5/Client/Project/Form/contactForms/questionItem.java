@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project.contactForms;
+package uk.ac.cf.group5.Client.Project.Form.contactForms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

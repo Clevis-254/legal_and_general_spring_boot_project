@@ -1,10 +1,9 @@
-package uk.ac.cf.group5.Client.Project.contactForms;
+package uk.ac.cf.group5.Client.Project.Form.contactForms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> questionItems() {
-        String sql = "select * from contact_questions WHERE category <> 'textarea'\n";
+        String sql = "select id, question_contact_text, question_num, category from questions WHERE category != 'textarea' and date_added  ORDER BY question_num ASC";
         return jdbctemplate.query(sql, questionItemMapper);
     }
 

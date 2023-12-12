@@ -12,17 +12,12 @@ import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewService;
 import uk.ac.cf.group5.Client.Project.Submissions.SubmissionItem;
 import uk.ac.cf.group5.Client.Project.Submissions.SubmissionService;
-import uk.ac.cf.group5.Client.Project.contactForms.ContactQuestionService;
-import uk.ac.cf.group5.Client.Project.contactForms.questionItem;
+import uk.ac.cf.group5.Client.Project.Form.contactForms.ContactQuestionService;
+import uk.ac.cf.group5.Client.Project.Form.contactForms.questionItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactItem;
-import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactRepositoryImpl;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactService;
-import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionItem;
-import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionService;
-import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
