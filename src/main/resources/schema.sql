@@ -97,14 +97,7 @@ PRIMARY KEY (id),
 FOREIGN KEY (contactID) REFERENCES contacts(id),
 FOREIGN KEY (reviewID) REFERENCES reviews(id)
 );
-CREATE TABLE contact_questions(
-id INT not null  auto_increment,
-questionNumb INT NOT NULL ,
-question VARCHAR(255) NOT NULL,
-category VARCHAR(50) NOT NULL ,
-date_added  Date default current_date,
-primary key (id)
-);
+
 
 CREATE TABLE answers
     (
@@ -114,7 +107,7 @@ CREATE TABLE answers
         answer VARCHAR(255) NOT NULL,
         subID INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (questionID) REFERENCES contact_questions(id),
+        FOREIGN KEY (questionID) REFERENCES questions(id),
         FOREIGN KEY (reviewID) REFERENCES reviews(id),
         FOREIGN KEY (subID) REFERENCES submissions(id)
     );
