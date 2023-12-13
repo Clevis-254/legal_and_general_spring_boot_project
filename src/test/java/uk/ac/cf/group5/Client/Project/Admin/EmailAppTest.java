@@ -48,7 +48,7 @@ public class EmailAppTest {
         // Mock of userService.getItem(id)
         UserItem mockedUser = new UserItem();
         mockedUser.setUsername("testuser");
-        mockedUser.setName("Test User");
+        mockedUser.setFirstname("Test User");
         when(userService.getItem(anyLong())).thenReturn(mockedUser);
 
         //when(emailService.sendApprovalEmail(anyString(),anyString())).;)
@@ -70,7 +70,7 @@ public class EmailAppTest {
         // Mock of userService.getItem(id)
         UserItem mockedUser = new UserItem();
         mockedUser.setUsername("testuser");
-        mockedUser.setName("Test User");
+        mockedUser.setFirstname("Test User");
         when(userService.getItem(anyLong())).thenReturn(mockedUser);
 
         //when(emailService.sendDenyEmail(anyString(),anyString())).;)

@@ -34,8 +34,8 @@ public class ContactServiceImplTest {
     void testGetAllContacts() {
         // Mock data
         List<ContactItem> mockContacts = new ArrayList<>();
-        mockContacts.add(new ContactItem(1, 1, "John", "Smith", "", "Manager"));
-        mockContacts.add(new ContactItem(2, 1, "Jane", "Doe", "", "Peer"));
+        mockContacts.add(new ContactItem(1L, 1L, "John", "Smith", "", "Manager"));
+        mockContacts.add(new ContactItem(2L, 1L, "Jane", "Doe", "", "Peer"));
 
         // Define mock behavior
         when(contactRepository.getAllContacts()).thenReturn(mockContacts);
@@ -52,9 +52,9 @@ public class ContactServiceImplTest {
     void testGetContactsByResultID() {
         // Mock data
         List<ContactItem> mockContacts = new ArrayList<>();
-        mockContacts.add(new ContactItem(1, 1, "John", "Smith", "", "Manager"));
-        mockContacts.add(new ContactItem(2, 1, "Jane", "Doe", "", "Peer"));
-        mockContacts.add(new ContactItem(3, 2, "John", "Doe", "", "Manager"));
+        mockContacts.add(new ContactItem(1L, 1L, "John", "Smith", "", "Manager"));
+        mockContacts.add(new ContactItem(2L, 1L, "Jane", "Doe", "", "Peer"));
+        mockContacts.add(new ContactItem(3L, 2L, "John", "Doe", "", "Manager"));
 
     // Define mock behavior for resultID = 1
     when(contactRepository.getResultContacts(1)).thenReturn(
@@ -76,7 +76,7 @@ public class ContactServiceImplTest {
 @Test
     void testAddContact() {
         // Mock data
-        ContactItem mockContact = new ContactItem(1, 1, "John", "Smith", "", "Manager");
+        ContactItem mockContact = new ContactItem(1L, 1L, "John", "Smith", "", "Manager");
 
         // Call the method to be tested
         contactService.save(mockContact, 1);
@@ -94,7 +94,7 @@ public class ContactServiceImplTest {
     @Test
     void testDeleteContact() {
         // Mock data
-        ContactItem mockContact = new ContactItem(1, 1, "John", "Smith", "", "Manager");
+        ContactItem mockContact = new ContactItem(1L, 1L, "John", "Smith", "", "Manager");
 
         // Call the method to be tested
         contactService.save(mockContact, 1);
@@ -109,9 +109,9 @@ public class ContactServiceImplTest {
     void testGetManagerCount() {
         // Mock data
         List<ContactItem> mockContacts = new ArrayList<>();
-        mockContacts.add(new ContactItem(1, 1, "John", "Smith", "", "Manager"));
-        mockContacts.add(new ContactItem(2, 1, "Jane", "Doe", "", "Peer"));
-        mockContacts.add(new ContactItem(3, 2, "John", "Doe", "", "External"));
+        mockContacts.add(new ContactItem(1L, 1L, "John", "Smith", "", "Manager"));
+        mockContacts.add(new ContactItem(2L, 1L, "Jane", "Doe", "", "Peer"));
+        mockContacts.add(new ContactItem(3L, 2L, "John", "Doe", "", "External"));
 
         // Define mock behavior
         when(contactRepository.getManagerCount(1)).thenReturn(

@@ -30,13 +30,14 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         List<QuestionItem> questions = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT id, question_text, category FROM questions");
+             PreparedStatement statement = connection.prepareStatement("SELECT id, question_num, question_user_text, category FROM questions");
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 QuestionItem question = new QuestionItem();
                 question.setId(resultSet.getLong("id"));
-                question.setQuestionText(resultSet.getString("question_text"));
+                question.setQuestionNum(resultSet.getInt("question_num"));
+                question.setQuestionText(resultSet.getString("question_User_text"));
                 question.setCategory(resultSet.getString("category"));
                 questions.add(question);
             }
@@ -47,4 +48,5 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
         return questions;
     }
+
 }

@@ -1,4 +1,3 @@
-
 drop table if exists answers;
 drop table if exists submissions;
 drop table if exists questions;
@@ -72,8 +71,10 @@ CREATE TABLE if not exists results(
 
 CREATE TABLE questions(
     id INT NOT NULL AUTO_INCREMENT,
-    question_text VARCHAR(255) NOT NULL,
-    date_added DATE NOT NULL,
+    question_num INT NOT NULL,
+    question_user_text VARCHAR(255) NOT NULL,
+    question_contact_text VARCHAR(255) NOT NULL,
+    date_added DATETIME NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -98,6 +99,7 @@ FOREIGN KEY (reviewID) REFERENCES reviews(id)
 );
 CREATE TABLE contact_questions(
 id INT not null  auto_increment,
+questionNumb INT NOT NULL ,
 question VARCHAR(255) NOT NULL,
 category VARCHAR(50) NOT NULL ,
 date_added  Date default current_date,
