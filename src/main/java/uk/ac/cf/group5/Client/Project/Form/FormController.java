@@ -1,4 +1,4 @@
-package uk.ac.cf.group5.Client.Project.Form.Survey;
+package uk.ac.cf.group5.Client.Project.Form;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uk.ac.cf.group5.Client.Project.Answer.AnswerItem;
 import uk.ac.cf.group5.Client.Project.Answer.AnswerService;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionItem;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionService;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewService;
 import uk.ac.cf.group5.Client.Project.Submissions.SubmissionItem;
@@ -28,7 +30,7 @@ import java.util.List;
 public class FormController {
 
     @Autowired
-    private  QuestionService questionService;
+    private QuestionService questionService;
 
 
     @Autowired
@@ -86,28 +88,12 @@ public class FormController {
 
     @PostMapping("/form/{id}/employee")
     public String receiveEmployeeAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
-        try { ObjectMapper objectMapper = new ObjectMapper();
-            List<AnswerItem> answerList = objectMapper.readValue(answers,
-                    new TypeReference<List<AnswerItem>>() {});
-            for (AnswerItem answer : answerList) {
-                answer.setSub_id(id);
-                Long questionId = answer.getQuestion_id();
-                String answerText = answer.getAnswer();
-            }
-            answerService.add(answerList);
-            //return "Success";
-            // Replace with your response
-        } catch (IOException e) {
-            // Handle JSON parsing exception
-            e.printStackTrace();
-            //return "Error"; //
-            // Replace with your error response
-        }
+        receiveAnswer(id,answers);
         return "redirect:/form/employee/{id}/contacts";
     }
 
 
-    @GetMapping("/form/employee/{id}/contacts")
+    @GetMapping("/form/{id}/employee/contacts")
     public ModelAndView getEmployeeContacts(Authentication authentication, @PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("form/contacts");
         ReviewItem reviewItem = review.getItem(id);

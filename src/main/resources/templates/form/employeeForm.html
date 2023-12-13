@@ -20,11 +20,11 @@
             Welcome to your 360 Self evaluation!</div>
         <div class=" border-8 border-black align-middle w-auto m-8">
             <div class="mx-auto max-w-7xl p-8">
-                <form th:action="@{/form/{id}/employee(id=${submissionItem.id})}" th:object="${answers}" method="post" onsubmit="prepareFormData()">
+                <form th:action="@{/form/{id}/employee(id=${submissionItem.id})}" th:object="${answers}" method="post">
                     <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
                     <div th:each="category : ${categories}">
-                        <h3 th:text="${category}"></h3>
-                        <h2 class="text-2xl">While working, to what extent do you experience yourself... </h2>
+                        <h3 class="text-2xl" th:text="${category}"></h3>
+                        <h2>While working, to what extent do you experience yourself... </h2>
                         <div class="grid grid-cols-6">
                             <div></div>
                             <label class="text-center text-lg italic">Never</label>
@@ -53,27 +53,26 @@
                     <div th:each="textAreaQuestions : ${textAreaQuestions}">
                             <input type="hidden" th:value="${textAreaQuestions.id}" />
                             <label th:text="${textAreaQuestions.questionText}"></label>
-                        <textarea th:id="${'question_' + textAreaQuestions.id}" th:name="${'question_' + textAreaQuestions.id}" rows="4" cols="50"-->
-                    required ></textarea>
+                        <textarea th:id="${'question_' + textAreaQuestions.id}" th:name="${'question_' + textAreaQuestions.id}" rows="4" cols="50" required></textarea>
                     </div>
 
                     <!-- Hidden input to store the JSON data -->
                     <input type="hidden" id="questionAnswers" name="questionAnswers" />
                     <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
-                    <button type="submit">Submit</button>
 
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8"> Submit > </button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8" onclick="prepareEmployeeFormData()"> Submit > </button>
                 </form>
             </div>
         </div>
 <script th:inline="javascript">
     // Credit to Clevis Gikenyi (src/main/resources/templates/form/contactForm.html -- lines 67-91) for this solution
 
-    function prepareFormData() {
+    function prepareEmployeeFormData() {
+        /* <![CDATA[ */
         var questionAnswers = [];
 
         // Add radio button answers
-        [[${questionItems}]].forEach(function(question) {
+        [[${questions}]].forEach(function(question) {
             var answer = document.querySelector('input[name="question_' + question.id + '_answer"]:checked');
             if (answer) {
                 questionAnswers.push({ question_id: question.id, answer: answer.value });
@@ -90,6 +89,7 @@
         document.getElementById('questionAnswers').value = JSON.stringify(questionAnswers);
         console.log(questionAnswers)
     }
+    /* ]]> */
 </script>
 </body>
 </html>
