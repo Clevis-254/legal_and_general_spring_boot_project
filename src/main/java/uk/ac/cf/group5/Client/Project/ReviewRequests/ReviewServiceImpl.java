@@ -4,10 +4,12 @@ import org.springframework.stereotype.Service;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
+
 
     private ReviewRepository repository;
 
@@ -29,5 +31,8 @@ public class ReviewServiceImpl implements ReviewService{
     }
     public ReviewItem getItem(long reviewID) {
         return repository.getItem(reviewID);
+    }
+    public Date getDateForQ(long reviewID){
+        return repository.getDateForQ(reviewID);
     }
 }

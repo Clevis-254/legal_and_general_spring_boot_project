@@ -12,18 +12,14 @@ import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewItem;
 import uk.ac.cf.group5.Client.Project.ReviewRequests.ReviewService;
 import uk.ac.cf.group5.Client.Project.Submissions.SubmissionItem;
 import uk.ac.cf.group5.Client.Project.Submissions.SubmissionService;
-import uk.ac.cf.group5.Client.Project.contactForms.ContactQuestionService;
-import uk.ac.cf.group5.Client.Project.contactForms.questionItem;
+import uk.ac.cf.group5.Client.Project.Form.contactForms.ContactQuestionService;
+import uk.ac.cf.group5.Client.Project.Form.contactForms.questionItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactItem;
-import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactRepositoryImpl;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactService;
-import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionItem;
-import uk.ac.cf.group5.Client.Project.Form.Survey.QuestionService;
-import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
-import java.awt.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -59,8 +55,8 @@ public class FormController {
     /*
     perhaps should add an id to reference the user answering the form questions.
      */
-    @GetMapping("/form/employee")
-    public ModelAndView getEmployeeForm() {
+    @GetMapping("/form/{id}/employee")
+    public ModelAndView getEmployeeForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("form/employeeForm");
         List<QuestionItem> questions = questionService.getAllQuestions();
         modelAndView.addObject("questions", questions);
@@ -116,8 +112,9 @@ public class FormController {
     @GetMapping("/form/{id}")
     public ModelAndView sentForm(@PathVariable Long id){
         ModelAndView contact = new ModelAndView("form/contactForm");
-        List<questionItem> questionItems = question.questionItems();
-        List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions();
+        Date date = review.getDateForQ(id);
+        List<questionItem> questionItems = question.questionItems(date);
+        List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions(date);
         SubmissionItem submissionItem = submission.getSubmission(id);
         contact.addObject("questionItems",questionItems);
         contact.addObject("getTextAreaQuestions",getTextAreaQuestions);

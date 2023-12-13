@@ -9,4 +9,6 @@ public interface SubmissionService {
     List<SubmissionItem> getsubmissionItems(Long reviewID);
 
     SubmissionItem getSubmission(Long submissionId);
+
+    SubmissionItem DeleteSubmissionItem(Long contactID);
 }

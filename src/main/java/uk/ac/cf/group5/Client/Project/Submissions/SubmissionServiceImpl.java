@@ -28,4 +28,8 @@ public class SubmissionServiceImpl implements SubmissionService{
     public SubmissionItem getSubmission(Long submissionId){
         return Repo.getSubmission(submissionId);
     }
+
+    public SubmissionItem DeleteSubmissionItem(Long contactID){
+        return Repo.DeleteSubmissionItem(contactID);
+    }
 }
