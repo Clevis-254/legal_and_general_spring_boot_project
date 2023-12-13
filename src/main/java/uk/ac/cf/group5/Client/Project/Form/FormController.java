@@ -29,6 +29,8 @@ import java.util.List;
 @Controller
 public class FormController {
 
+    private List<String> categories = new ArrayList<>();
+
     @Autowired
     private QuestionService questionService;
 
@@ -47,13 +49,21 @@ public class FormController {
 
     private UserService user;
     public FormController(QuestionService questionService, ContactService contactService,UserService service,
-                          ReviewService reviewService, SubmissionService submissionService, AnswerService aservices) {
+                          ReviewService reviewService, SubmissionService submissionService, AnswerService aservices){
         this.questionService = questionService;
         this.contactService = contactService;
         this.user = service;
         this.review = reviewService;
         this.submission = submissionService;
         this.answerService = aservices;
+        List<String> categoriesToAdd = new ArrayList<>();
+        categoriesToAdd.add("Collaborative");
+        categoriesToAdd.add("Purposeful");
+        categoriesToAdd.add("Straight-Forward");
+        categoriesToAdd.add("Authentic");
+        categoriesToAdd.add("Agile");
+        categoriesToAdd.add("Ambitious");
+        this.categories = categoriesToAdd;
     }
 
     public void receiveAnswer(Long id, String answers){
@@ -82,13 +92,6 @@ public class FormController {
     @GetMapping("/form/{id}/employee")
     public ModelAndView getEmployeeForm(@PathVariable Long id, Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("form/employeeForm");
-        List<String> categories = new ArrayList<>();
-        categories.add("Collaborative");
-        categories.add("Purposeful");
-        categories.add("Straight-Forward");
-        categories.add("Authentic");
-        categories.add("Agile");
-        categories.add("Ambitious");
         modelAndView.addObject("categories", categories);
         String employee = authentication.getName();
         UserItem userItem = user.getUserItem(employee);
@@ -132,18 +135,20 @@ public class FormController {
     public String addContact(@ModelAttribute ContactItem contact, @PathVariable Long id) {
         // Process and save the received contact to the database
         System.out.println(contact.toString());
-        contactService.save(contact, id);
-        ContactItem Item = contactService.getContactItem(id);
-        Long contactID = Item.getId();
-        submission.add(contactID,id,null);
+        ContactItem savedContact = contactService.save(contact, id); // Save the contact and get the saved contact
+
+        Long contactID = savedContact.getId(); // Retrieve the contact ID from the saved contact
+        submission.add(contactID, id, null);
+
         return "redirect:/form/{id}/employee/contacts"; // Redirect to the contact form page
     }
+
 
     @GetMapping("/form/deleteContact/{id}")
     public String deleteContact(@PathVariable Long id){
             // Delete contact by id
             contactService.delete(id);
-        return "redirect:/form/employee/contacts"; // Redirect back to the contacts list
+        return "redirect:/form/{id}/employee/contacts"; // Redirect back to the contacts list
     }
 
 
@@ -156,7 +161,12 @@ public class FormController {
     @GetMapping("/form/{id}/contactForm")
     public ModelAndView sentForm(@PathVariable Long id){
         ModelAndView contact = new ModelAndView("form/contactForm");
+        contact.addObject("categories", categories);
         Date date = review.getDateForQ(id);
+        String firstName = review.getFirstName(id);
+        String lastName = review.getLastName(id);
+        contact.addObject("firstName",firstName);
+        contact.addObject("lastName",lastName);
         List<questionItem> questionItems = question.getRadioQuestions(date);
         List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions(date);
         SubmissionItem submissionItem = submission.getSubmission(id);

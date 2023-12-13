@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Employee 360</title>
 
-    <link th:fragment="css_file"
-          th:href="@{/css/build.css}" rel="stylesheet"
-    >
-    <link th:fragment="favicon"
-          th:href="@{/images/favicon .ico}"
-          rel="shortcut icon"
-          type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="font-family: 'Roboto', sans-serif;">
-<div class="flex text-center text-6xl justify-between items-center">
-    <img alt="logo" src="/images/legal%20logo.png"/>
-    <div>Welcome to your 360 Self evaluation!</div>
+
+<body class="font-roboto">
+<div class="flex justify-between items-center p-8">
+    <img src="/images/legal%20logo.png" alt="logo" class="w-24 h-24">
+    <div class="text-6xl">
+        <span>Welcome to your 360 Self evaluation!</span>
+    </div>
 </div>
-<div class="border-8 border-black align-middle w-auto m-8">
-    <div class="mx-auto max-w-7xl p-8">
+
+<div class="border-8 border-black mx-8">
+    <div class="max-w-7xl mx-auto p-8">
         <form th:action="@{/form/{id}/employee(id=${submissionItem.id})}" method="post" onsubmit="prepareEmployeeFormData()">
             <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
-            <th:block th:each="category : ${categories}">
-                <h3 class="text-2xl" th:text="${category}"></h3>
-                <h2>While working, to what extent do you experience yourself... </h2>
-                <div class="grid grid-cols-6">
+
+            <div th:each="category : ${categories}">
+                <h3 class="text-2xl font-bold mt-6" th:text="${category}"></h3>
+                <h2 class="mb-2">While working, to what extent do you experience yourself... </h2>
+                <div class="grid grid-cols-6 mb-4">
                     <div></div>
                     <label class="text-center text-lg italic">Never</label>
                     <label class="text-center text-lg italic">Rarely</label>
@@ -34,43 +33,39 @@
                     <label class="text-center text-lg italic">Often</label>
                     <label class="text-center text-lg italic">Always</label>
                 </div>
-                <th:block th:each="question : ${questions}">
-                    <th:block th:if="${question.category == category}">
-                        <div class="grid grid-cols-6 border-t-2 border-gray-500 p-4 flex items-center">
-                            <input type="hidden" th:value="${question.id}"/>
-                            <label class="text-lg" th:text="${question.question_num}+': '+${question.questionText}"></label>
-                            <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="1" />
-                            <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5"  th:value="2" />
-                            <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5"  th:value="3" />
-                            <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5"  th:value="4" />
-                            <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="5" />
-                        </div>
-                    </th:block>
-                </th:block>
-            </th:block>
+                <div th:each="question : ${questions}">
+                    <div th:if="${question.category == category}" class="grid grid-cols-6 border-t-2 border-gray-500 p-4 flex items-center">
+                        <input type="hidden" th:value="${question.id}" />
+                        <label class="text-lg" th:text="${question.question_num}+': '+${question.questionText}"></label>
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="1" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="2" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="3" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="4" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="5" />
+                    </div>
+                </div>
+            </div>
+
             <div th:each="textAreaQuestions : ${textAreaQuestions}">
                 <input type="hidden" th:value="${textAreaQuestions.id}" />
-                <label th:text="${textAreaQuestions.questionText}"></label>
-                <textarea th:id="${'question_' + textAreaQuestions.id}" th:name="${'question_' + textAreaQuestions.id}" rows="4" cols="50" required></textarea>
+                <label th:text="${textAreaQuestions.questionText}" class="block mt-4"></label>
+                <textarea th:id="${'question_' + textAreaQuestions.id}" th:name="${'question_' + textAreaQuestions.id}" rows="4" cols="50" class="border p-2 w-full" required></textarea>
             </div>
 
             <!-- Hidden input to store the JSON data -->
             <input type="hidden" id="questionAnswers" name="questionAnswers" />
 
-
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8"> Submit > </button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8">Submit ></button>
         </form>
     </div>
 </div>
-<script th:inline="javascript">
-    // Credit to Clevis Gikenyi (src/main/resources/templates/form/contactForm.html -- lines 67-91) for this solution
 
+<script th:inline="javascript">
     function prepareEmployeeFormData() {
-        /* <![CDATA[ */
         let questionAnswers = [];
 
         // Add radio button answers
-        [[${questions}]].forEach(function(question) {
+        [[${questions}]].forEach(function (question) {
             let answer = document.querySelector('input[name="question_' + question.id + '_answer"]:checked');
             if (answer) {
                 questionAnswers.push({ question_id: question.id, answer: answer.value });
@@ -78,16 +73,16 @@
         });
 
         // Add textarea answers
-        [[${textAreaQuestions}]].forEach(function(question) {
+        [[${textAreaQuestions}]].forEach(function (question) {
             let answer = document.getElementById('question_' + question.id).value;
             questionAnswers.push({ question_id: question.id, answer: answer });
         });
 
         // Set the value of the hidden input to the JSON representation of the EmployeeAnswers array
         document.getElementById('questionAnswers').value = JSON.stringify(questionAnswers);
-        console.log(questionAnswers)
+        console.log(questionAnswers);
     }
-    /* ]]> */
 </script>
 </body>
+
 </html>

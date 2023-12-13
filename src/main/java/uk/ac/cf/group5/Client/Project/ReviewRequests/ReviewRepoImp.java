@@ -72,4 +72,15 @@ public class ReviewRepoImp implements ReviewRepository{
         String sql = "select date_started from Reviews where id = ? and status = 'in_progress'";
         return jdbctemplate.queryForObject(sql, Date.class, id);
     }
+
+    public String getFirstName(long reviewID) {
+        String sql = "select firstname from users where id = (select userid from reviews where id = ?)";
+        return jdbctemplate.queryForObject(sql, String.class, reviewID);
+    }
+
+    public String getLastName(long reviewID) {
+        String sql = "select secondname from users where id = (select userid from reviews where id = ?)";
+        return jdbctemplate.queryForObject(sql, String.class, reviewID);
+    }
+
 }

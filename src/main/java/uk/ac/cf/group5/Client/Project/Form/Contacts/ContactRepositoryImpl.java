@@ -56,7 +56,9 @@ public class ContactRepositoryImpl implements ContactRepository{
 
     @Override
     public void deleteContact(Long contactID) {
-        String sql = "DELETE FROM contacts WHERE id = ?";
+        String sql1 = "DELETE FROM submissions WHERE contactID = ?;";
+        jdbcTemplate.update(sql1, contactID);
+        String sql = "DELETE FROM contacts WHERE id = ?;";
         jdbcTemplate.update(sql, contactID);
     }
 
@@ -67,9 +69,9 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
-    public ContactItem getContact(Long reviewsId) {
-        String sql = "SELECT * FROM contacts WHERE reviewsId = ?";
-        return jdbcTemplate.queryForObject(sql, ContactMapper, reviewsId);
+    public ContactItem getContact(Long contactID) {
+        String sql = "SELECT * FROM contacts WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, ContactMapper, contactID);
     }
 
     @Override
