@@ -26,7 +26,8 @@ public class AnswerRepoimpl implements AnswerRepo{
                 rs.getLong("id"),
                 rs.getLong("question_id"),
                 rs.getLong("sub_id"),
-                rs.getString("answer")
+                rs.getString("answer"),
+                rs.getLong("reviewID")
         );
     }
 
@@ -34,12 +35,14 @@ public class AnswerRepoimpl implements AnswerRepo{
     public void add(AnswerItem Item) {
         String answersInsertSql =
                 "insert into answers " +
-                        "(questionID,subID, answer)" +
-                        " values (?,?,?)";
+                        "(questionID,subID, answer,reviewID)" +
+                        " values (?,?,?,?)";
         jdbctemplate.update(answersInsertSql,
                 Item.getQuestion_id(),
                 Item.getSub_id(),
-                Item.getAnswer()
+                Item.getAnswer(),
+                Item.getRev_id()
         );
     }
+
 }

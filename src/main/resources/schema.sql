@@ -109,11 +109,13 @@ primary key (id)
 CREATE TABLE answers
     (
         id INT NOT NULL AUTO_INCREMENT,
+        reviewID INT NOT NULL,
         questionID INT NOT NULL,
         answer VARCHAR(255) NOT NULL,
         subID INT NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (questionID) REFERENCES contact_questions(id),
+        FOREIGN KEY (reviewID) REFERENCES reviews(id),
         FOREIGN KEY (subID) REFERENCES submissions(id)
     );
 

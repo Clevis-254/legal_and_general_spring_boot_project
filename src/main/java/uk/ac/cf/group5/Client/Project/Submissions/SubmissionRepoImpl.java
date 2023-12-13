@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class SubmissionRepoImpl implements SubmissionRepo{
 
@@ -41,9 +43,9 @@ public class SubmissionRepoImpl implements SubmissionRepo{
     }
 
     @Override
-    public SubmissionItem getSubmissionItem(Long id) {
+    public List<SubmissionItem> getsubmissionItems(Long reviewID){
         String sql = "select * from submissions where reviewID = ?";
-        return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
+        return jdbctemplate.query(sql, SubmissionItemMapper,reviewID);
     }
     @Override
     public SubmissionItem getSubmission(Long submissionId) {

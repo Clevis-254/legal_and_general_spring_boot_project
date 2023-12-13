@@ -49,6 +49,7 @@ public class securityConfiguration {
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/settings").hasRole("USER")
+                        .requestMatchers("/results/{id}").hasRole("USER")
                         .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
                         .requestMatchers("/form/{id}/addContact").hasRole( "USER")
                         .requestMatchers("/form/deleteContact/{id}").hasRole( "USER")
