@@ -21,4 +21,9 @@ public class AnswerServiceImpl implements AnswerServiceDTO {
     public   List<AnswerDTO> getAnswersGroupedByContact(){
         return answerRepository.getAnswersGroupedByContact();
     }
+
+    @Override
+    public  List<AnswerDTO> getAnswersForSubmission(Long submissionId){
+        return answerRepository.getAnswersForSubmission(submissionId);
+    }
 }

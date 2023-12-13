@@ -95,11 +95,15 @@ public class ViewRequestsController {
         ModelAndView ViewReview = new ModelAndView("Admin/submsionsList");
         List<SubmissionItem> reviewSubmissions = submissionService.getsubmissionItems(id);
         ViewReview.addObject("reviewSubmissions",reviewSubmissions);
-//        List<AnswerDTO> dtos = DTO.getAnswersGroupedByCategory(); // was testing the methods to see whether they are working as expected.
-//        List<AnswerDTO> wer = DTO.getAnswersGroupedByContact(); // was testing the methods to see whether they are working as expected.
-//        System.out.println(dtos);
-//        System.out.println(wer);
         return ViewReview;
+    }
+    @GetMapping("Admin/AdminReviews/submission/{id}")
+    public ModelAndView getSubmission(@PathVariable Long id){
+        ModelAndView answers = new ModelAndView("Answers");
+        List<AnswerDTO> submissions = DTO.getAnswersForSubmission(id);
+        answers.addObject(submissions);
+        System.out.println(submissions);
+        return answers;
     }
 }
 

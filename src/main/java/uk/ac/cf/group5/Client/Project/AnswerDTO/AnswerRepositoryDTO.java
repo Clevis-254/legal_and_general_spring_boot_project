@@ -6,4 +6,6 @@ public interface AnswerRepositoryDTO {
     List<AnswerDTO> getAnswersGroupedByCategory();
 
     List<AnswerDTO> getAnswersGroupedByContact();
+
+    List<AnswerDTO> getAnswersForSubmission(Long submissionId);
 }

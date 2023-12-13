@@ -9,14 +9,23 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class AnswerDTO {
-    private String category;
+    private String contactCategory; // Changed from 'category' to 'contactCategory'
+    private String questionCategory;
     private Long answerId;
     private String answer;
     private Long questionId;
 
+    private Long ReviewId;
+
+    private String question_text;
+
+    private String contactFirstName;
+    private String contactSecondName;
     private List<AnswerDTO> answers;
     public AnswerDTO(){
-        this("",0L,"",0L,new ArrayList<>());
+        this("","",0L,"",0L,0L,""
+                ,"",""
+                ,new ArrayList<>());
     }
 
     public List<AnswerDTO> getAnswers() {

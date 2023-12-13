@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>answers</title>
+  <link th:replace="~{base :: css_file}" />
+  <link th:replace="~{base :: favicon}">
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+<main class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
+<div class="flex justify-evenly items-center">
+  <span th:text="${requestItem.id}" class="font-semibold text-xl">
+
+  </span>
+</div>
+</main>
+</body>
+</html>

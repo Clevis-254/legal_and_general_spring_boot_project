@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>results</title>
+  <link th:replace="~{base :: css_file}"/>
+  <link th:replace="~{base :: favicon}">
+  <!-- Include the Highcharts library -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+
+</head>
+<body class="flex w-full max-h-full">
+<div th:replace="sidebar :: sidebarFragment"></div>
+<main class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
+>
+  <span class="text-3xl font-bold text-left">My Results</span>
+    <div class="flex flex-col justify-between max-h-screen w-full">
+        <div id="pieChartContainer"></div>
+        <div id="CollaborativeContainer"></div>
+        <div id="StraightContainer"></div>
+        <div id="AuthenticContainer"></div>
+        <div id="AgileContainer"></div>
+        <div id="AmbitiousContainer"></div>
+        <div id="PurposefulContainer"></div>
+    </div>
+
+    <script th:inline="javascript">
+        // Get the data passed from the controller
+        var answers = /*[[${answers}]]*/ [];
+
+        // Group the answers by reviewID
+        var groupedData = {};
+        answers.forEach(function(answer) {
+            var reviewID = answer.reviewId;
+            var QuestionCategory = answer.questionCategory;
+
+            // Exclude data from the "textarea" category
+            if (QuestionCategory !== "textarea") {
+                var key = reviewID + '-' + QuestionCategory;
+                if (!groupedData[key]) {
+                    groupedData[key] = 0;
+                }
+                groupedData[key]++;
+            }
+        });
+
+        // Convert the grouped data into series data
+        var seriesData = [];
+        for (var key in groupedData) {
+            var reviewID = key.split('-')[0];
+            var QuestionCategory = key.split('-')[1];
+            seriesData.push({
+                name: QuestionCategory,
+                y: groupedData[key]
+            });
+        }
+
+        // Create the chart
+        Highcharts.chart('pieChartContainer', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Answers Grouped by Question Category'
+            },
+            series: [{
+                name: 'Question Category',
+                data: seriesData
+            }]
+        });
+        var collaborative = /*[[${collaborative}]]*/ {};
+        var purposeful = /*[[${Purposeful}]]*/ {};
+        var straight = /*[[${straightForwardAverages}]]*/ {};
+        var Authentic = /*[[${Authentic}]]*/ {};
+        var Agile = /*[[${ Agile}]]*/ {};
+        var  Ambitious = /*[[${ Ambitious}]]*/ {};
+
+        // Convert the collaborative map to an array of data points
+        var collaborativeData = Object.keys(collaborative).map(function (key) {
+            return {
+                name: key,
+                y: collaborative[key]
+            };
+        });
+
+        // Create the Highcharts configuration for the collaborative chart
+        Highcharts.chart('CollaborativeContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average Collaborative Category'
+            },
+            xAxis: {
+                categories: Object.keys(collaborative),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Collaborative Score'
+                }
+            },
+            series: [{
+                name: 'Average Collaborative Score',
+                data: collaborativeData
+            }]
+        });
+
+        // Convert the purposeful map to an array of data points
+        var purposefulData = Object.keys(purposeful).map(function (key) {
+            return {
+                name: key,
+                y: purposeful[key]
+            };
+        });
+
+        // Create the Highcharts configuration for the purposeful chart
+        Highcharts.chart('PurposefulContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average Purposeful Category'
+            },
+            xAxis: {
+                categories: Object.keys(purposeful),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Purposeful Score'
+                }
+            },
+            series: [{
+                name: 'Average Purposeful Score',
+                data: purposefulData
+            }]
+        });
+
+
+        // Convert the collaborative map to an array of data points
+        var data = Object.keys(straight).map(function (key) {
+            return {
+                name: key,
+                y: straight[key]
+            };
+        });
+
+        // Create the Highcharts configuration
+        Highcharts.chart('straightContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average straight Category'
+            },
+            xAxis: {
+                categories: Object.keys(straight),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average straight Score'
+                }
+            },
+            series: [{
+                name: 'Average straight Score',
+                data: straight
+            }]
+        });
+
+
+        // Convert the collaborative map to an array of data points
+        var data = Object.keys(Authentic).map(function (key) {
+            return {
+                name: key,
+                y: Authentic[key]
+            };
+        });
+
+        // Create the Highcharts configuration
+        Highcharts.chart('AuthenticContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average Authentic Category'
+            },
+            xAxis: {
+                categories: Object.keys(Authentic),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Authentic Score'
+                }
+            },
+            series: [{
+                name: 'Average Authentic Score',
+                data: Authentic
+            }]
+        });
+
+
+        // Convert the collaborative map to an array of data points
+        var data = Object.keys(Agile).map(function (key) {
+            return {
+                name: key,
+                y: Agile[key]
+            };
+        });
+
+        // Create the Highcharts configuration
+        Highcharts.chart('AgileContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average Agile Category'
+            },
+            xAxis: {
+                categories: Object.keys(Agile),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Agile Score'
+                }
+            },
+            series: [{
+                name: 'Average Agile Score',
+                data: Agile
+            }]
+        });
+
+
+        // Convert the collaborative map to an array of data points
+        var data = Object.keys(Ambitious).map(function (key) {
+            return {
+                name: key,
+                y: Ambitious[key]
+            };
+        });
+
+        // Create the Highcharts configuration
+        Highcharts.chart('AmbitiousContainer', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Average Ambitious Category'
+            },
+            xAxis: {
+                categories: Object.keys(Ambitious),
+                title: {
+                    text: 'Contact Category'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Ambitious Score'
+                }
+            },
+            series: [{
+                name: 'Average Ambitious Score',
+                data: data
+            }]
+        });
+    </script>
+</main>
+</body>
+</html>
