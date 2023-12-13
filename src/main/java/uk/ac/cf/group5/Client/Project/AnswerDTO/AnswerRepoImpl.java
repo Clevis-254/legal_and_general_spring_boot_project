@@ -51,7 +51,7 @@ public class AnswerRepoImpl implements AnswerRepositoryDTO {
                 "FROM contacts c " +
                 "LEFT JOIN submissions s ON c.id = s.contactID " +
                 "LEFT JOIN answers a ON s.id = a.subID " +
-                "LEFT JOIN contact_questions cq ON a.questionID = cq.id " +
+                "LEFT JOIN questions cq ON a.questionID = cq.id " +
                 "ORDER BY c.category, cq.id, a.id";
 
         List<AnswerDTO> results = jdbcTemplate.query(sql, (rs, rowNum) -> {
