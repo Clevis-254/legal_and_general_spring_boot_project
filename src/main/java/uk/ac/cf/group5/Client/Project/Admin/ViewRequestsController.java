@@ -99,10 +99,9 @@ public class ViewRequestsController {
     }
     @GetMapping("Admin/AdminReviews/submission/{id}")
     public ModelAndView getSubmission(@PathVariable Long id){
-        ModelAndView answers = new ModelAndView("Answers");
+        ModelAndView answers = new ModelAndView("Admin/Answers");
         List<AnswerDTO> submissions = DTO.getAnswersForSubmission(id);
-        answers.addObject(submissions);
-        System.out.println(submissions);
+        answers.addObject("submissions",submissions);
         return answers;
     }
 }

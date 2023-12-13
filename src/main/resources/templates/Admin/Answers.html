@@ -8,12 +8,34 @@
 </head>
 <body class="flex w-full max-h-full">
 <div th:replace="Adminsidebar :: sidebarFragment"></div>
-<main class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
-<div class="flex justify-evenly items-center">
-  <span th:text="${requestItem.id}" class="font-semibold text-xl">
-
-  </span>
-</div>
+<main class="flex flex-col w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
+    <div class="flex justify-evenly items-center">
+        <span class="font-semibold text-2xl">Answers for Submission ID:
+            <span th:text="${submissions.size() > 0 ? submissions[0].getReviewId() : ''}"></span>
+        </span>
+        <span class="font-light text-lg"> Contact Name :
+            <span th:text="${submissions.size() > 0 ? submissions[0].contactFirstName + ' ' + submissions[0].contactSecondName : ''}"></span>
+        </span>
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Question Category</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="submission : ${submissions}">
+                <td th:text="${submission.questionCategory}"></td>
+                <td th:text="${submission.question_text}"></td>
+                <td th:text="${submission.answer}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
+
 </body>
 </html>
