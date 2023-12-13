@@ -56,6 +56,26 @@ public class FormController {
         this.answerService = aservices;
     }
 
+    public void receiveAnswer(Long id, String answers){
+        try { ObjectMapper objectMapper = new ObjectMapper();
+            List<AnswerItem> answerList = objectMapper.readValue(answers,
+                    new TypeReference<List<AnswerItem>>() {});
+            for (AnswerItem answer : answerList) {
+                answer.setSub_id(id);
+                Long questionId = answer.getQuestion_id();
+                String answerText = answer.getAnswer();
+            }
+            answerService.add(answerList);
+            //return "Success";
+            // Replace with your response
+        } catch (IOException e) {
+            // Handle JSON parsing exception
+            e.printStackTrace();
+            //return "Error"; //
+            // Replace with your error response
+        }
+    }
+
     /*
     perhaps should add an id to reference the user answering the form questions.
      */
@@ -89,12 +109,12 @@ public class FormController {
     @PostMapping("/form/{id}/employee")
     public String receiveEmployeeAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
         receiveAnswer(id,answers);
-        return "redirect:/form/employee/{id}/contacts";
+        return "redirect:/form/{id}/employee/contacts";
     }
 
 
     @GetMapping("/form/{id}/employee/contacts")
-    public ModelAndView getEmployeeContacts(Authentication authentication, @PathVariable Long id) {
+    public ModelAndView getEmployeeContacts(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("form/contacts");
         ReviewItem reviewItem = review.getItem(id);
         modelAndView.addObject("reviewItem",reviewItem);
@@ -116,7 +136,7 @@ public class FormController {
         ContactItem Item = contactService.getContactItem(id);
         Long contactID = Item.getId();
         submission.add(contactID,id,null);
-        return "redirect:/form/employee/{id}/contacts"; // Redirect to the contact form page
+        return "redirect:/form/{id}/employee/contacts"; // Redirect to the contact form page
     }
 
     @GetMapping("/form/deleteContact/{id}")
@@ -146,25 +166,9 @@ public class FormController {
         return contact;
     }
     @PostMapping("/form/{id}")
-    public ModelAndView receiveAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
+    public ModelAndView receiveContactAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
 
-        try { ObjectMapper objectMapper = new ObjectMapper();
-            List<AnswerItem> answerList = objectMapper.readValue(answers,
-                    new TypeReference<List<AnswerItem>>() {});
-            for (AnswerItem answer : answerList) {
-                answer.setSub_id(id);
-                Long questionId = answer.getQuestion_id();
-                String answerText = answer.getAnswer();
-                }
-            answerService.add(answerList);
-            //return "Success";
-            // Replace with your response
-            } catch (IOException e) {
-            // Handle JSON parsing exception
-            e.printStackTrace();
-            //return "Error"; //
-            // Replace with your error response
-            }
+        receiveAnswer(id,answers);
 
 
         ModelAndView result = new ModelAndView("form/thankYou");

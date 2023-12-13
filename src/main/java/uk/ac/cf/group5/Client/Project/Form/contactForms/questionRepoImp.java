@@ -27,7 +27,7 @@ public class questionRepoImp implements questionRepo{
 
         questionItemMapper = (rs, i) -> new questionItem(
                 rs.getLong("id"),
-                rs.getString("question"),
+                rs.getString("question_contact_text"),
                 rs.getInt("question_num"),
                 rs.getString("category")
         );
@@ -35,7 +35,7 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> getRadioQuestions(Date date) {
-        String sql = "select id, question_contact_text, question_num, category from questions WHERE category <> 'textarea' and date_added <?  ORDER BY question_num ASC";
+        String sql = "select id, question_contact_text, question_num, category from questions WHERE category <> 'textarea' and date_added <=? ORDER BY question_num ASC";
         return jdbctemplate.query(sql, questionItemMapper, date);
     }
 
@@ -43,7 +43,7 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> getTextAreaQuestions(Date date) {
-        String sql = "SELECT id, question_num, question_contact_text, category FROM questions WHERE category = 'textarea' and date_added <? ORDER BY question_num ASC";
+        String sql = "SELECT id, question_num, question_contact_text, category FROM questions WHERE category = 'textarea' and date_added <=? ORDER BY question_num ASC";
         return jdbctemplate.query(sql, questionItemMapper, date);
     }
 }
