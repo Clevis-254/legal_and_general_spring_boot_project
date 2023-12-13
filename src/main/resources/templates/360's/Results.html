@@ -6,7 +6,16 @@
   <link th:replace="~{base :: css_file}"/>
   <link th:replace="~{base :: favicon}">
   <!-- Include the Highcharts library -->
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- Add these script tags at the end of your body section -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <!-- Add this script tag at the end of your body section -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- Include Highcharts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+
 
 </head>
 <body class="flex w-full max-h-full">
@@ -14,6 +23,9 @@
 <main class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
 >
   <span class="text-3xl font-bold text-left">My Results</span>
+    <button onclick="exportToPDF()"
+            class="inline-block bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-500
+             hover:text-black hover:border hover:border-black hover:border-solid font-bold">Convert to pdf</button>
     <div class="flex flex-col justify-between max-h-screen w-full">
         <div id="pieChartContainer"></div>
         <div id="CollaborativeContainer"></div>
@@ -68,6 +80,8 @@
                 data: seriesData
             }]
         });
+    </script>
+    <script th:inline="javascript">
         var collaborative = /*[[${collaborative}]]*/ {};
         var purposeful = /*[[${Purposeful}]]*/ {};
         var straight = /*[[${straightForwardAverages}]]*/ {};
@@ -86,7 +100,7 @@
         // Create the Highcharts configuration for the collaborative chart
         Highcharts.chart('CollaborativeContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average Collaborative Category'
@@ -119,7 +133,7 @@
         // Create the Highcharts configuration for the purposeful chart
         Highcharts.chart('PurposefulContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average Purposeful Category'
@@ -153,7 +167,7 @@
         // Create the Highcharts configuration
         Highcharts.chart('straightContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average straight Category'
@@ -187,7 +201,7 @@
         // Create the Highcharts configuration
         Highcharts.chart('AuthenticContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average Authentic Category'
@@ -221,7 +235,7 @@
         // Create the Highcharts configuration
         Highcharts.chart('AgileContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average Agile Category'
@@ -255,7 +269,7 @@
         // Create the Highcharts configuration
         Highcharts.chart('AmbitiousContainer', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Average Ambitious Category'
@@ -276,6 +290,80 @@
                 data: data
             }]
         });
+    </script>
+    <script th:inline="javascript">
+        function exportToPDF() {
+            // Capture the charts as images
+            var containerElement = document.getElementById('CollaborativeContainer');
+            var chartContainerElement = document.getElementById('PurposefulContainer');
+            var piechartElement = document.getElementById('pieChartContainer');
+
+
+            var promises = [];
+
+            if (containerElement) {
+                promises.push(html2canvas(containerElement).then(function (canvas) {
+                    return { id: 'CollaborativeContainer', image: canvas.toDataURL('image/png') };
+                }));
+            }
+
+            if (chartContainerElement) {
+                promises.push(html2canvas(chartContainerElement).then(function (canvas) {
+                    return { id: 'PurposefulContainerr', image: canvas.toDataURL('image/png') };
+                }));
+            }
+
+            if (piechartElement) {
+                promises.push(html2canvas(piechartElement).then(function (canvas) {
+                    return { id: 'pieChartContainer', image: canvas.toDataURL('image/png') };
+                }));
+            }
+
+
+
+
+
+
+
+            Promise.all(promises).then(function (contents) {
+
+                var content = [
+                    { text: 'Your Graphs', style: 'header' },
+                    { image: contents[0].image, width: 600 },
+                    { image: contents[1].image, width: 600 },
+                    { image: contents[2].image, width: 1000 },
+                    // { text: contents[3].text, style: 'body' },
+                    // { text: 'This is a sample content', style: 'body' }
+                ];
+
+
+                var styles = {
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10]
+                    },
+                    body: {
+                        fontSize: 12,
+                        margin: [0, 0, 0, 0]
+                    },
+                    answer: {
+                        fontSize: 12,
+                        margin: [0, 0, 0, 10],
+                    }
+                };
+
+
+                var docDefinition = {
+                    content: content,
+                    styles: styles
+                };
+
+                // Generate and download the PDF
+                pdfMake.createPdf(docDefinition).download('exported.pdf');
+            });
+        }
+
     </script>
 </main>
 </body>
