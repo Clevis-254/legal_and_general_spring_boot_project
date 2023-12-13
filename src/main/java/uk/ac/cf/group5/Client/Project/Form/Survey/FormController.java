@@ -126,12 +126,14 @@ public class FormController {
     }
     @PostMapping("/form/{id}")
     public ModelAndView receiveAnswer(@PathVariable Long id,@RequestParam("questionAnswers") String answers){
-
+       SubmissionItem submissionItem = submission.getSubmission(id);
+       Long review = submissionItem.getReviewID();
         try { ObjectMapper objectMapper = new ObjectMapper();
             List<AnswerItem> answerList = objectMapper.readValue(answers,
                     new TypeReference<List<AnswerItem>>() {});
             for (AnswerItem answer : answerList) {
                 answer.setSub_id(id);
+                answer.setRev_id(review);
                 Long questionId = answer.getQuestion_id();
                 String answerText = answer.getAnswer();
                 }

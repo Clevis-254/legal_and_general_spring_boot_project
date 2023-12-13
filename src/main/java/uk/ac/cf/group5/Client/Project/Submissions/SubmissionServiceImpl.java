@@ -1,6 +1,9 @@
 package uk.ac.cf.group5.Client.Project.Submissions;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SubmissionServiceImpl implements SubmissionService{
@@ -16,9 +19,11 @@ public class SubmissionServiceImpl implements SubmissionService{
         Repo.add(contactID,reviewID);
     }
 
-     public SubmissionItem getSubmissionItem(Long id){
-        return Repo.getSubmissionItem(id);
-     }
+
+    @Override
+    public List<SubmissionItem> getsubmissionItems(Long reviewID) {
+        return Repo.getsubmissionItems(reviewID);
+    }
 
     public SubmissionItem getSubmission(Long submissionId){
         return Repo.getSubmission(submissionId);

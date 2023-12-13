@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>submission_list</title>
+    <link th:replace="~{base :: css_file}" />
+    <link th:replace="~{base :: favicon}">
+</head>
+
+<body class="flex w-full max-h-full">
+<div th:replace="Adminsidebar :: sidebarFragment"></div>
+<main class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16">
+    <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
+        <span class="text-3xl font-bold text-left ">Submissions made</span>
+    </div>
+
+    <!-- Check if reviewSubmissions is empty -->
+    <th:block th:if="${#lists.isEmpty(reviewSubmissions)}">
+        <div class="text-2xl font-bold text-center">No submission received</div>
+    </th:block>
+
+    <table th:unless="${#lists.isEmpty(reviewSubmissions)}">
+        <tbody>
+        <tr th:each="reviewSubmission, iStat : ${reviewSubmissions}">
+            <td>
+                <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
+                    <div class="flex flex-col space-y-4">
+                                <span class="font-bold text-2xl">SubmissionID
+                                    <span th:text="${reviewSubmission.id}" class="font-semibold text-xl"></span>
+                                </span>
+                        <div class="flex space-x-3">
+                                    <span class="font-semibold text-base">ReviewID :
+                                        <span th:text="${reviewSubmission.reviewID}" class="font-light text-base"></span>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+
+</html>

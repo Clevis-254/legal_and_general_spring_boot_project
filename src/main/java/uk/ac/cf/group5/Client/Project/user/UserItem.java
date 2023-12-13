@@ -18,6 +18,7 @@ public class UserItem {
 
 
     public UserItem (){
+
         this(0L,"","","","","");
     }
 
