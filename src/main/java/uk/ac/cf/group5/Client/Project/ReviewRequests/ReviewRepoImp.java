@@ -71,4 +71,22 @@ public class ReviewRepoImp implements ReviewRepository{
         String sql = "select * from reviews where id = ?";
         return jdbctemplate.queryForObject(sql,ViewReviewMapper, reviewID);
     }
+
+    public String getFirstName(long reviewID) {
+        String sql = "select firstname from users where id = (select userid from reviews where id = ?)";
+        return jdbctemplate.queryForObject(sql, String.class, reviewID);
+    }
+
+    public String getLastName(long reviewID) {
+        String sql = "select secondname from users where id = (select userid from reviews where id = ?)";
+        return jdbctemplate.queryForObject(sql, String.class, reviewID);
+    }
+
+
+    public ReviewItem getUserID(long reviewID) {
+        String sql = "select userID from reviews where id = ?";
+        return jdbctemplate.queryForObject(sql,ViewReviewMapper, reviewID);
+    }
+
+
 }

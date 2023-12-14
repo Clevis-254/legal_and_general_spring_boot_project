@@ -18,5 +18,6 @@ public interface ReviewService {
     List<ReviewItem> getReviewItems(Long userId);
 
     ReviewItem getItem(long reviewID);
+
 }
 

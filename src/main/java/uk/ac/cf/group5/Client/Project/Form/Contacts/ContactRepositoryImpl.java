@@ -2,8 +2,13 @@ package uk.ac.cf.group5.Client.Project.Form.Contacts;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -36,6 +41,7 @@ public class ContactRepositoryImpl implements ContactRepository{
         jdbcTemplate.update(sql, contact.getFirstName(), contact.getLastName()  , contact.getEmail(), contact.getCategory(), reviewsId );
     }
 
+
     @Override
     public Integer getManagerCount(long reviewsId ) {
         String sql = "SELECT COUNT(*) FROM contacts WHERE category = 'Manager' AND reviewsId  = ?";
@@ -66,6 +72,8 @@ public class ContactRepositoryImpl implements ContactRepository{
         return jdbcTemplate.query(sql, ContactMapper, reviewsId );
     }
 
+
+
     @Override
     public ContactItem getContact(Long reviewsId) {
         String sql = "SELECT * FROM contacts WHERE reviewsId = ?";
@@ -77,5 +85,11 @@ public class ContactRepositoryImpl implements ContactRepository{
         String sql = "SELECT * FROM contacts";
         return jdbcTemplate.query(sql, ContactMapper);
     }
+    @Override
+    public List<ContactItem> getItem(long id) {
+        String sql = "SELECT * FROM contacts where id = ?";
+        return jdbcTemplate.query(sql,ContactMapper, id);
+    }
+
 
 }

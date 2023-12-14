@@ -3,6 +3,10 @@ package uk.ac.cf.group5.Client.Project.Form.Contacts;
 import org.springframework.jdbc.core.RowMapper;
 import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
 
+import org.springframework.jdbc.core.RowMapper;
+import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
+
 import java.util.List;
 
 public interface ContactService {
@@ -22,5 +26,6 @@ public interface ContactService {
 
     Integer getExternalCount(long reviewsID);
 
+    List<ContactItem> getItem(long id);
     List<ContactItem> getAllContacts();
 }

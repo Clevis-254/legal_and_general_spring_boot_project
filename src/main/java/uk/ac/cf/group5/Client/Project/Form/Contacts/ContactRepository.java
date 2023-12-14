@@ -8,6 +8,8 @@ public interface ContactRepository {
 
     Integer getManagerCount(long reviewsID);
 
+    List<ContactItem> getItem(long id);
+
     Integer getPeerCount(long reviewsID);
 
     Integer getExternalCount(long reviewsID);
