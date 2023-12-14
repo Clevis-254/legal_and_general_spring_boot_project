@@ -20,7 +20,7 @@
     </div>
 </div>
 
-    <form th:action="@{/form/{id}(id=${submissionItem.id})}" th:method="post" onsubmit="prepareFormData()">
+    <form th:action="@{/form/{id} (id=${submissionItem.id})}" th:method="post" onsubmit="prepareFormData()">
         <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
         <th:block th:each="question : ${questionItems}">
             <span th:text="${question.category}" class="font-semibold text-2xl ml-5"></span>

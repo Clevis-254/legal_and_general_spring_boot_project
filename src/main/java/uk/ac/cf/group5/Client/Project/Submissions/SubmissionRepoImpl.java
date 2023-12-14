@@ -58,5 +58,11 @@ public class SubmissionRepoImpl implements SubmissionRepo{
     String sql = "DELETE FROM submissions WHERE contactID = ?";
     return jdbctemplate.queryForObject(sql,SubmissionItemMapper,contactID);
     }
+
+    @Override
+    public SubmissionItem getSubmissionbyCon(Long id){
+        String sql = "select * from submissions where contactID = ?";
+        return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
+    }
 }
 

@@ -76,6 +76,7 @@ public class FormController {
                 answer.setSub_id(id);
                 Long questionId = answer.getQuestion_id();
                 String answerText = answer.getAnswer();
+                answer.setRev_id(submission.getSubmission(id).getReviewID());
             }
             answerService.add(answerList);
             //return "Success";
@@ -163,7 +164,7 @@ public class FormController {
         ModelAndView contact = new ModelAndView("form/contactForm");
         contact.addObject("categories", categories);
         Long reviewid = contactService.getReviewId(id);
-        SubmissionItem submissionItem = submission.getSubmission(id);
+        SubmissionItem submissionItem = submission.getSubmissionbyCon(id);
         Date date = review.getDateForQ(reviewid);
         String firstName = review.getFirstName(reviewid);
         String lastName = review.getLastName(reviewid);

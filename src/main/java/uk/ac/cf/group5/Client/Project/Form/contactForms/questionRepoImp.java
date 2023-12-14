@@ -35,15 +35,19 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> getRadioQuestions(Date date) {
-        String sql = "select id, question_contact_text, question_num, category from questions WHERE category <> 'textarea' and date_added <=? ORDER BY question_num ASC";
-        return jdbctemplate.query(sql, questionItemMapper, date);
+        String sql = "SELECT id, question_num, question_contact_text, category FROM questions" +
+                "  WHERE category != 'textArea' AND (question_num, date_added) IN (SELECT question_num, MAX(date_added) FROM questions GROUP BY question_num)" +
+                " ORDER BY question_num";
+        return jdbctemplate.query(sql, questionItemMapper);
     }
 
 
 
     @Override
     public List<questionItem> getTextAreaQuestions(Date date) {
-        String sql = "SELECT id, question_num, question_contact_text, category FROM questions WHERE category = 'textarea' and date_added <=? ORDER BY question_num ASC";
-        return jdbctemplate.query(sql, questionItemMapper, date);
+        String sql = "SELECT id, question_num, question_contact_text, category FROM questions" +
+                "  WHERE category = 'textArea' AND (question_num, date_added) IN (SELECT question_num, MAX(date_added) FROM questions GROUP BY question_num)" +
+                " ORDER BY question_num";
+        return jdbctemplate.query(sql, questionItemMapper);
     }
 }

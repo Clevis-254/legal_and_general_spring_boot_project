@@ -73,7 +73,7 @@ CREATE TABLE questions(
     question_num INT NOT NULL,
     question_user_text VARCHAR(255) NOT NULL,
     question_contact_text VARCHAR(255) NOT NULL,
-    date_added DATETIME NOT NULL,
+    date_added DATE NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
