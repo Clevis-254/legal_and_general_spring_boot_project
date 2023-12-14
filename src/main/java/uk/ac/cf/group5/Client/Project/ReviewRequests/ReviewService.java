@@ -13,6 +13,8 @@ public interface ReviewService {
 
     ReviewItem getReview(long userId);
 
+    Date getDateForQ(long id);
+
     List<ReviewItem> getReviewItems(Long userId);
 
     ReviewItem getItem(long reviewID);

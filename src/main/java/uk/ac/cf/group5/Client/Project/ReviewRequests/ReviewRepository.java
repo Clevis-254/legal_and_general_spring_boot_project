@@ -11,6 +11,8 @@ public interface ReviewRepository {
     List<ReviewItem> getReviewItems(long userId);
 
     ReviewItem getReview(long userId);
+
+    Date getDateForQ(long reviewId);
     void add(Long userID, Long RequestID);
     ReviewItem getItem(long reviewID);
     Date getDateForQ(long reviewID);

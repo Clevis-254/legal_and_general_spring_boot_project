@@ -1,20 +1,22 @@
 
 package uk.ac.cf.group5.Client.Project.Form.employeeForms;
 public class QuestionItem {
-private Long id;
-    private String questionText;
-    private String category;
-
-    private Integer question_num;
+    private Long id;
+    private int questionNum;
+    private String questionUserText;
+    private Date date;
+    private  String category;
 
     public QuestionItem() {
     }
 
-    public QuestionItem(Long id, String questionText, String category, Integer question_num) {
+    public QuestionItem(Long id, String questionText, String category, Integer question_num, Date date) {
         this.id = id;
-        this.questionText = questionText;
+        this.questionNum = questionNum;
+        this.questionUserText = questionUserText;
         this.category = category;
-        this.question_num = question_num;
+        this.date = date;
+
     }
 
     public Long getId() {
@@ -26,7 +28,7 @@ private Long id;
     }
 
     public String getQuestionText() {
-        return questionText;
+        return questionUserText;
     }
 
     public String getCategory() {
@@ -37,12 +39,11 @@ private Long id;
         this.id = id;
     }
 
-    public void setQuestion_num(Integer question_num) {
-        this.question_num = question_num;
-    }
-
     public void setQuestionText(String questionText) {
-        this.questionText = questionText;
+        this.questionUserText = questionText;
+    }
+    public void setQuestionNum(int questionNum) {
+        this.questionNum = questionNum;
     }
 
     public void setCategory(String category) {

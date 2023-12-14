@@ -18,6 +18,8 @@ import uk.ac.cf.group5.Client.Project.Form.contactForms.ContactQuestionService;
 import uk.ac.cf.group5.Client.Project.Form.contactForms.questionItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactItem;
 import uk.ac.cf.group5.Client.Project.Form.Contacts.ContactService;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionItem;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionService;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
 
@@ -140,7 +142,6 @@ public class FormController {
 
         return "redirect:/form/{id}/employee/contacts"; // Redirect to the contact form page
     }
-
 
     @GetMapping("/form/deleteContact/{id}")
     public String deleteContact(@PathVariable Long id){

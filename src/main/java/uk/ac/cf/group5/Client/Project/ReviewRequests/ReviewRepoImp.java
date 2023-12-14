@@ -16,6 +16,7 @@ public class ReviewRepoImp implements ReviewRepository{
 
     private static RowMapper<ReviewItem> ViewReviewMapper;
 
+
     public ReviewRepoImp(JdbcTemplate ajdbctemplate){
 
         jdbctemplate = ajdbctemplate;
@@ -50,7 +51,10 @@ public class ReviewRepoImp implements ReviewRepository{
         String sql = "SELECT * FROM reviews WHERE userId = ? and status = 'in_progress'";
         return jdbctemplate.query(sql, ViewReviewMapper, userId);
     }
-
+    public Date getDateForQ(long id){
+        String sql = "select date_started from Reviews where id = ? and status = 'in_progress'";
+        return jdbctemplate.queryForObject(sql, Date.class, id);
+    }
     public void add(Long userID, Long requestID) {
         String reviewInsertSql =
                 "INSERT INTO reviews " +

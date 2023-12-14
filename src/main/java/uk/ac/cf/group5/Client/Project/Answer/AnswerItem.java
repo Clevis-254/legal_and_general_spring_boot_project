@@ -13,8 +13,10 @@ public class AnswerItem {
     private Long sub_id;
     private String answer;
 
+    private Long rev_id;
+
     public  AnswerItem(){
 
-        this(0L,0L,0L,"");
+        this(0L,0L,0L,"",0L);
     }
 }

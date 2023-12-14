@@ -73,7 +73,7 @@ CREATE TABLE questions(
     question_num INT NOT NULL,
     question_user_text VARCHAR(255) NOT NULL,
     question_contact_text VARCHAR(255) NOT NULL,
-    date_added DATE NOT NULL,
+    date_added DATETIME NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -103,11 +103,13 @@ FOREIGN KEY (reviewID) REFERENCES reviews(id)
 CREATE TABLE answers
     (
         id INT NOT NULL AUTO_INCREMENT,
+        reviewID INT NOT NULL,
         questionID INT NOT NULL,
         answer VARCHAR(255) NOT NULL,
         subID INT NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (questionID) REFERENCES questions(id),
+        FOREIGN KEY (reviewID) REFERENCES reviews(id),
         FOREIGN KEY (subID) REFERENCES submissions(id)
     );
 
