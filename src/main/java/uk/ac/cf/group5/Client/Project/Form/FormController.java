@@ -102,6 +102,7 @@ public class FormController {
         SubmissionItem submissionItem = submission.getSubmission(id);
         modelAndView.addObject("submissionItem",submissionItem);
         Date date = review.getDateForQ(id);
+        System.out.println(date);
         List<QuestionItem> questions = questionService.getRadioQuestions(date);
         System.out.println(questions);
         modelAndView.addObject("questions", questions);
