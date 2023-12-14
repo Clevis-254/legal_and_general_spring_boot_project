@@ -36,7 +36,7 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> questionItems(Date date) {
-        String sql = "select id, question_num, question_user_text, category from questions WHERE date < ? AND category <> 'textarea'\n";
+        String sql = "select id, question_num, question_user_text, category from questions WHERE date_added < ? AND category <> 'textarea'\n";
         return jdbctemplate.query(sql, questionItemMapper, date);
     }
 
@@ -44,7 +44,7 @@ public class questionRepoImp implements questionRepo{
 
     @Override
     public List<questionItem> getTextAreaQuestions(Date date) {
-        String sql = "SELECT id, question_num, question_user_text, category FROM questions WHERE date < ? AND category = 'textarea'\n";
-        return jdbctemplate.query(sql, questionItemMapper);
+        String sql = "SELECT id, question_num, question_user_text, category FROM questions WHERE date_added < ? AND category = 'textarea'\n";
+        return jdbctemplate.query(sql, questionItemMapper,date);
     }
 }

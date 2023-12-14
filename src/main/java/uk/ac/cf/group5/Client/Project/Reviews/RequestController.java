@@ -47,13 +47,6 @@ public class RequestController {
         return reviews;
     }
 
-/*    @GetMapping("/Reviews")
-    public ModelAndView getViewReviews() {
-        ModelAndView viewReviews = new ModelAndView("360's/Reviews");
-        List<ReviewItem> allReviewItems = ReviewRepoImp.getInProgressReviewItems();
-        viewReviews.addObject("allReviewItems", allReviewItems);
-        return viewReviews;
-    }*/
 
     @GetMapping("/requests")
     public ModelAndView getRequest(Authentication authentication) {
@@ -69,7 +62,7 @@ public class RequestController {
 
 
     @GetMapping("/request360")
-    public ModelAndView makeRequest(/*@AuthenticationPrincipal UserDetails userDetails*/
+    public ModelAndView makeRequest(
             Authentication authentication) {
 
         /*        String employee = userDetails.getUsername();*/
