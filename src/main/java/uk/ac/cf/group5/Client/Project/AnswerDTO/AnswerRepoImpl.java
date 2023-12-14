@@ -86,7 +86,7 @@ public class AnswerRepoImpl implements AnswerRepositoryDTO {
                 "FROM contacts c " +
                 "JOIN submissions s ON c.id = s.contactID " +
                 "LEFT JOIN answers a ON s.id = a.subID " +
-                "LEFT JOIN contact_questions cq ON a.questionID = cq.id " +
+                "LEFT JOIN questions cq ON a.questionID = cq.id " +
                 "WHERE s.id = ? " +  // Add WHERE clause to filter by submission ID
                 "ORDER BY c.fname, c.surname, cq.id, a.id";
 

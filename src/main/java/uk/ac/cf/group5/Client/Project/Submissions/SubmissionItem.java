@@ -13,11 +13,13 @@ public class SubmissionItem {
 
     private Long reviewID;
 
+    private Long userID;
+
 //    private Map<Long,String> answers;
 //new HashMap()
 
     public SubmissionItem(){
-        this(0L,0L,0L);
+        this(0L,0L,0L,0L);
     }
 
 //    public void addAnswer(Long questionId, String answerText){

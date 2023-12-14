@@ -69,7 +69,11 @@ public class ViewRequestsController {
     @GetMapping("Admin/dashboard/approve/{id}")
     public ModelAndView ApproveRequest(@PathVariable("id") Long id){
         RequestItem approved = viewRequestsImpl.getRequest(id);
+        approved.setApproved("approved");
         viewRequestsImpl.setApproved(approved);
+        Long userid = approved.getUserId();
+        Long requestId = approved.getUserId();
+        reviewService.add(userid,requestId);
         ModelAndView result = new ModelAndView("redirect:/Admin/AdminDashboard");
         return result;
     }

@@ -26,6 +26,7 @@ public class SubmissionRepoImpl implements SubmissionRepo{
 
         SubmissionItemMapper = (rs, i) -> new SubmissionItem(
                 rs.getLong("id"),
+                rs.getLong("userID"),
                 rs.getLong("contactID"),
                 rs.getLong("reviewID")
         );

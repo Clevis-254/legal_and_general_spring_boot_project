@@ -99,7 +99,9 @@ public class FormController {
         String employee = authentication.getName();
         UserItem userItem = user.getUserItem(employee);
         Long userId = userItem.getId();
-        submission.add(null, id, userId);
+        ReviewItem reviewItem = review.getReview(userId);
+        Long reviewId = reviewItem.getId();
+        submission.add(null,reviewId,userId);
         SubmissionItem submissionItem = submission.getSubmission(id);
         modelAndView.addObject("submissionItem",submissionItem);
         Date date = review.getDateForQ(id);
