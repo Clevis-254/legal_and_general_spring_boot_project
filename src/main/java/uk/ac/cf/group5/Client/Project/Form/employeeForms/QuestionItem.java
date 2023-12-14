@@ -1,5 +1,5 @@
 
-package uk.ac.cf.group5.Client.Project.Form.Survey;
+package uk.ac.cf.group5.Client.Project.Form.employeeForms;
 
 import java.sql.Date;
 
@@ -7,18 +7,16 @@ public class QuestionItem {
     private Long id;
     private int questionNum;
     private String questionUserText;
-    private Date date;
     private  String category;
 
     public QuestionItem() {
     }
 
-    public QuestionItem(Long id, int questionNum, String questionUserText, String category) {
+    public QuestionItem(Long id, String questionText, String category, Integer question_num) {
         this.id = id;
-        this.questionNum = questionNum;
-        this.questionUserText = questionUserText;
+        this.questionNum = question_num;
+        this.questionUserText = questionText;
         this.category = category;
-        this.date = date;
 
     }
 
@@ -26,11 +24,13 @@ public class QuestionItem {
         return id;
     }
 
+    public Integer getQuestion_num() {
+        return questionNum;
+    }
+
     public String getQuestionText() {
         return questionUserText;
     }
-
-    public int getQuestionNum(){return questionNum;}
 
     public String getCategory() {
         return category;

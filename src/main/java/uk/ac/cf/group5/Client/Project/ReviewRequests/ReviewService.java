@@ -18,5 +18,9 @@ public interface ReviewService {
     List<ReviewItem> getReviewItems(Long userId);
 
     ReviewItem getItem(long reviewID);
+
+    String getFirstName(long reviewID);
+
+    String getLastName(long reviewID);
 }
 

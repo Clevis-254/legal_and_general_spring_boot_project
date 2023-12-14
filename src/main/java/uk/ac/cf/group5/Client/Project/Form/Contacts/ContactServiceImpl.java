@@ -20,8 +20,9 @@ public class ContactServiceImpl implements ContactService{
 
 
     @Override
-    public void save(ContactItem contactItem, long reviewsId ) {
-        contactRepository.saveContact(contactItem, reviewsId );
+    public Long save(ContactItem contactItem, long reviewsId ) {
+        Long newContact = contactRepository.saveContact(contactItem, reviewsId );
+        return newContact;
     }
 
     @Override
@@ -52,6 +53,11 @@ public class ContactServiceImpl implements ContactService{
     @Override
    public ContactItem getContactItem(long reviewsId){
         return contactRepository.getContact(reviewsId);
+    }
+
+    @Override
+    public long getReviewId(Long id) {
+        return contactRepository.getReviewId(id);
     }
 }
 

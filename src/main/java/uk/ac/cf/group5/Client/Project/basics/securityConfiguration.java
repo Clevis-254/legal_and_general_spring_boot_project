@@ -49,15 +49,15 @@ public class securityConfiguration {
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/settings").hasRole("USER")
-                        .requestMatchers("/results/{id}").hasRole("USER")
+                        .requestMatchers("/results/{id}").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
+                        .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/form/{id}/addContact").hasRole( "USER")
                         .requestMatchers("/form/deleteContact/{id}").hasRole( "USER")
-                        .requestMatchers("/form/employee/{id}/contacts").hasRole( "USER")
+                        .requestMatchers("/form/{id}/employee/contacts").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Reviews").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/thankYou").hasAnyRole("ADMIN","USER"))
 
                 .formLogin(form -> form

@@ -15,8 +15,8 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
 
-    public void add(Long contactID, Long reviewID) {
-        Repo.add(contactID,reviewID);
+    public void add(Long contactID, Long reviewID, Long userID) {
+        Repo.add(contactID,reviewID,userID);
     }
 
 
@@ -32,4 +32,9 @@ public class SubmissionServiceImpl implements SubmissionService{
     public SubmissionItem DeleteSubmissionItem(Long contactID){
         return Repo.DeleteSubmissionItem(contactID);
     }
+
+    public SubmissionItem getSubmissionbyCon(Long id){
+        return Repo.getSubmissionbyCon(id);
+    }
+
 }

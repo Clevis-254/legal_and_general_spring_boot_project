@@ -27,24 +27,27 @@ public class questionRepoImp implements questionRepo{
 
         questionItemMapper = (rs, i) -> new questionItem(
                 rs.getLong("id"),
-                rs.getInt("questionNum"),
-                rs.getString("questionContactText"),
-                rs.getDate("date"),
+                rs.getString("question_contact_text"),
+                rs.getInt("question_num"),
                 rs.getString("category")
         );
     }
 
     @Override
-    public List<questionItem> questionItems(Date date) {
-        String sql = "select id, question_num, question_user_text, category from questions WHERE date_added < ? AND category <> 'textarea'\n";
-        return jdbctemplate.query(sql, questionItemMapper, date);
+    public List<questionItem> getRadioQuestions(Date date) {
+        String sql = "SELECT id, question_num, question_contact_text, category FROM questions" +
+                "  WHERE category != 'textArea' AND (question_num, date_added) IN (SELECT question_num, MAX(date_added) FROM questions GROUP BY question_num)" +
+                " ORDER BY question_num";
+        return jdbctemplate.query(sql, questionItemMapper);
     }
 
 
 
     @Override
     public List<questionItem> getTextAreaQuestions(Date date) {
-        String sql = "SELECT id, question_num, question_user_text, category FROM questions WHERE date_added < ? AND category = 'textarea'\n";
-        return jdbctemplate.query(sql, questionItemMapper,date);
+        String sql = "SELECT id, question_num, question_contact_text, category FROM questions" +
+                "  WHERE category = 'textArea' AND (question_num, date_added) IN (SELECT question_num, MAX(date_added) FROM questions GROUP BY question_num)" +
+                " ORDER BY question_num";
+        return jdbctemplate.query(sql, questionItemMapper);
     }
 }

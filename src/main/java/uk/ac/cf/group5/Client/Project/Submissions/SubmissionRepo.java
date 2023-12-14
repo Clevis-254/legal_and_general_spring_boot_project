@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface SubmissionRepo {
 
-    void add(Long contactID, Long reviewID);
+    void add(Long contactID, Long reviewID, Long userID);
 
     List<SubmissionItem> getsubmissionItems(Long reviewID);
 
     SubmissionItem getSubmission(Long submissionId);
 
     SubmissionItem DeleteSubmissionItem(Long contactID);
+
+    SubmissionItem getSubmissionbyCon(Long id);
+
+
 }

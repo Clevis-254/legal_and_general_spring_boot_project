@@ -32,7 +32,19 @@ public class ReviewServiceImpl implements ReviewService{
     public ReviewItem getItem(long reviewID) {
         return repository.getItem(reviewID);
     }
-    public Date getDateForQ(long reviewID){
+
+    @Override
+    public Date getDateForQ(long reviewID) {
         return repository.getDateForQ(reviewID);
+    }
+
+    @Override
+    public String getFirstName(long reviewID) {
+        return repository.getFirstName(reviewID);
+    }
+
+    @Override
+    public String getLastName(long reviewID) {
+        return repository.getLastName(reviewID);
     }
 }

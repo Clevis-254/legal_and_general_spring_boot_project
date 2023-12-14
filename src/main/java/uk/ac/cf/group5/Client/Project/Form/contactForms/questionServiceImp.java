@@ -15,12 +15,13 @@ public class questionServiceImp implements ContactQuestionService {
         this.Repository = repository;
     }
 
-    public List<questionItem> questionItems(Date date){
-        return Repository.questionItems(date);
-    }
 
      public List<questionItem> getTextAreaQuestions(Date date){
          return Repository.getTextAreaQuestions(date);
+    }
+
+    public List<questionItem> getRadioQuestions(Date date){
+        return Repository.getRadioQuestions(date);
     }
 
 }

@@ -2,8 +2,12 @@ package uk.ac.cf.group5.Client.Project.Form.Contacts;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -31,10 +35,27 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
-    public void saveContact(ContactItem contact, long reviewsId ) {
-        String sql = "INSERT INTO contacts (fname, surname , email, category, reviewsId ) VALUES (?, ?, ?, ?,?)";
-        jdbcTemplate.update(sql, contact.getFirstName(), contact.getLastName()  , contact.getEmail(), contact.getCategory(), reviewsId );
+    public Long saveContact(ContactItem contact, Long reviewsId) {
+        String sql = "INSERT INTO contacts (fname, surname, email, category, reviewsId) VALUES (?, ?, ?, ?, ?)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder(); // Create a key holder to store the generated keys
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, contact.getFirstName());
+            ps.setString(2, contact.getLastName());
+            ps.setString(3, contact.getEmail());
+            ps.setString(4, contact.getCategory());
+            ps.setLong(5, reviewsId);
+            return ps;
+        }, keyHolder);
+
+        // Retrieve the generated contact ID
+        Long generatedId = keyHolder.getKey().longValue();
+
+        return generatedId; // Return the generated contact ID
     }
+
 
     @Override
     public Integer getManagerCount(long reviewsId ) {
@@ -56,26 +77,34 @@ public class ContactRepositoryImpl implements ContactRepository{
 
     @Override
     public void deleteContact(Long contactID) {
-        String sql = "DELETE FROM contacts WHERE id = ?";
+        String sql1 = "DELETE FROM submissions WHERE contactID = ?;";
+        jdbcTemplate.update(sql1, contactID);
+        String sql = "DELETE FROM contacts WHERE id = ?;";
         jdbcTemplate.update(sql, contactID);
     }
 
     @Override
-    public List<ContactItem> getResultContacts(long reviewsId ) {
+    public List<ContactItem> getResultContacts(Long reviewsId ) {
         String sql = "SELECT * FROM contacts WHERE reviewsId  = ?";
         return jdbcTemplate.query(sql, ContactMapper, reviewsId );
     }
 
     @Override
-    public ContactItem getContact(Long reviewsId) {
-        String sql = "SELECT * FROM contacts WHERE reviewsId = ?";
-        return jdbcTemplate.queryForObject(sql, ContactMapper, reviewsId);
+    public ContactItem getContact(Long contactID) {
+        String sql = "SELECT * FROM contacts WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, ContactMapper, contactID);
     }
 
     @Override
     public List<ContactItem> getAllContacts() {
         String sql = "SELECT * FROM contacts";
         return jdbcTemplate.query(sql, ContactMapper);
+    }
+
+    @Override
+    public Long getReviewId(Long id) {
+        String sql = "SELECT reviewsId FROM contacts WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, Long.class, id);
     }
 
 }

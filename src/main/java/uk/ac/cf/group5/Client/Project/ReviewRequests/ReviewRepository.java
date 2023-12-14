@@ -15,4 +15,8 @@ public interface ReviewRepository {
     Date getDateForQ(long reviewId);
     void add(Long userID, Long RequestID);
     ReviewItem getItem(long reviewID);
+
+    String getFirstName(long reviewID);
+
+    String getLastName(long reviewID);
 }

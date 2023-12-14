@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ContactQuestionService {
 
-    List<questionItem> questionItems(Date date);
-
     List<questionItem> getTextAreaQuestions(Date date);
+
+    List<questionItem> getRadioQuestions(Date date);
 }
