@@ -49,7 +49,7 @@ public class securityConfiguration {
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/settings").hasRole("USER")
-                        .requestMatchers("/results/{id}").hasRole("USER")
+                        .requestMatchers("/results/{id}").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
                         .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/form/{id}/addContact").hasRole( "USER")
