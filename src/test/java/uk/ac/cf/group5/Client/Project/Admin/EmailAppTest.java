@@ -38,10 +38,10 @@ public class EmailAppTest {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username = "notareal@gmail.com", roles = "ADMIN")
+     @WithMockUser(username = "notareal@gmail.com", roles = "ADMIN")
     void sendApprovalEmail_shouldSendEmailAndRedirect() throws Exception {
         // Mock of userService.getItem(id)
-        UserItem mockedUser = new UserItem(1L, "John", "Doe");
+        UserItem mockedUser = new UserItem();
         mockedUser.setUsername("testuser");
         mockedUser.setFirstname("Test User");
         when(userService.getItem(anyLong())).thenReturn(mockedUser);
@@ -63,7 +63,7 @@ public class EmailAppTest {
     @WithMockUser(username = "notareal@gmail.com", roles = "ADMIN")
     void sendDenyEmail_shouldSendEmailAndRedirect() throws Exception {
         // Mock of userService.getItem(id)
-        UserItem mockedUser = new UserItem(1L, "John", "Doe");
+        UserItem mockedUser = new UserItem();
         mockedUser.setUsername("testuser");
         mockedUser.setFirstname("Test User");
         when(userService.getItem(anyLong())).thenReturn(mockedUser);
