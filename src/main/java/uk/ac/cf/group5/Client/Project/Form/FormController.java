@@ -135,9 +135,7 @@ public class FormController {
     public String addContact(@ModelAttribute ContactItem contact, @PathVariable Long id) {
         // Process and save the received contact to the database
         System.out.println(contact.toString());
-        ContactItem savedContact = contactService.save(contact, id); // Save the contact and get the saved contact
-
-        Long contactID = savedContact.getId(); // Retrieve the contact ID from the saved contact
+        Long contactID =  contactService.save(contact, id); // Save the contact and get the saved contact// Retrieve the contact ID from the saved contact
         submission.add(contactID, id, null);
 
         return "redirect:/form/{id}/employee/contacts"; // Redirect to the contact form page
@@ -162,14 +160,15 @@ public class FormController {
     public ModelAndView sentForm(@PathVariable Long id){
         ModelAndView contact = new ModelAndView("form/contactForm");
         contact.addObject("categories", categories);
-        Date date = review.getDateForQ(id);
-        String firstName = review.getFirstName(id);
-        String lastName = review.getLastName(id);
+        Long reviewid = contactService.getReviewId(id);
+        SubmissionItem submissionItem = submission.getSubmission(id);
+        Date date = review.getDateForQ(reviewid);
+        String firstName = review.getFirstName(reviewid);
+        String lastName = review.getLastName(reviewid);
         contact.addObject("firstName",firstName);
         contact.addObject("lastName",lastName);
         List<questionItem> questionItems = question.getRadioQuestions(date);
         List<questionItem> getTextAreaQuestions = question.getTextAreaQuestions(date);
-        SubmissionItem submissionItem = submission.getSubmission(id);
         contact.addObject("questionItems",questionItems);
         contact.addObject("getTextAreaQuestions",getTextAreaQuestions);
         contact.addObject("submissionItem",submissionItem);

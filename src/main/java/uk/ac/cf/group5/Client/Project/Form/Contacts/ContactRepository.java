@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ContactRepository {
 
-    void saveContact(ContactItem contact, long reviewsID);
+    Long saveContact(ContactItem contact, Long reviewsID);
 
     Integer getManagerCount(long reviewsID);
 
@@ -14,9 +14,11 @@ public interface ContactRepository {
 
     void deleteContact(Long contactID);
 
-    List<ContactItem> getResultContacts(long reviewsID);
+    List<ContactItem> getResultContacts(Long reviewsID);
 
     ContactItem getContact(Long reviewsId);
+
+    Long getReviewId(Long id);
 
 
     List<ContactItem> getAllContacts();

@@ -9,7 +9,7 @@ public interface ContactService {
 
    ContactItem getContactItem(long reviewsId);
 
-    ContactItem save(ContactItem menuItem, long reviewsID);
+    Long save(ContactItem contactItem, long reviewsID);
 
     void delete(Long id);
 
@@ -20,4 +20,6 @@ public interface ContactService {
     Integer getExternalCount(long reviewsID);
 
     List<ContactItem> getAllContacts();
+
+    long getReviewId(Long id);
 }

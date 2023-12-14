@@ -12,7 +12,7 @@
 
 <body class="font-roboto">
 <div class="flex justify-between items-center p-8">
-    <img src="/images/legal%20logo.png" alt="logo" class="w-24 h-24">
+    <img src="/images/legal%20logo.png" alt="logo" class="h-24">
     <div class="text-6xl">
         <span>Welcome to <span th:text="${firstName}"></span> <span th:text="${lastName}"></span>'s 360!</span>
     </div>
@@ -23,6 +23,16 @@
         <form th:action="@{/form/{id}/employee(id=${submissionItem.id})}" method="post" onsubmit="prepareEmployeeFormData()">
             <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
 
+            <!-- Legal Consent -->
+            <h3 class="text-2xl font-bold mt-6">Legal Consent</h3>
+            <div class="flex flex-row items-center gap-16">
+                <label class="text-lg" for="checkbox">Do you consent to the anonymous use of any data you submit by Legal and General for training and development purposes?
+                    <p class="italic">(Please Tick)</p>
+                </label>
+                <input type="checkbox" id="checkbox" name="checkbox" class="h-8 w-8 mx-2.5" value="true" required>
+            </div>
+
+            <span class="text-2xl font-bold mt-6 italic">Please answer the following questions as truthfully as possible</span>
             <!-- Categories and Questions -->
             <div th:each="category : ${categories}">
                 <h3 class="text-2xl font-bold mt-6" th:text="${category}"></h3>

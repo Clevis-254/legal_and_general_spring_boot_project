@@ -7,8 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import uk.ac.cf.group5.Client.Project.UserForm.QuestionItem;
-import uk.ac.cf.group5.Client.Project.UserForm.QuestionRepository;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionItem;
+import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionRepository;
 import uk.ac.cf.group5.Client.Project.Form.employeeForms.QuestionServiceImpl;
 
 
@@ -34,8 +34,8 @@ class QuestionServiceImplTest {
     void testGetAllQuestions() {
         // Mock data
         List<QuestionItem> mockQuestions = new ArrayList<>();
-        mockQuestions.add(new QuestionItem(1L, "Question 1", "Category 1"));
-        mockQuestions.add(new QuestionItem(2L, "Question 2", "Category 2"));
+        mockQuestions.add(new QuestionItem(1L, "Question 1", "Category 1",1));
+        mockQuestions.add(new QuestionItem(2L, "Question 2", "Category 2",2));
 
         // Define mock behavior
         when(questionRepository.findAll()).thenReturn(mockQuestions);
