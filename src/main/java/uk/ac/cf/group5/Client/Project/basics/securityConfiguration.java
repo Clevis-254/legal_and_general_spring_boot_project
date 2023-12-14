@@ -29,6 +29,7 @@ public class securityConfiguration {
             "/css/**",
             "/images/**",
             "/login",
+            "/form/{id}/contactForm",
             "/form/{id}",
             "/error"
     };
