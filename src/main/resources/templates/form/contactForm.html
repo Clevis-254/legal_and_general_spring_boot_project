@@ -20,7 +20,7 @@
 
 <div class="border-8 border-black mx-8">
     <div class="max-w-7xl mx-auto p-8">
-        <form th:action="@{/form/{id}/employee(id=${submissionItem.id})}" method="post" onsubmit="prepareEmployeeFormData()">
+        <form th:action="@{/form/{id}(id=${submissionItem.id})}" method="post" onsubmit="prepareFormData()">
             <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
             <h3 class="text-2xl font-bold mt-6">Legal Consent</h3>
             <div class="flex flex-row items-center gap-16">
@@ -74,7 +74,7 @@
 </div>
 
 <script th:inline="javascript">
-    function prepareEmployeeFormData() {
+    function prepareFormData() {
         let questionAnswers = [];
 
         // Add radio button answers
