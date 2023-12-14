@@ -17,7 +17,7 @@ public class AnswerRepoImpl implements AnswerRepositoryDTO {
     }
 
     public List<AnswerDTO> getAnswersGroupedByCategory() {
-        String sql = "SELECT cq.category, cq.id as question_id, cq.question, a.id as answer_id, a.answer, a.reviewID " +
+        String sql = "SELECT cq.category, cq.id as question_id, a.id as answer_id, a.answer, a.reviewID " +
                 "FROM questions cq " +
                 "LEFT JOIN answers a ON cq.id = a.questionID " +
                 "ORDER BY cq.category, cq.id, a.id";

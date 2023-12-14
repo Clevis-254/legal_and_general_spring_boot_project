@@ -9,13 +9,15 @@ import java.sql.Date;
 @AllArgsConstructor
 public class questionItem {
     private Long id;
-    private int questionNum;
-    private String questionContactText;
-    private Date date;
+
+    private String question;
+
+    private Integer question_num;
+
     private  String category;
 
     public questionItem(){
-        this(0L,0,"",null,"");
+        this(0L,"",0, "");
     }
 }
 

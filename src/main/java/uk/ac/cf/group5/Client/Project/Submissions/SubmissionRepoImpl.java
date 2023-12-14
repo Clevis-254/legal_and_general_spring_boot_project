@@ -33,13 +33,13 @@ public class SubmissionRepoImpl implements SubmissionRepo{
 
 
     @Override
-    public void add(Long contactID, Long reviewID) {
+    public void add(Long contactID, Long reviewID, Long userID) {
         String submissionInsertSql =
                 "INSERT INTO submissions " +
-                        "(contactID, reviewID)" +
-                        " VALUES (?, ?)";
+                        "(contactID,userID, reviewID)" +
+                        " VALUES (?, ?,?)";
 
-        jdbctemplate.update(submissionInsertSql, contactID, reviewID);
+        jdbctemplate.update(submissionInsertSql, contactID, userID, reviewID);
     }
 
     @Override
@@ -57,6 +57,12 @@ public class SubmissionRepoImpl implements SubmissionRepo{
     public SubmissionItem DeleteSubmissionItem(Long contactID){
     String sql = "DELETE FROM submissions WHERE contactID = ?";
     return jdbctemplate.queryForObject(sql,SubmissionItemMapper,contactID);
+    }
+
+    @Override
+    public SubmissionItem getSubmissionbyCon(Long id){
+        String sql = "select * from submissions where contactID = ?";
+        return jdbctemplate.queryForObject(sql,SubmissionItemMapper,id);
     }
 }
 

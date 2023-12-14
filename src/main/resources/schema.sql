@@ -1,3 +1,13 @@
+-- -----------------------------------------------------
+
+-- Create schema group_5_client_project
+
+-- -----------------------------------------------------
+
+ CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
+
+ USE `group_5_client_project`;
+
 drop table if exists answers;
 drop table if exists submissions;
 drop table if exists questions;
@@ -11,14 +21,6 @@ drop table if exists requests;
 drop table if exists users;
 
 -- -----------------------------------------------------
-
--- Create schema group_5_client_project
-
--- -----------------------------------------------------
-
- CREATE SCHEMA IF NOT EXISTS `group_5_client_project` DEFAULT CHARACTER SET utf8 ;
-
- USE `group_5_client_project`;
 
 -- changed the database schema so that the admin is able to view the user first and second names when seeing
 -- a request made
@@ -36,9 +38,6 @@ CREATE TABLE users(
 );
 
 
--- changed the database schema so that the admin is able to view the user first and second names when seeing
--- a request made
--- also the first and second names are used to add the users item into the user's table
 CREATE TABLE requests(
     id INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
@@ -74,7 +73,7 @@ CREATE TABLE questions(
     question_num INT NOT NULL,
     question_user_text VARCHAR(255) NOT NULL,
     question_contact_text VARCHAR(255) NOT NULL,
-    date_added DATETIME NOT NULL,
+    date_added DATE NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -91,10 +90,12 @@ CREATE TABLE contacts(
 
 CREATE TABLE submissions(
 id INT NOT NULL AUTO_INCREMENT,
-contactID INT NOT NULL,
+contactID INT,
+userID INT,
 reviewID INT NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (contactID) REFERENCES contacts(id),
+FOREIGN KEY (userID) REFERENCES users(id),
 FOREIGN KEY (reviewID) REFERENCES reviews(id)
 );
 

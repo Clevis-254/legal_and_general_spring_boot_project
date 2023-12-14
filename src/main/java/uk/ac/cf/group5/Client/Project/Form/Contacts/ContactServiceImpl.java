@@ -20,8 +20,9 @@ public class ContactServiceImpl implements ContactService{
 
 
     @Override
-    public void save(ContactItem contactItem, long reviewsId ) {
-        contactRepository.saveContact(contactItem, reviewsId );
+    public Long save(ContactItem contactItem, long reviewsId ) {
+        Long newContact = contactRepository.saveContact(contactItem, reviewsId );
+        return newContact;
     }
 
     @Override
