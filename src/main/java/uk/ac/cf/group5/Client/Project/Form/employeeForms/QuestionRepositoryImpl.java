@@ -40,8 +40,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public List<QuestionItem> findTextAreaQuestions(Date date){
-        String sql = "SELECT id, question_user_text, category, question_num FROM questions WHERE category = 'textarea' AND date_added <= ?";
-        return jdbcTemplate.query(sql, questionItemMapper, date);
+        String sql = "SELECT id, question_num, question_user_text, category FROM questions" +
+        "  WHERE category = 'textArea' AND (question_num, date_added) IN (SELECT question_num, MAX(date_added) FROM questions GROUP BY question_num)" +
+                " ORDER BY question_num";
+        return jdbcTemplate.query(sql, questionItemMapper);
     }
 
     @Override
