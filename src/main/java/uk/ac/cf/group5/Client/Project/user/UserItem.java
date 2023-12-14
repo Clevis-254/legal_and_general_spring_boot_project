@@ -17,7 +17,7 @@ public class UserItem {
     private String role;
 
 
-    public UserItem (){
+    public UserItem (long l, String john, String doe){
 
         this(0L,"","","","","");
     }
