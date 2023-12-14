@@ -63,6 +63,11 @@ public class ContactServiceImpl implements ContactService{
         return contactRepository.getItem(id );
     }
 
+    @Override
+    public long getReviewId(Long id){
+        return contactRepository.getReviewId(id);
+    }
+
 
 
 }

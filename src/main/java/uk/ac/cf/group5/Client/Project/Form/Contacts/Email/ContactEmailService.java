@@ -15,7 +15,7 @@ public class ContactEmailService {
         System.out.println("got to contact email");
         message.setFrom("group5superuser@gmail.com");
         message.setTo(username);
-        message.setText("Hello "+ Contactname +", You have been asked to participate in "+ Empname +"'s 360. Please go to this link to begin: "+link);
+        message.setText("Hello "+ Contactname +", You have been asked to participate in "+ Empname +"'s 360. Please go to this link to begin: http://localhost:8080/form/"+link+"/contactForm .");
         message.setSubject("360 request Approved");
 
         mailSender.send(message);
