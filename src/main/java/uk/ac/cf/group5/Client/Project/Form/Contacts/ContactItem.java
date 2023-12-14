@@ -27,6 +27,8 @@ public class ContactItem {
     public Long getId() {
         return id;
     }
+
+    public Long getReviewsId(){return reviewsId;}
     public String getFirstName() {
         return firstName;
     }

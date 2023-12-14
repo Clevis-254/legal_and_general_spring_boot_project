@@ -69,7 +69,7 @@
                         <a class="float-right text-white font-semibold bg-red-500 hover:bg-red-600 focus:outline-none rounded-md" th:href="@{'/form/deleteContact/' + ${contact.id}}"><i class="bx m-3 bx-trash"></i></a>
                     </div>
                 </div>
-                <button th:data-mCount="${managerCount}" th:data-pCount="${peerCount}" th:data-eCount="${externalCount}" onclick="submitContacts(this.getAttribute('data-mCount'), this.getAttribute('data-pCount'), this.getAttribute('data-eCount'))"
+                <button th:data-mCount="${managerCount}" th:data-pCount="${peerCount}" th:data-eCount="${externalCount}" th:data-review="${reviewID}" onclick="submitContacts(this.getAttribute('data-mCount'), this.getAttribute('data-pCount'), this.getAttribute('data-eCount'), this.getAttribute('data-review'))"
                         class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md mt-4" id="submitButton">Submit Contacts</button>
             </div>
         </div>
@@ -77,12 +77,12 @@
     </div>
 </div>
 <script>
-    function submitContacts(mCount, pCount, eCount) {
+    function submitContacts(mCount, pCount, eCount, id) {
         // Check if minimum counts are met for submission
         console.log(mCount, pCount, eCount);
         if (mCount >= 1 && pCount >= 5 && eCount >= 5) {
             alert('Contacts list submitted!');
-            window.location.href = '/thankYou';
+            window.location.href = '/form/employee/email/' + id;
         } else {
             alert('Minimum contacts not met, please add some more contacts.');
         }

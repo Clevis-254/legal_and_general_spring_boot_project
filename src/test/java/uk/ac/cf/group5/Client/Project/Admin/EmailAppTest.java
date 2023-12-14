@@ -2,19 +2,14 @@ package uk.ac.cf.group5.Client.Project.Admin;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.mail.javamail.JavaMailSender;
-import uk.ac.cf.group5.Client.Project.Admin.EmailController;
-import uk.ac.cf.group5.Client.Project.Admin.EmailService;
 import uk.ac.cf.group5.Client.Project.TestConfig;
 import uk.ac.cf.group5.Client.Project.user.UserItem;
 import uk.ac.cf.group5.Client.Project.user.UserService;
@@ -43,7 +38,7 @@ public class EmailAppTest {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username = "notareal@gmail.com", roles = "ADMIN")
+     @WithMockUser(username = "notareal@gmail.com", roles = "ADMIN")
     void sendApprovalEmail_shouldSendEmailAndRedirect() throws Exception {
         // Mock of userService.getItem(id)
         UserItem mockedUser = new UserItem();

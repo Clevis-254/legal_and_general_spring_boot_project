@@ -19,4 +19,6 @@ public interface ReviewRepository {
     String getFirstName(long reviewID);
 
     String getLastName(long reviewID);
+
+    ReviewItem getUserID(long reviewID);
 }

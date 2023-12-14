@@ -62,7 +62,7 @@ public class AdminController {
     @GetMapping("Admin/add")
     public ModelAndView addUser(){
         ModelAndView add = new ModelAndView("Admin/add");
-        UserItem newUser = new UserItem();
+         UserItem newUser = new UserItem();
         add.addObject("newUser",newUser);
         return add;
     }

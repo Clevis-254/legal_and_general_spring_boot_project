@@ -19,6 +19,7 @@ public interface ContactService {
 
     Integer getExternalCount(long reviewsID);
 
+    List<ContactItem> getItem(long id);
     List<ContactItem> getAllContacts();
 
     long getReviewId(Long id);

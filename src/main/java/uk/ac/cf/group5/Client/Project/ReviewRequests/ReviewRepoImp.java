@@ -82,4 +82,11 @@ public class ReviewRepoImp implements ReviewRepository{
         return jdbctemplate.queryForObject(sql, String.class, reviewID);
     }
 
+
+    public ReviewItem getUserID(long reviewID) {
+        String sql = "select userID from reviews where id = ?";
+        return jdbctemplate.queryForObject(sql,ViewReviewMapper, reviewID);
+    }
+
+
 }

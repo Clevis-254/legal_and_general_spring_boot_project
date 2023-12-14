@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import uk.ac.cf.group5.Client.Project.user.UserItem;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -89,6 +90,8 @@ public class ContactRepositoryImpl implements ContactRepository{
         return jdbcTemplate.query(sql, ContactMapper, reviewsId );
     }
 
+
+
     @Override
     public ContactItem getContact(Long contactID) {
         String sql = "SELECT * FROM contacts WHERE id = ?";
@@ -100,6 +103,12 @@ public class ContactRepositoryImpl implements ContactRepository{
         String sql = "SELECT * FROM contacts";
         return jdbcTemplate.query(sql, ContactMapper);
     }
+    @Override
+    public List<ContactItem> getItem(long id) {
+        String sql = "SELECT * FROM contacts where id = ?";
+        return jdbcTemplate.query(sql,ContactMapper, id);
+    }
+
 
     @Override
     public Long getReviewId(Long id) {
