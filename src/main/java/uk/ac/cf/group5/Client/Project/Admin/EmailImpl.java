@@ -18,9 +18,11 @@ public class EmailImpl {
 
         ViewRequestMapper = (em, i) -> new UserItem(
                 em.getLong("id"),
-                em.getString("name"),
+                em.getString("firstname"),
+                em.getString("secondname"),
                 em.getString("Username"),
-                em.getString("password")
+                em.getString("password"),
+                em.getString("role")
                 );
     }
 

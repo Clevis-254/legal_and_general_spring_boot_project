@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee 360</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-roboto">
+<div class="flex justify-between items-center p-8">
+    <img src="/images/legal%20logo.png" alt="logo" class="w-24 h-24">
+    <div class="text-6xl">
+        <span>Welcome to <span th:text="${firstName}"></span> <span th:text="${lastName}"></span>'s 360!</span>
+    </div>
+</div>
+
+<div class="border-8 border-black mx-8">
+    <div class="max-w-7xl mx-auto p-8">
+        <form th:action="@{/form/{id}(id=${submissionItem.id})}" method="post" onsubmit="prepareFormData()">
+            <input th:name="${_csrf.parameterName}" th:type="hidden" th:value="${_csrf.token}" />
+            <h3 class="text-2xl font-bold mt-6">Legal Consent</h3>
+            <div class="flex flex-row items-center gap-16">
+                <label class="text-lg" for="checkbox">Do you consent to the anonymous use of any data you submit by Legal and General for training and development purposes?
+                    <p class="italic">(Please Tick)</p>
+                </label>
+                <input type="checkbox" id="checkbox" name="checkbox" class="h-8 w-8 mx-2.5" value="true" required>
+            </div>
+            <!-- Categories and Questions -->
+            <div th:each="category : ${categories}">
+                <h3 class="text-2xl font-bold mt-6" th:text="${category}"></h3>
+                <h2 class="mb-2">While working, to what extent do you experience this person... </h2>
+                <!-- Radio button grid -->
+                <div class="grid grid-cols-6 mb-4">
+                    <div></div>
+                    <label class="text-center text-lg italic">Never</label>
+                    <label class="text-center text-lg italic">Rarely</label>
+                    <label class="text-center text-lg italic">Sometimes</label>
+                    <label class="text-center text-lg italic">Often</label>
+                    <label class="text-center text-lg italic">Always</label>
+                </div>
+                <!-- Question items -->
+                <div th:each="question : ${questionItems}">
+                    <div th:if="${question.category == category}" class="grid grid-cols-6 border-t-2 border-gray-500 p-4 flex items-center">
+                        <input type="hidden" th:value="${question.id}" />
+                        <label class="text-lg" th:text="${question.question_num}+': '+${question.question}"></label>
+                        <!-- Radio buttons for answers -->
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="1" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="2" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="3" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="4" />
+                        <input type="radio" th:name="${'question_' + question.id + '_answer'}" class="h-8 my-2.5" th:value="5" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Area Questions -->
+            <div th:each="textAreaQuestions : ${getTextAreaQuestions}">
+                <input type="hidden" th:value="${textAreaQuestions.id}" />
+                <label th:text="${textAreaQuestions.question}" class="block mt-4"></label>
+                <textarea th:id="${'question_' + textAreaQuestions.id}" th:name="${'question_' + textAreaQuestions.id}" rows="4" cols="50" class="border p-2 w-full" required></textarea>
+            </div>
+
+            <!-- Hidden input to store the JSON data -->
+            <input type="hidden" id="questionAnswers" name="questionAnswers" />
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8">Submit ></button>
+        </form>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function prepareFormData() {
+        let questionAnswers = [];
+
+        // Add radio button answers
+        [[${questionItems}]].forEach(function (question) {
+            let answer = document.querySelector('input[name="question_' + question.id + '_answer"]:checked');
+            if (answer) {
+                questionAnswers.push({
+                    question_id: question.id,
+                    answer: answer.value
+                });
+            }
+        });
+
+        // Add textarea answers
+        [[${getTextAreaQuestions}]].forEach(function (question) {
+            let answer = document.getElementById('question_' + question.id).value;
+            questionAnswers.push({
+                question_id: question.id,
+                answer: answer
+            });
+        });
+
+        // Set the value of the hidden input to the JSON representation of the questionAnswers array
+        document.getElementById('questionAnswers').value = JSON.stringify(questionAnswers);
+        console.log(questionAnswers);
+    }
+</script>
+</body>
+
+</html>

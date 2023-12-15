@@ -29,6 +29,8 @@ public class securityConfiguration {
             "/css/**",
             "/images/**",
             "/login",
+            "/form/{id}/contactForm",
+            "/form/{id}",
             "/error"
     };
 
@@ -42,20 +44,21 @@ public class securityConfiguration {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                        //.requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/LoginSuccess/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
-
                         .requestMatchers("/settings").hasRole("USER")
                         .requestMatchers("/settings").hasRole("USER")
+                        .requestMatchers("/results/{id}").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Admin/AdminSettings").hasRole("ADMIN")
-
-
-                        // .requestMatchers("/dashboard/**").hasRole( "USER")
+                        .requestMatchers("/form/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/form/{id}/addContact").hasRole( "USER")
+                        .requestMatchers("/form/deleteContact/{id}").hasRole( "USER")
+                        .requestMatchers("/form/{id}/employee/contacts").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/Reviews").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/request360").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/requests").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/form/employee").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/thankYou").hasAnyRole("ADMIN","USER"))
 
                 .formLogin(form -> form

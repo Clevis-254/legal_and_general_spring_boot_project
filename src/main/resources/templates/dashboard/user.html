@@ -12,9 +12,89 @@
 <main
         class="flex flex-col  w-full max-h-screen px-6 py-8 space-y-8 overflow-y-auto sm:py-16 justify-items-center lg:p-16"
 >
-    <div class="flex flex-col items-center justify-between w-full space-y-4 sm:space-y-0 sm:flex-row">
-        <span class="text-base font-semibold">Welcome back</span>
-        <span class="justify-end"><img alt="logo" src="/images/legal%20logo.png" style="width: 100px; height: auto;"/></span>
+    <div class="flex flex-wrap justify-center gap-8 h-max">
+        <a
+                th:href="@{/requests}"
+                class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-56 border-dark-300 focus-ring"
+        >
+            <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    class="w-auto h-12 lg:h-16"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="64" height="64" rx="8" fill="#4A93D6" />
+                <path
+                        d="M26.6667 18.6667V22.6667M37.3334 18.6667V22.6667"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M45.3333 45.3333L44 44M40.2667 44.5333C41.3983 44.5333 42.4835 44.0838 43.2837 43.2837C44.0838 42.4835 44.5333 41.3983 44.5333 40.2667C44.5333 39.1351 44.0838 38.0498 43.2837 37.2497C42.4835 36.4495 41.3983 36 40.2667 36C39.1351 36 38.0498 36.4495 37.2497 37.2497C36.4495 38.0498 36 39.1351 36 40.2667C36 41.3983 36.4495 42.4835 37.2497 43.2837C38.0498 44.0838 39.1351 44.5333 40.2667 44.5333Z"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M20.6667 28.12H43.3333M33.8267 45.3333H26.6667C22 45.3333 20 42.6667 20 38.6667V27.3333C20 23.3333 22 20.6667 26.6667 20.6667H37.3333C42 20.6667 44 23.3333 44 27.3333V33.3333"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M31.9933 34.2667H32.0067M27.0587 34.2667H27.072M27.0587 38.2667H27.072"
+                        stroke="white"
+                        stroke-width="2.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+            </svg>
+            <div class="flex flex-col items-center text-lg lg:text-xl">
+                <span class="font-semibold">My Requests</span>
+                <span th:text="${#lists.size(requestItems)}"></span>
+            </div>
+        </a>
+        <a
+                th:href="@{/reviews}"
+                class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-80 border-dark-300 focus-ring"
+        >
+            <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    class="w-auto h-12 lg:h-16"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="64" height="64" rx="8" fill="#A28395" />
+                <path
+                        d="M28 45.3333H36C42.6666 45.3333 45.3333 42.6667 45.3333 36V28C45.3333 21.3333 42.6666 18.6667 36 18.6667H28C21.3333 18.6667 18.6666 21.3333 18.6666 28V36C18.6666 42.6667 21.3333 45.3333 28 45.3333Z"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M32 26.8V39.5467M40.5066 36.36V26.1067C40.5066 25.08 39.68 24.3333 38.6666 24.4133H38.6133C36.8266 24.56 34.12 25.48 32.6 26.4267L32.4533 26.52C32.2133 26.6667 31.8 26.6667 31.5466 26.52L31.3333 26.3867C29.8266 25.44 27.12 24.5467 25.3333 24.4C24.32 24.32 23.4933 25.08 23.4933 26.0933V36.36C23.4933 37.1733 24.16 37.9467 24.9733 38.04L25.2133 38.08C27.0533 38.32 29.9066 39.2667 31.5333 40.16L31.5733 40.1733C31.8 40.3067 32.1733 40.3067 32.3866 40.1733C34.0133 39.2667 36.88 38.3333 38.7333 38.08L39.0133 38.04C39.84 37.9467 40.5066 37.1867 40.5066 36.36V36.36Z"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+            </svg>
+            <span class="text-lg font-semibold lg:text-xl">My Reviews</span>
+        </a>
+        <a
+                th:href="@{/settings}"
+                class="flex items-center w-64 px-5 py-4 space-x-4 border rounded-lg lg:w-80 border-dark-300 focus-ring"
+        >
+            <img alt="add" src="/images/user%20(2).png" class="w-auto h-10 rounded-md"/>
+            <span class="text-lg font-semibold lg:text-xl">Account Settings</span>
+        </a>
     </div>
     <div class="flex w-full justify-between">
         <div class="flex flex-col w-1/3 h-auto border-black border-2 rounded-lg overflow-auto">
@@ -33,7 +113,7 @@
                     <tr th:if="${requestItems.empty}" class="w-full">
                         <td class="text-center py-2">Make a request</td>
                     </tr>
-                    <tr th:each="requestItem : ${requestItems}" class="w-full">
+                    <tr th:each="requestItem ,iStat: ${requestItems}" th:if="${iStat.index} &lt; 5" class="w-full">
                         <td class="flex justify-between p-2 border-b">
                         <span class="border-r pr-2">
                             Request ID:

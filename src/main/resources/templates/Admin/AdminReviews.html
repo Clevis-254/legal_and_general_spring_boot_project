@@ -15,28 +15,33 @@
             <!-- Add any additional content here if needed -->
         </div>
     </div>
-    <table>
+
+    <!-- Check if there are no reviews -->
+    <div th:if="${#lists.isEmpty(allReviewItems)}">
+        <div class="text-2xl font-bold text-center">No reviews found</div>
+    </div>
+
+    <!-- Display reviews if available -->
+    <table th:if="${not #lists.isEmpty(allReviewItems)}">
         <tbody>
         <tr th:each="reviewItem, iStat : ${allReviewItems}">
             <td>
-                <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
-                    <div class="flex flex-col space-y-4">
+                <a th:href="@{AdminReviews/{id} (id=${reviewItem.id})}">
+                    <div class="flex flex-col justify-between w-full p-4 min-[500px]:p-6 space-y-4 border rounded-lg shadow sm:p-4 sm:items-center md:space-y-0 md:flex-row border-black-100">
+                        <div class="flex flex-col space-y-4">
                         <span class="font-bold text-2xl">Review:
                             <span th:text="${reviewItem.id}" class="font-light text-base"></span>
                         </span>
-                        <div class="flex space-x-3">
-                            <span class="font-bold text-2xl">User:
-                                <span th:text="${reviewItem.userId}" class="font-light text-base"></span>
-                            </span>
+                            <div class="flex space-x-3">
                             <span class="font-semibold text-base">Date Started:
                                 <span th:text="${#dates.format(reviewItem.date_started, 'yyyy-MM-dd')}" class="font-light text-base"></span>
                             </span>
-                            <span class="font-semibold text-base">Review Status:
+                                <span class="font-semibold text-base">Review Status:
                                 <span th:text="${reviewItem.status}" class="font-light text-base"></span>
                             </span>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div></a>
             </td>
         </tr>
         </tbody>

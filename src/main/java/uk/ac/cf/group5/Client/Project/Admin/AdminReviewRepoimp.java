@@ -27,13 +27,13 @@ public class AdminReviewRepoimp {
                 rs.getLong("userid"),
                 rs.getLong("requestId"),
                 rs.getString("status"),
-                rs.getDate("dateRequested")
+                rs.getDate("date_started")
         );
     }
 
 
     public List<ReviewItem> getReview() {
-        String sql = "SELECT * FROM Reviews WHERE status = 'in_progress'";
+        String sql = "SELECT * FROM reviews WHERE status = 'in_progress'";
         return jdbctemplate.query(sql, ReviewItemMapper);
     }
 }

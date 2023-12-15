@@ -25,7 +25,8 @@ public class RequestRepositoryImpl implements RequestRepository {
                 rs.getLong("id"),
                 rs.getString("approved"),
                 rs.getLong("userid"),
-                rs.getString("name"),
+                rs.getString("firstname"),
+                rs.getString("secondname"),
                 rs.getDate("requested")
         );
     }
@@ -34,12 +35,13 @@ public class RequestRepositoryImpl implements RequestRepository {
     public void add(RequestItem request) {
         String RequestInsertSql =
                 "insert into requests " +
-                        "(userid,name)" +
-                        " values (?,?)";
+                        "(userid,firstname,secondname)" +
+                        " values (?,?,?)";
         jdbctemplate.update(RequestInsertSql,
                 request.getUserId(),
                 //request.getApproved(),
-                request.getName()
+                request.getFirstname(),
+                request.getSecondname()
         );
     }
 
@@ -48,7 +50,7 @@ public class RequestRepositoryImpl implements RequestRepository {
         return null;
     }
     public List<RequestItem> getRequestItems(Long userId){
-        String sql = "select * from requests where userid = ?";
+        String sql = "select * from requests where userid = ? order by id desc ";
         return jdbctemplate.query(sql, RequestItemMapper, userId);
     }
 }

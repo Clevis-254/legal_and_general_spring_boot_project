@@ -7,19 +7,24 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserItem {
     private Long id;
-    private String name;
+    private String firstname;
 
-    private String username;
+    private String secondname;
+    private  String username;
 
     private String password;
 
+    private String role;
+
 
     public UserItem (){
-        this(0L,"","","");
+
+        this(0L,"","","","","");
     }
 
-    public boolean isNew() {
-        return this.username == null;
-    }
+//    public boolean isNew() {
+//
+//        return this.username == null;
+//    }
 
 }

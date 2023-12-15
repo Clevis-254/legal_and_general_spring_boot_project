@@ -3,7 +3,7 @@ package uk.ac.cf.group5.Client.Project.ReviewRequests;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class ReviewItem {
     private String status;
     private Date date_started;
 
-    public ReviewItem(){ this( 0L,  0L, 0L,"",new Date());
+    public ReviewItem(long l, String someReview, long reviewId){ this( 0L,  0L, 0L,"", Date.valueOf("2023-05-01T15:23:45.123Z"));
 
     }
 }
