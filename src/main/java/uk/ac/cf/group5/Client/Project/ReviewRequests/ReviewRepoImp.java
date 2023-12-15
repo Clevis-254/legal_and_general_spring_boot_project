@@ -3,8 +3,6 @@ package uk.ac.cf.group5.Client.Project.ReviewRequests;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import uk.ac.cf.group5.Client.Project.Reviews.RequestItem;
-import uk.ac.cf.group5.Client.Project.user.UserItem;
 
 import java.sql.Date;
 import java.util.List;
@@ -24,7 +22,7 @@ public class ReviewRepoImp implements ReviewRepository{
         setReviewMapper();
     }
 
-    private void setReviewMapper() {
+    public void setReviewMapper() {
 
         ViewReviewMapper = (rs, i) -> new ReviewItem(
                 rs.getLong("id"),

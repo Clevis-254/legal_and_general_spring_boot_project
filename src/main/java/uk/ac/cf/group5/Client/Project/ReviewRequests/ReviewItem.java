@@ -15,7 +15,7 @@ public class ReviewItem {
     private String status;
     private Date date_started;
 
-    public ReviewItem(long l, String someReview, long reviewId){ this( 0L,  0L, 0L,"", Date.valueOf("2023-05-01T15:23:45.123Z"));
-
+    public ReviewItem() {
+        this(0L, 0L, 0L, "", new Date(System.currentTimeMillis()));
     }
 }
