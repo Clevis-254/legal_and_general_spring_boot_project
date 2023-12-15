@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
+    @Autowired
    private UserService user;
 
     public  UserController( UserService userService){
@@ -29,6 +31,8 @@ public class UserController {
         ModelAndView login = new ModelAndView("/LoginPage");
         return login;
     }
+
+
 
     @GetMapping("/settings")
     public ModelAndView settings(Authentication authentication){
