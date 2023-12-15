@@ -76,6 +76,7 @@ public class FormController {
                 answer.setSub_id(id);
                 Long questionId = answer.getQuestion_id();
                 String answerText = answer.getAnswer();
+                SubmissionItem submissionItem = submission.getSubmission(id);
                 answer.setRev_id(submission.getSubmission(id).getReviewID());
             }
             answerService.add(answerList);

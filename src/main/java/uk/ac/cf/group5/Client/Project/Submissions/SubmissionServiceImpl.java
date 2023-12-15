@@ -25,6 +25,7 @@ public class SubmissionServiceImpl implements SubmissionService{
         return Repo.getsubmissionItems(reviewID);
     }
 
+    @Override
     public SubmissionItem getSubmission(Long submissionId){
         return Repo.getSubmission(submissionId);
     }
