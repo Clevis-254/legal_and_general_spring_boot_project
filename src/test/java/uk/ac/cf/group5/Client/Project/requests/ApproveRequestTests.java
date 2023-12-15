@@ -45,7 +45,7 @@ public class ApproveRequestTests {
         //WHEN REQUEST 1 IS APPROVED
         mvc.perform(MockMvcRequestBuilders.get("/Admin/approve/1"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/Admin/ViewPendingRequests"));
+                .andExpect(redirectedUrl("/Admin/ApproveEmail/1"));
 
         //AND REQUEST 1 IS THEN RETRIEVED
         RequestItem updatedRequest = repository.getRequestItems(1L).get(0);
