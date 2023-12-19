@@ -68,16 +68,17 @@ public class FormController {
         this.categories = categoriesToAdd;
     }
 
-    public void receiveAnswer(Long id, String answers){
+    public void receiveAnswer(Long submissionid, String answers){
         try { ObjectMapper objectMapper = new ObjectMapper();
             List<AnswerItem> answerList = objectMapper.readValue(answers,
                     new TypeReference<List<AnswerItem>>() {});
             for (AnswerItem answer : answerList) {
-                answer.setSub_id(id);
+                answer.setSub_id(submissionid);
                 Long questionId = answer.getQuestion_id();
                 String answerText = answer.getAnswer();
-                SubmissionItem submissionItem = submission.getSubmission(id);
-                answer.setRev_id(submission.getSubmission(id).getReviewID());
+                SubmissionItem submissionItem = submission.getSubmission(submissionid);
+                Long review = submissionItem.getReviewID();
+                answer.setRev_id(review);
             }
             answerService.add(answerList);
             //return "Success";
